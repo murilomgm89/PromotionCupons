@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ShiftInc.Raizen.ShellTanqueCheio.Entity.LuckyCode>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><h6 class="panel-title"><i class="icon-table"></i> Table inside modal</h6></div>
+    <table class="table table-bordered table-striped datatable-selectable">
+        <thead>
+            <tr>
+                <th>CNPJ do estabelecimento</th>
+                <th>N° da sorte</th>
+                <th>Data do Cadastro</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var code in Model)
+            { 
+            <tr>
+                <td>@code.Receipt.vendorCNPJ</td>
+                <td>@code.code</td>
+                <td>@code.Receipt.dtCreation</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

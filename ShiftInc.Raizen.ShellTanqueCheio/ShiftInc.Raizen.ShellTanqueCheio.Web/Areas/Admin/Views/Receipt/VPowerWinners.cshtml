@@ -1,0 +1,124 @@
+﻿@model ShiftInc.Raizen.ShellTanqueCheio.Web.Areas.Admin.Models.VPowerWinnersViewModel
+@{
+    ViewBag.Title = "ReceiptDetails";
+    Layout = "~/Areas/Admin/Views/Shared/Layout.cshtml";
+}
+
+@helper ContentTab(string name, string _class, bool showButtons, IEnumerable<ShiftInc.Raizen.ShellTanqueCheio.Entity.Receipt> receipts)
+{
+    <div class="tab-pane @_class" id="@name">
+        <div class="block">
+            <div class="datatable">
+                <table id="@name-table" class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>                          
+                            <th>Data do Cadastro</th>
+                            @{
+                                if (name == "reprovados")
+                                {
+                                     <th>Motivo</th>
+                                }
+                            }
+                           
+                            <th></th>                           
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var receipt in receipts)
+                        {
+                            <tr data-idReceipt="@receipt.idReceipt">
+                                <td><a href="/admin/person/@receipt.idPerson">@receipt.Person.name</a></td>
+                                <td><a href="/admin/person/@receipt.idPerson">@receipt.Person.email</a></td>  
+                                <td>@receipt.dtCreation.ToString("dd/MM/yyyy HH:mm") </td>
+                                @{
+                                    if (name == "reprovados")
+                                    {
+                                        <td>
+                                            @receipt.invalidateDescription
+                                        </td>
+                                    }
+                                }                                 
+                                <td>
+                                    <a class="btn-xs btn-default" target="_blank" href="/receipt/file?id=@receipt.idReceipt.ToString().PadLeft(8, '0').Base64Encode()"><i class="icon-file3" style="margin-right: 5px;"></i> Ver cupom</a>
+                                </td>                               
+                                <td>
+                                    @if (showButtons) { 
+                                    <a class="btn-xs btn-success bt-aprovar"><i class="icon-thumbs-up2" style="margin-right: 5px;"></i> Aprovar</a>
+                                    <a class="btn-xs btn-danger bt-reprovar"><i class="icon-thumbs-down2" style="margin-right: 5px;"></i> Reprovar</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="page-header">
+    <div class="page-title">
+        <h3>Cupons Recebidos</h3>
+    </div>
+</div>
+
+
+<div class="block">
+    <div class="row">
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#pendentes" data-toggle="tab"><i class="icon-question3"></i> Verificação Pendente</a></li>
+                <li><a href="#aprovados" data-toggle="tab"><i class="icon-thumbs-up2"></i> Aprovados</a></li>
+                <li><a href="#reprovados" data-toggle="tab"><i class="icon-thumbs-down2"></i> Reprovados</a></li>
+            </ul>
+
+            <div class="tab-content with-padding">
+                @ContentTab("pendentes", "fade in active", true, Model.PendingVerification)
+                @ContentTab("aprovados", "fade", false, Model.Approved)
+                @ContentTab("reprovados", "fade", false, Model.Disapproved)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+<script>
+    $(function () {
+        $('.bt-aprovar').on('click', function () {
+            var parent = $(this).parent().parent();
+            $.get('/admin/receipt/' + parent.attr('data-idReceipt') + '/set-validated', {
+                isValidated: true
+            }, function () {
+                $(parent).fadeOut('fast', function(parent) {
+                    $(parent).remove();
+                });
+            });
+        });
+        $('.bt-reprovar').on('click', function () {
+            var parent = $(this).parent().parent();
+            $.get('/admin/receipt/' + parent.attr('data-idReceipt') + '/set-validated', {
+                isValidated: false
+            }, function () {
+                $(parent).fadeOut('fast', function (parent) {
+                    $(parent).remove();
+                });
+            });
+        });
+
+        $('#pendentes-table').DataTable({
+            "language": dtLanguage
+        });
+
+        $('#aprovados-table').DataTable({
+            "language": dtLanguage
+        });
+
+        $('#reprovados-table').DataTable({
+            "language": dtLanguage
+        });
+    });
+</script>
+}

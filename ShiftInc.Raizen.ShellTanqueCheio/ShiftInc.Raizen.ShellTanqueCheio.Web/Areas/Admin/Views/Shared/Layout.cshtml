@@ -1,0 +1,148 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <title>Promoção Gympass</title>
+    <link href="/Content/Styles/Admin/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/Content/Styles/Admin/css.css" rel="stylesheet" type="text/css">
+    <link href="/Content/Styles/Admin/styles.css" rel="stylesheet" type="text/css">
+    <link href="/Content/Styles/Admin/icons.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/charts/sparkline.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/forms/select2.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/forms/inputmask.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/forms/autosize.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/forms/inputlimit.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/forms/listbox.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/forms/multiselect.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/forms/validate.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/forms/tags.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/forms/switch.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/forms/wysihtml5/wysihtml5.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/forms/wysihtml5/toolbar.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/interface/daterangepicker.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/interface/fancybox.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/interface/moment.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/interface/jgrowl.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/interface/datatables.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/interface/colorpicker.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/interface/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/interface/timepicker.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/application.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/charts/flot.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/charts/flot.pie.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/charts/flot.time.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/plugins/charts/flot.animator.min.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/charts/widgets/filled_blue.js"></script>
+    <script type="text/javascript" src="/Scripts/admin/charts/full/pie.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="https://www.intimus.com.br" target="_blank"><img src="https://www.intimus.com.br/public/images/logo.png" style="width: 73px;" alt="Intimus"></a>
+            <button type="button" class="navbar-toggle offcanvas">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="icon-paragraph-justify2"></i>
+            </button>
+        </div>
+        <ul class="nav navbar-nav navbar-right collapse" id="navbar-icons">
+            <li class="user dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="http://placehold.it/300">
+                    <span>Login</span>
+                    <i class="caret"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right icons-right">
+                    <li><a href="/admin"><i class="icon-exit"></i>Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- /Header -->
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-content">
+                <!-- User dropdown -->
+                <div class="user-menu dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="https://www.vml.com/brazil/sites/all/themes/vml/dist/23d662bde397d4cec13b2a89a72599ac.png">
+                        <div class="user-info">
+                            VML Brasil <span>Agência</span>
+                        </div>
+                    </a>
+                </div>
+                <!-- /user dropdown -->
+                <!-- MENU -->
+                <ul class="navigation">
+                    <li class="@Html.Raw(Request.Url.ToString().Contains("/admin/dashboard") ? "active" : "")"><a href="/admin/dashboard"><span>Dashboard</span> <i class="icon-stats-up"></i></a></li>
+                    <li class="has-ul @Html.Raw(Request.Url.ToString().Contains("/admin/report") ? "active" : "")">
+                        <a href="/admin/report">
+                            <span>Relatórios</span>
+                            <i class="icon-bars"></i>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="/admin/report/participations">Evolução de participações</a>
+                            </li>                           
+                        </ul>
+                    </li>                    
+                    <li class="@Html.Raw(Request.Url.ToString().Contains("/admin/winners/gympass") ? "active" : "")"><a href="/admin/winners/gympass"><span>Curadoria de Participações</span> <i class="icon-copy"></i></a></li>                            
+                    <li class="@Html.Raw(Request.Url.ToString().Contains("/admin/search") ? "active" : "")"><a href="/admin/search"><span>Busca detalhada</span> <i class="icon-search2"></i></a></li>
+                </ul>
+                <!-- MENU -->
+            </div>
+        </div>
+        <!-- /sidebar -->
+        <!-- Page content -->
+        <input type="hidden" id="userc" value="@Session["Entity.AdminAccount.name"].ToString()" />
+        <div class="page-content">
+            @RenderBody()
+            <!-- Footer -->
+            <div class="footer clearfix">
+                <div class="pull-left">Desenvolvimento VML - DevLab</div>
+            </div>
+            <!-- /footer -->
+        </div>
+        <!-- /page content -->
+    </div>
+    <!-- /page container -->
+    <script>
+        var dtLanguage = {
+            "sEmptyTable": "Nenhum registro encontrado",
+            "sInfo": "Mostrando de _START_ até _END_ de <b>_TOTAL_ registros no total</b>",
+            "sInfoEmpty": "Mostrando 0 até 0 de 0 registros no total",
+            "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "_MENU_ resultados por página",
+            "sLoadingRecords": "Carregando...",
+            "sProcessing": "Processando...",
+            "sZeroRecords": "Nenhum registro encontrado",
+            "sSearch": "Pesquisar",
+            "oPaginate": {
+            "sNext": "Próximo",
+            "sPrevious": "Anterior",
+            "sFirst": "Primeiro",
+            "sLast": "Último"
+            },
+            "oAria": {
+            "sSortAscending": ": Ordenar colunas de forma ascendente",
+            "sSortDescending": ": Ordenar colunas de forma descendente"
+            }
+        };
+    </script>
+    @RenderSection("scripts", false)
+</body>
+</html>

@@ -1,0 +1,17 @@
+@media (min-width:769px) {
+    .mobile {
+        display: none !important;
+    }
+    @media (max-width: 1300px) {
+        html,
+        body {
+            font-size: 1vw !important;
+        }
+    }
+    @media (min-width: 1300px) {
+        html,
+        body {
+            font-size: 13px !important;
+        }
+    }
+}

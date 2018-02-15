@@ -1,0 +1,992 @@
+html,
+body {
+    font-family: futura_t, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    max-width: 1500px;
+    /*overflow: hidden;*/
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+}
+
+strong {
+    font-weight: bold;
+}
+
+body > form,
+body > .winners,
+body > .tela-erro {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 0 1em 0;
+    text-align: left;
+}
+
+input + span > span {
+    display: none;
+    margin-top: -2.35em;
+    margin-bottom: 1.4em;
+    font-size: inherit;
+    padding-left: 1em;
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.dados input + span > span {
+    margin: -2em 0 1.05em;
+    padding-left: 1.05em;
+}
+
+.cupom input + span > span {
+    margin-top: -2em;
+    margin-bottom: 1.05em;
+}
+
+input:invalid + span > span,
+label[data-valid="false"] input + span > span {
+    display: block;
+}
+
+input:invalid:focus + span > span,
+label[data-valid="false"] input:focus + span > span {
+    display: none !important;
+}
+
+.cadastro {
+    display: table;
+    padding: 5.4em 0;
+}
+
+.cadastro > * > * {
+    vertical-align: bottom;
+}
+
+.cadastro > p,
+.cadastro > label {
+    display: table-cell;
+    box-sizing: border-box;
+}
+
+.cadastro p {
+    width: 37.5%;
+    font-size: 1.835em;
+    font-weight: bold;
+    line-height: .9;
+    box-sizing: initial;
+    vertical-align: middle;
+}
+
+.cadastro p small {
+    display: inline-block;
+    font-weight: normal;
+    font-size: .68em;
+}
+
+.cadastro label {
+    width: 42%;
+}
+
+form > div > label {
+    font-size: 1.45em;
+}
+
+label input,
+label select {
+    width: 100%;
+    font-size: inherit;
+    padding: 1.4em 0 1.3em .9em;
+}
+
+select option {
+    font-size: 1.4em;
+}
+
+.cadastro label.submit {
+    width: 20.5%;
+    font-size: 1em;
+    /*vertical-align: middle;*/
+}
+
+.cadastro label.submit input[type="submit"] {
+    float: right;
+    width: 88%;
+}
+
+input[type="submit"] {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+a.btn,
+input[type="submit"] {
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    border: 0;
+    outline: 0;
+    font-weight: bold;
+    font-size: 1.36em;
+    padding: 1.4em 4.3em;
+}
+
+a.btn {
+    display: inline-block;
+}
+
+body > form > div > header {
+    display: block;
+    padding: 1.3em 0 1.4em;
+}
+
+body > form > div > header > span {
+    float: left;
+    display: block;
+    padding: .7em 3.3em .5em 1em;
+    font-size: 1.8em;
+    margin-right: .3em;
+    position: relative;
+}
+
+body > form > div > header > span:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 6%;
+    width: 0;
+    height: 0;
+    border-width: .7em .5em 0;
+    border-style: solid;
+}
+
+body > form > div > header > span.disable:after {
+    display: none;
+}
+
+body > form > div > header > span > strong {
+    display: block;
+}
+
+body > form > div > header > span > small {
+    font-size: .68em;
+    display: block;
+    padding-top: .5em;
+}
+
+body > form > div > header > a {
+    display: none;
+    /*    float: right;
+    font-size: 3.5em;
+    padding: .18em .15em .1em;
+    font-weight: normal;
+    text-decoration: none;
+    line-height: .6;
+    font-family: serif;
+    margin-top: .05em;
+*/
+}
+
+.confirmacao > header h1 {
+    display: inline-block;
+    font-size: 1.7em;
+    font-weight: bold;
+}
+
+.confirmacao > p {
+    padding-bottom: 3.6em;
+    font-size: 1.233em;
+    line-height: 1.4;
+}
+
+.confirmacao > div {
+    text-align: center;
+}
+
+.confirmacao > div > a {
+    padding: 1.7em 1.4em 1.4em;
+    margin-left: 4.3em;
+    margin-right: 1.7em;
+}
+
+.dados > div,
+.cupom > div {
+    clear: both;
+}
+
+.dados > div {
+    padding-top: 6em;
+}
+
+div.termos {
+    padding: 0;
+    margin: -1.1em 0 .7em;
+}
+
+.cupom > div {
+    padding-top: 4.1em;
+}
+
+.dados > div > * {
+    display: table;
+    padding-bottom: 3.85em;
+    position: relative;
+}
+
+.termos > input {
+    display: inline-block;
+    font-size: 1em;
+    width: 2em;
+    height: 2em;
+    line-height: 1em;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 0;
+    margin: 0;
+    border: 2px solid #404040;
+    color: #f2f2f2;
+    background: #f2f2f2 none no-repeat center;
+    background-size: 60%;
+}
+
+.termos > input:checked {
+    border-color: #404040;
+    background-image: url('../img/check.png');
+}
+
+.termos > input:invalid,
+.termos[data-valid="false"] > input {
+    border-color: #dd1d21;
+}
+
+.dados > div > p,
+.termos > p {
+    display: inline-block;
+    padding: 0;
+    color: #404040;
+    font-size: 1.24em;
+    vertical-align: middle;
+    padding-left: 1.3em;
+    width: 70em;
+}
+
+div.termos[data-valid="false"] > p {
+    color: #dd1d21;
+}
+
+.dados > div > p > a,
+div.termos > p > a {
+    display: inline;
+    color: inherit;
+    vertical-align: bottom;
+}
+
+.dados > div > * > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.dados > div > .full {
+    width: 100%;
+}
+
+.dados .full > * {
+    width: 100%;
+}
+
+.dados > div > .one-third {
+    width: 34%;
+    padding-bottom: 4.1em;
+}
+
+.dados > div > .one-third > label {
+    width: 75%;
+}
+
+.dados > div > .two-third {
+    width: 78%;
+    padding: .9em 0 2.75em;
+}
+
+.dados div > label {
+    position: relative;
+    font-size: 1.23em;
+}
+
+.dados div > label + a {
+    width: 24%;
+    font-size: 1.23em;
+    vertical-align: bottom;
+    white-space: nowrap;
+    padding-bottom: .2em;
+}
+
+.dados div > label > strong,
+.cupom div > label > strong {
+    position: absolute;
+    top: -1.3em;
+    left: 0;
+    font-size: .9em;
+}
+
+.cupom div > label > strong {
+    font-weight: normal;
+}
+
+.dados div > label > input,
+.dados div > label > select,
+.cupom div > label > input,
+.cupom div > label > select {
+    padding: 1.2em .3em 1em 1em;
+}
+
+.dados .half {
+    width: 49%;
+}
+
+.dados .endereco {
+    width: 69%;
+}
+
+.dados .complemento {
+    width: 20%;
+}
+
+.dados .numero {
+    width: 10%;
+}
+
+.dados .uf {
+    width: 16%;
+}
+
+.dados .cidade {
+    width: 33%;
+}
+
+.dados div > label {
+    padding-right: .3em;
+}
+
+.dados > input[type="submit"] {
+    width: 100%;
+    margin: 1.8em 0;
+}
+
+.cupom h2 {
+    font-size: 1.4em;
+    padding-bottom: 3em;
+}
+
+.cupom h2.success {
+    float: left;
+    font-size: 1.4em;
+    width: 100%;
+    font-weight: bold;
+    padding-bottom: 1.4em;
+}
+
+.cupom h2.success-cupom {
+    float: none;
+    font-size: 1.4em;
+    width: 100%;
+    font-weight: bold;
+    padding-bottom: 1.4em;
+}
+
+.cupom h2.success-cupom + p strong {
+    padding-top: 0;
+}
+
+.cupom h2 strong {
+    display: block;
+    font-size: 1em;
+    padding-top: .2em;
+}
+
+.cupom h2 + .cupom {
+    float: left;
+    list-style: none;
+    width: 33.6%;
+    text-align: center;
+    margin: -.4em auto 1.6em;
+}
+
+.cupom h2 + .cupom > li {
+    font-weight: bold;
+    width: 100%;
+    display: inline-block;
+    border-top: 1px solid #f2f2f2;
+    font-size: 1.9em;
+    padding: .415em 0;
+}
+
+.cupom p {
+    clear: both;
+    font-size: 1.23em;
+    line-height: 1.19;
+}
+
+.cupom p strong {
+    display: block;
+    padding-top: 1em;
+}
+
+.cupom a.btn {
+    background: none;
+    margin-top: 1.9em;
+    padding: .9em 6em;
+    margin-bottom: -1em;
+}
+
+.cupom label {
+    position: relative;
+    display: table-cell;
+    font-size: 1.36em;
+    padding-right: .5em;
+}
+
+.cupom label + label {
+    width: 31.5%;
+    padding-right: 0;
+}
+
+.cupom input[type="file"] {
+    position: fixed;
+    top: -9999px;
+    left: -9999px;
+}
+
+.cupom .upload {
+    display: table;
+    width: 100%;
+}
+
+.cupom .company {
+    display: table;
+    width: 100%;
+    padding: 3.3em 0 2.2em;
+}
+
+.enviados > div > * {
+    display: none;
+}
+
+.enviados > div > .active {
+    display: block;
+}
+
+.cupom label > span.btn {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    outline: 0;
+    font-weight: bold;
+    padding: 1.1em 0;
+    text-align: center;
+    margin: 0;
+}
+
+.cupom input[type="submit"] {
+    width: 100%;
+}
+
+.enviados {
+    margin-top: 4.5em;
+    padding-top: 3em;
+    text-align: center;
+}
+
+.enviados h3 {
+    font-size: 1.6em;
+}
+
+.enviados .abas {
+    padding-top: 2.4em;
+    width: auto;
+    margin: 0 auto;
+}
+
+.enviados .abas li {
+    font-size: 1.4em;
+    font-weight: bold;
+    display: inline-block;
+    width: 22em;
+    vertical-align: middle;
+    list-style: none;
+    margin-right: 1%;
+}
+
+.enviados .abas span {
+    vertical-align: middle;
+    font-weight: inherit;
+    width: 100%;
+    display: block;
+    line-height: 2.5;
+    cursor: pointer;
+}
+
+.enviados > div > ul.active {
+    clear: both;
+    padding-top: 0;
+}
+
+.enviados > div > ul.active span {
+    float: left;
+    width: 71%;
+    text-align: left;
+    padding-bottom: 2em;
+}
+
+.enviados > div > ul.active > li {
+    text-align: left;
+    padding: 0 0 2.6em;
+    margin-top: 5.3em;
+    font-size: 1.25em;
+    padding-left: .1em;
+    list-style: none;
+    position: relative;
+}
+
+.enviados > div > ul.active > li:before,
+.enviados > div > ul.active > li:after {
+    content: ' ';
+    display: table;
+}
+
+.enviados > div > ul.active > li:after {
+    clear: both;
+}
+
+.enviados > div > ul.active a {
+    position: relative;
+    display: inline-block;
+}
+
+.enviados > div > ul.lub > li > span {
+    width: 100%;
+    padding: 0 0 1em;
+    float: none;
+    font-size: 1.6em;
+    font-weight: bold;
+    display: block;
+}
+
+.enviados > div > ul.lub > li > span {
+    cursor: pointer;
+    background: transparent url('../img/open.png') no-repeat right bottom;
+    background-size: 2em;
+}
+
+.enviados > div > ul.lub > li > span.active {
+    background: transparent url('../img/close.png') no-repeat right bottom;
+    background-size: 2em;
+}
+
+.enviados > div > ul.lub > li > span ~ table {
+    display: none;
+}
+
+.enviados > div > ul.lub > li > span.active ~ table {
+    display: block;
+}
+
+.enviados > div > ul.lub li > a {
+    display: inline-block;
+    float: none;
+    margin-left: -.1em;
+    width: auto;
+    padding-top: 0;
+}
+
+.enviados > div > ul.lub li ul {
+    padding: 1.1em 0 0 0;
+    list-style: none;
+    display: block;
+    float: left;
+    width: 43.5%;
+}
+
+.enviados > div > ul.lub li ul li {
+    height: 100%;
+}
+
+.enviados > div > ul.lub li ul li > span {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 0 1.4em .29em 0;
+    position: relative;
+    width: 100%;
+    float: left;
+}
+
+.enviados > div > ul.lub li ul li > span:after {
+    font-size: .57em;
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 28.3em;
+    line-height: 1;
+    vertical-align: middle;
+    text-align: center;
+    padding: .6em 0 .3em;
+}
+
+.enviados > div > ul.lub li ul li.premiado > span:after {
+    content: 'n\00famero premiado';
+    background: #626262;
+}
+
+.enviados > div > ul.lub li ul li.invalido > span {
+    color: #d9d9d9;
+}
+
+.enviados > div > ul.lub li ul li.invalido > span:after {
+    content: 'n\00famero inv\00e1lido';
+    background: #d9d9d9;
+}
+
+.enviados > div > ul.vpower.active a.premiado:after {
+    content: 'cupom premiado';
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: .4em;
+    text-align: center;
+    height: 1.3em;
+    line-height: 1.3;
+    width: auto;
+    padding: 0 3em 0;
+    white-space: nowrap;
+    cursor: default;
+}
+
+.winners li {
+    display: inline-block;
+    list-style: none;
+    font-size: 2.19em;
+    font-weight: bold;
+    padding: 0 0 0 .48em;
+}
+
+.winners ul li:first-child {
+    padding-left: 0;
+}
+
+.winners ul li a {
+    text-decoration: none;
+    color: #404040;
+    padding: 0 .24em;
+}
+
+.winners ul li a.active {
+    border-bottom: .3em solid #dd1d21;
+}
+
+.winners table {
+    display: none;
+    text-align: left;
+}
+
+.winners table.active {
+    display: table;
+    margin-top: 1.8em;
+    width: 100%;
+    text-align: left;
+}
+
+.winners thead tr,
+.winners tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.winners thead {
+    font-size: 1.6em;
+}
+
+.winners th {
+    padding: 1.6em 1.2em;
+    font-weight: bold;
+    width: 20%;
+}
+
+.winners th + th {
+    width: 11%;
+}
+
+.winners th + th + th {
+    width: 7%;
+}
+
+.winners th + th + th + th {
+    width: 9%;
+}
+
+.winners td {
+    line-height: 3.4;
+    padding-left: 1.7em;
+}
+
+.winners tbody {
+    font-size: 1.2em;
+    border-top: 1em solid #fff;
+}
+
+body > .winners {
+    background: #fff;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+label > select + span {
+    background: transparent url('../img/dropdown.png') no-repeat right center;
+    background-size: 100%;
+    width: 1.719vw;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 1em;
+    pointer-events: none;
+}
+
+label[data-valid="false"] > select + span {
+    background-image: url('../img/dropdown-erro.png');
+}
+
+label > select:focus + span {
+    -moz-transform: scale(-1, -1);
+    -o-transform: scale(-1, -1);
+    -webkit-transform: scale(-1, -1);
+    transform: scale(-1, -1);
+}
+
+body > .aguarde {
+    display: none;
+    text-align: center;
+}
+
+body > .aguarde > h1 {
+    font-size: 3.05em;
+    font-weight: bold;
+}
+
+body > .aguarde > p {
+    font-size: 1.77em;
+    padding-top: 1em;
+}
+
+body.aguarde > .aguarde,
+body.aguarde > form {
+    width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+body.aguarde > div.aguarde {
+    width: 80% !important;
+}
+
+body > .aguarde > small {
+    display: inline-block;
+    padding-top: 5.5em;
+    margin-right: -1em;
+}
+
+@keyframes aguarde {
+    to {
+        background-color: #f9cd30;
+        border-color: #f9cd30;
+    }
+}
+
+body > .aguarde > small > span {
+    display: inline-block;
+    border: .4em solid #404040;
+    border-radius: 3em;
+    width: 0;
+    height: 0;
+    padding: .4em;
+    margin: 0 .8em;
+    background-color: #f2f2f2;
+    animation: aguarde .6s cubic-bezier(1, 1, 0, 1) infinite alternate;
+}
+
+body > .aguarde > small > span + span {
+    animation-delay: .2s;
+}
+
+body > .aguarde > small > span + span + span {
+    animation-delay: .4s;
+}
+
+body > .tela-erro {
+    text-align: center;
+    padding: 7em 0;
+}
+
+body > .tela-erro > h1 {
+    font-weight: bold;
+    font-size: 3.04em;
+    padding: 1em 0;
+}
+
+body > .tela-erro > a {
+    background: none;
+    color: #404040;
+    font-size: 1.36em;
+    border: 1px solid #404040;
+    padding: .9em 4em;
+    white-space: nowrap;
+}
+
+[data-custom] > input:invalid + span > span.normal,
+[data-custom][data-valid="false"] > input + span > span.normal,
+body > form label > input + span > span.validate0,
+body > form label > input + span > span.validate1,
+body > form label > input + span > span.validate2,
+body > form label > input + span > span.validate3,
+body > form label > input + span > span.validate4,
+body > form label > input + span > span.validate5,
+body > form label > input + span > span.validate6,
+body > form label > input + span > span.validate7,
+body > form label > input + span > span.validate8,
+body > form label > input + span > span.validate9 {
+    display: none;
+}
+
+[data-custom="0"][data-valid="false"] > input + span > span.validate0,
+[data-custom="1"][data-valid="false"] > input + span > span.validate1,
+[data-custom="2"][data-valid="false"] > input + span > span.validate2,
+[data-custom="3"][data-valid="false"] > input + span > span.validate3,
+[data-custom="4"][data-valid="false"] > input + span > span.validate4,
+[data-custom="5"][data-valid="false"] > input + span > span.validate5,
+[data-custom="6"][data-valid="false"] > input + span > span.validate6,
+[data-custom="7"][data-valid="false"] > input + span > span.validate7,
+[data-custom="8"][data-valid="false"] > input + span > span.validate8,
+[data-custom="9"][data-valid="false"] > input + span > span.validate9,
+[data-custom="0"] > input:invalid + span > span.validate0,
+[data-custom="1"] > input:invalid + span > span.validate1,
+[data-custom="2"] > input:invalid + span > span.validate2,
+[data-custom="3"] > input:invalid + span > span.validate3,
+[data-custom="4"] > input:invalid + span > span.validate4,
+[data-custom="5"] > input:invalid + span > span.validate5,
+[data-custom="6"] > input:invalid + span > span.validate6,
+[data-custom="7"] > input:invalid + span > span.validate7,
+[data-custom="8"] > input:invalid + span > span.validate8,
+[data-custom="9"] > input:invalid + span > span.validate9 {
+    display: block;
+}
+
+table.cupom {
+    width: 56vw;
+    margin: 3em auto 0;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+table.cupom > thead {
+    border-bottom: 1px solid #dadada;
+}
+
+table.cupom tr {}
+
+table.cupom th,
+table.cupom td {
+    width: 10%;
+    padding: 0;
+    font-weight: bold;
+}
+
+table.cupom th {
+    font-size: 1em;
+}
+
+table.cupom td {
+    font-size: 1.5em;
+    padding: 0 0 .23em;
+}
+
+table.cupom tr:first-child td {
+    font-size: 1.5em;
+    padding: 1.15em 0 .2em;
+}
+
+table.cupom table tr > td {
+    font-size: 1.5em;
+    padding: 1em 0;
+}
+
+table.cupom > tbody {}
+
+table.cupom .td1,
+table.cupom .th1 {
+    border-right: 1px solid #dadada;
+    padding: .5em 0;
+}
+
+table.cupom .td2,
+table.cupom .th2 {
+    border-right: 1px solid #dadada;
+}
+
+table.cupom .td3,
+table.cupom .th3 {
+    border-right: 1px solid #dadada;
+}
+
+table.cupom tr > .td4 > span {
+    margin: 0;
+    padding: 0;
+    float: none;
+    width: auto;
+    text-align: center;
+}
+
+table.cupom .premiado > .td4 > span:after {
+    content: 'N\00famero premiado';
+    display: block;
+    background: #626262;
+    color: #fff;
+    font-size: .7em;
+    font-weight: normal;
+    padding: .15em 0;
+}
+
+form > .confirmacao,
+form > .cupom,
+form > .cupom + .enviados {
+    margin-bottom: 1.8em;
+}
+
+p.tela-erro {
+    font-size: 1.82em;
+    padding-top: 2.86em;
+    line-height: 1.19;
+    text-align: center;
+}
+
+p.tela-erro > strong {
+    display: block;
+}

@@ -1,0 +1,189 @@
+html,
+body {
+    color: #404040;
+    background: #f2f2f2;
+}
+
+input,
+select {
+    background: #fff;
+    border: 1px solid #fff;
+}
+
+label > .input {
+    background: #fff;
+}
+
+label[data-valid="false"] > select {
+    color: #dd1d21;
+    border-color: #dd1d21;
+}
+
+input:valid,
+label[data-valid="true"] input {
+    border-color: #fff;
+}
+
+input:invalid,
+label[data-valid="false"] input {
+    border-color: #dd1d21;
+    color: #fff;
+}
+
+input:invalid:focus,
+label[data-valid="false"] input:focus {
+    border-color: #fff;
+    color: #404040;
+}
+
+input + span {
+    color: #d83431;
+}
+
+input[required]:invalid::-webkit-input-placeholder {
+    color: #fff;
+}
+
+input[required]:invalid:-ms-input-placeholder {
+    color: #fff;
+}
+
+input[required]:invalid:-moz-placeholder {
+    color: #fff;
+}
+
+input[required]:invalid::-moz-placeholder {
+    color: #fff;
+}
+
+label[data-valid="false"] input::-webkit-input-placeholder {
+    color: #fff;
+}
+
+label[data-valid="false"] input:-ms-input-placeholder {
+    color: #fff;
+}
+
+label[data-valid="false"] input:-moz-placeholder {
+    color: #fff;
+}
+
+label[data-valid="false"] input::-moz-placeholder {
+    color: #fff;
+}
+
+input[required]:invalid:focus::-webkit-input-placeholder {
+    color: #404040;
+}
+
+input[required]:invalid:focus:-ms-input-placeholder {
+    color: #404040;
+}
+
+input[required]:invalid:focus:-moz-placeholder {
+    color: #404040;
+}
+
+input[required]:invalid:focus::-moz-placeholder {
+    color: #404040;
+}
+
+label[data-valid="false"] input:focus::-webkit-input-placeholder {
+    color: #404040;
+}
+
+label[data-valid="false"] input:focus:-ms-input-placeholder {
+    color: #404040;
+}
+
+label[data-valid="false"] input:focus:-moz-placeholder {
+    color: #404040;
+}
+
+label[data-valid="false"] input:focus::-moz-placeholder {
+    color: #404040;
+}
+
+a.btn,
+input[type="submit"] {
+    color: #fff;
+    background: #d83431;
+}
+
+form > div > header > a,
+#modalCupom > div > a.fechar {
+    color: #d83431;
+    border: .05em solid #d83431;
+}
+
+input + span {
+    color: #d83431;
+}
+
+body > form > div > header > span {
+    background: #d9d9d9;
+}
+
+body > form > div > header > span.disable {
+    background: #e7e7e7;
+}
+
+.dados div > label + a {
+    color: #404040;
+}
+
+body > form > .cupom label > span.btn {
+    border: 1px solid #404040;
+    color: #404040;
+}
+
+body > form > .cupom label[data-valid="false"] > span.btn {
+    border: 1px solid #dd1d21;
+    color: #dd1d21;
+}
+
+body > form > div > header > span:after {
+    border-color: transparent;
+    border-top-color: #d9d9d9;
+    border-width-bottom: 0;
+    border-color-bottom: transparent;
+}
+
+.enviados .abas span.active {
+    background: #626262;
+    color: #fff;
+}
+
+.enviados > div > ul.active > li {
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.enviados > div > ul.active a {
+    color: #404040;
+}
+
+.enviados > div > ul.active a.premiado:after {
+    background: #626262;
+    color: #fff;
+}
+
+.enviados {
+    border-top: 1px solid #d9d9d9;
+}
+
+.enviados .abas li {
+    border: 1px solid #404040;
+}
+
+.cupom h2 strong {
+    color: #d83431;
+}
+
+.cupom h2 + .cupom {
+    background: #d9d9d9;
+}
+
+.cupom a.btn {
+    color: #404040;
+    border: 1px solid #404040;
+}

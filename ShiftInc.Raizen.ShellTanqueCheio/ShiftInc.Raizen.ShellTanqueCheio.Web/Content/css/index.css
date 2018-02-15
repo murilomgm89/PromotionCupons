@@ -1,0 +1,24 @@
+@import url("reset.css");
+@import url("color.css");
+@import url("base.css");
+@import url("mobile.css");
+@import url("desktop.css");
+
+/*@import url("mobile.css") (max-width:768px);
+@import url("desktop.css") (min-width:769px);*/
+
+@font-face {
+    font-family: futura_t;
+    src: url('../font/ftb.eot');
+    src: url('../font/ftb.eot?#iefix') format('embedded-opentype'), url('../font/ftb.woff2') format('woff2'), url('../font/ftb.woff') format('woff'), url('../font/ftb.ttf') format('truetype'), url('../font/ftb.svg#futura_t') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: futura_t;
+    src: url('../font/ft.eot');
+    src: url('../font/ft.eot?#iefix') format('embedded-opentype'), url('../font/ft.woff2') format('woff2'), url('../font/ft.woff') format('woff'), url('../font/ft.ttf') format('truetype'), url('../font/ft.svg#futura_t') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
