@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CpfCheck</title>
+    <link rel="stylesheet" href="/Content/css/index.css">
+	
+	@*<script src="//assets.adobedtm.com/9b74220da1d0b361973dbd26a530b8f49255d00c/satelliteLib-b69ce53ba3fa1db9f06b40a159d15cee47132b4e.js"></script>*@
+</head>
+<body>
+	<form action="/promotion/cpf-check" method="post" name="internal.frm" autocomplete="off">
+		<div class="cadastro">
+			<p class="desktop">
+				Cadastre agora mesmo seu cupom fiscal
+				<small>
+					ou confira seus cupons já enviados.
+				</small>
+			</p>
+			<p class="mobile">
+				Para se cadastrar, digite seu CPF e descubra se ganhou.
+				<small>
+					Se preferir, confira os cupons cadastrados.
+				</small>
+			</p>
+            @{
+                if (ViewBag.Error == "error_end_promotion")
+                {
+                    <label data-valid='false' data-custom='0'>
+                        <input name="cpf" type="tel" placeholder="000.000.000-00" data-pattern="\d{3}(\.)*\d{3}(\.)*\d{3}(\-)*\d{2}" data-mask data-required data-maxlength="14">
+                        <span>                           
+                            <span class="validate0">Promoção encerrada. Fique ligado em nossas próximas promoções.</span>
+                        </span>
+                        <span style="font-size: .7em; paddin-top: .1em">Preencha aqui seu CPF</span>
+                    </label>
+                }
+                else 
+                {             
+			        <label @Html.Raw(ViewBag.Error == null ? "" : "data-valid='false' data-custom='0'")>
+				        <input name="cpf" type="tel" placeholder="000.000.000-00" data-pattern="\d{3}(\.)*\d{3}(\.)*\d{3}(\-)*\d{2}" data-mask data-required data-maxlength="14">
+				        <span>
+					        <span class="normal">CPF inválido. Digite novamente.</span>
+					        <span class="validate0">CPF com participação restrita. Consulte o regulamento.</span>
+				        </span>
+				        <span style="font-size: .7em; paddin-top: .1em">Preencha aqui seu CPF</span>
+			        </label>
+                }
+            }
+			<label class="submit">
+				<input type="submit" value="Cadastrar">
+			</label>
+		</div>
+        <input type="hidden" name="productType" value="@ViewBag.ProductType" />
+	</form>
+	<script src="/Scripts/js.js"></script>
+</body>
+</html>

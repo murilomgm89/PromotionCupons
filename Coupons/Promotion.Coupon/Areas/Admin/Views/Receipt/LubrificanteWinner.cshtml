@@ -1,0 +1,107 @@
+﻿@model Promotion.Coupon.Areas.Admin.Models.LubrificantesWinnersViewModel
+@{
+    ViewBag.Title = "ReceiptDetails";
+    Layout = "~/Areas/Admin/Views/Shared/Layout.cshtml";
+}
+
+@helper ContentTab(string name, string _class, IEnumerable<Receipt> receipts)
+{
+    <script src="~/Scripts/admin/view/LubrificantesWinner.js"></script>
+    <div class="tab-pane @_class" id="@name">
+        <div class="block">
+            <div class="datatable">
+                <table id="@name-table" class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CNPJ do estabelecimento</th>
+                            <th>Nº sorte</th>
+                            <th>Data do Cadastro</th>                            
+                            @{
+                                if (name == "reprovados")
+                                {
+                                <th>Motivo</th>
+                                }
+                            }                            
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var receipt in receipts)
+                        {
+                            <tr>
+                                <td><a href="/admin/person/@receipt.idPerson">@receipt.Person.name</a></td>
+                                <td>@receipt.vendorCNPJ.PadLeft(14, '0').Insert(12, "-").Insert(8, "/").Insert(5, ".").Insert(2, ".")</td>
+                                <td>@receipt.LuckyCode.Where(lc => lc.isWinner == true).FirstOrDefault().code</td>
+                                <td>@receipt.dtCreation.ToString("dd/MM/yyyy HH:mm") </td>
+                                @{
+                                    if (name == "reprovados")
+                                    {
+                                        <td>
+                                            @receipt.invalidateDescription
+                                        </td>
+                                    }
+                                }                                
+                               
+                                <td>
+                                    <a class="btn-xs btn-success" href="/receipt/file?id=@receipt.idReceipt.ToString().PadLeft(8, '0').Base64Encode()"><i class="icon-file3" style="margin-right: 5px;"></i> Ver cupom</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="page-header">
+    <div class="page-title">
+        <h3>Definir Ganhador Lubrificante</h3>
+    </div>
+</div>
+
+
+<div class="block">
+    <div class="row">
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#vencedores" data-toggle="tab"><i class="icon-question3"></i>Vencedores</a></li>             
+                <li><a href="#reprovados" data-toggle="tab"><i class="icon-thumbs-down2"></i>Reprovados</a></li>
+                <li><a href="#newWinner" data-toggle="tab"><i class="icon-trophy-star"></i>Gerar novo ganhador</a></li>
+            </ul>
+
+            <div class="tab-content with-padding">
+                @ContentTab("vencedores", "fade in active", Model.Winners)              
+                @ContentTab("reprovados", "fade", Model.Disapproved)
+                <div class="tab-pane fade" id="newWinner">                    
+                    <div class="row">
+                        <div class ="col-md-3">
+                            <form action="#" class="breadcrumb-search">
+                                <input type="text" id="ValNumSort" placeholder="Digite o número premiado !!!..." name="search" class="form-control autocomplete">
+                                <input type="button" class="btn btn-block btn-success" id="SearchLubrificantesWinner" value="Buscar">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="GridWinners" class="datatable-scroll">
+                    
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            $('#vencedores-table').DataTable({
+                "language": dtLanguage
+            });
+            $('#reprovados-table').DataTable({
+                "language": dtLanguage
+            });
+        });
+    </script>
+}

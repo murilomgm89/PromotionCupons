@@ -1,0 +1,47 @@
+﻿@model Promotion.Coupon.Areas.Admin.Models.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <title>Administração - Promoção Tanque Cheio</title>
+    <link href="/Content/Styles/Admin/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/Content/Styles/Admin/londinium-theme.css" rel="stylesheet" type="text/css">
+    <link href="/Content/Styles/Admin/styles.css" rel="stylesheet" type="text/css">
+    <link href="/Content/Styles/Admin/icons.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+</head>
+<body class="full-width page-condensed">
+    <div class="login-wrapper">
+        <form action="" method="post" role="form">
+            <div class="popup-header">
+                <span class="text-semibold">Login Usuário</span>
+            </div>
+            <div class="well">
+                <div class="alert alert-danger" style="margin-bottom: 10px;display:@(Model == null || Model.Error ? "" : "none");">Login ou senha incorretos</div>
+                <div class="form-group has-feedback">
+                    <label>Nome Usuário</label>
+                    <input type="text" name="username" class="form-control" placeholder="Nome Usuário" value="@Model.Username">
+                    <i class="icon-users form-control-feedback"></i>
+                </div>
+                <div class="form-group has-feedback">
+                    <label>Senha</label>
+                    <input type="password" name="password" class="form-control" placeholder="Senha">
+                    <i class="icon-lock form-control-feedback"></i>
+                </div>
+                <div class="row form-actions">
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-warning pull-right"><i class="icon-arrow-right5"></i> Entre</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+﻿@model Promotion.Coupon.Areas.Admin.Models.WinnerListViewModel
+@{
+    ViewBag.Title = "GetWinners";
+    Layout = "~/Areas/Admin/Views/Shared/Layout.cshtml";
+}
+
+
+<div class="page-header">
+    <div class="page-title">
+        <h3>Listagem dos Vencedores</h3>
+    </div>
+</div>
+
+<div class="block">
+    <div class="row">
+        <div class="tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#v-power" data-toggle="tab"><i class="icon-gas-pump"></i> V-Power</a></li>
+                <li><a href="#lubrificantes" data-toggle="tab"><i class="icon-droplet"></i> Lubrificantes</a></li>
+            </ul>
+
+            <div class="tab-content with-padding">
+                <div class="tab-pane fade in active" id="v-power">
+                    <div class="block">
+                        <div class="datatable">
+                            <table id="v-power-table" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Cidade</th>
+                                        <th>Data do Cadastro</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.VPowerWinners.OrderByDescending(w => w.dtCreation))
+                                    {
+                                        <tr>
+                                            <td><a href="/admin/person/@item.idPerson">@item.Person.name</a></td>
+                                            <td>@item.Person.Address.City.name - @item.Person.Address.City.state</td>
+                                            <td>@item.dtCreation.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>
+                                                <a class="btn-xs btn-success" href="/receipt/file?id=@item.idReceipt.ToString().PadLeft(8, '0').Base64Encode()"><i class="icon-file3" style="margin-right: 5px;"></i> Ver cupom</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="lubrificantes">
+                    <div class="block">
+                        <div class="datatable">
+                            <table id="lub-table" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Número da Sorte</th>
+                                        <th>Cidade</th>
+                                        <th>Data do Cadastro</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.LubrificanteWinners.OrderByDescending(w => w.dtCreation))
+                                    {
+                                        <tr>
+                                            <td><a href="/admin/receipt/details?id=@item.idReceipt">@item.Person.name</a></td>
+                                            <td>@item.LuckyCode.FirstOrDefault().code</td>
+                                            <td>@item.Person.Address.City.name - @item.Person.Address.City.state</td>
+                                            <td>@item.dtCreation.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>
+                                                <a class="btn-xs btn-success" href="/receipt/file?id=@item.idReceipt.ToString().PadLeft(8, '0').Base64Encode()"><i class="icon-file3" style="margin-right: 5px;"></i> Ver cupom</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#v-power-table").DataTable({
+            "language": dtLanguage
+        });
+        $("#lub-table").DataTable({
+            "language": dtLanguage
+        });
+    });
+</script>

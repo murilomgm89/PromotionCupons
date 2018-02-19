@@ -1,0 +1,63 @@
+﻿@model Promotion.Coupon.Areas.Admin.Controllers.SearchResultViewModel
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Areas/Admin/Views/Shared/Layout.cshtml";
+}
+
+<div class="page-header">
+    <div class="page-title">
+        <h3>Busca</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- Filled blue -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h6 class="panel-title">
+                    <i class="icon-search2"></i> Filtro de busca
+                </h6>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" action="" method="get">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Texto de busca:</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="search" class="form-control from-date" value="@Model.Search">
+                        </div>
+                    </div>
+                    <div class="form-actions text-right">
+                        <button type="submit" class="btn btn-primary"><i class="icon-search2"></i> Buscar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /filled blue -->
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading"><h6 class="panel-title"><i class="icon-table2"></i> Listagem dos Participantes</h6></div>
+    <div class="table-responsive">
+        <table class="table" id="person-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>                  
+                    <th>Data do Cadastro</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.PersonList)
+                {
+                    <tr>
+                        <td><a href="/admin/person/@p.idPerson">@p.name</a></td>
+                        <td>@p.email</td>                        
+                        <td>@p.dtCreation.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

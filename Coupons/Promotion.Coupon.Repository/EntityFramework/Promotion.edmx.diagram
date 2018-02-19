@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7c14b6e6e60248a4875b3bde7ec9bceb" Name="Diagram1">
+        <EntityTypeShape EntityType="GymPassModel.Address" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPassModel.AdminAccount" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPassModel.BlockedCPFs" Width="1.5" PointX="8.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPassModel.City" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPassModel.LuckyCode" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPassModel.NewsSending" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPassModel.Person" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPassModel.Product" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPassModel.Receipt" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPassModel.SequenceSeries" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPassModel.Series" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPassModel.Vendor" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GymPassModel.AddressCEP" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="GymPassModel.FK_dbo_Address_dbo_City_idCity" ManuallyRouted="false" />
+        <AssociationConnector Association="GymPassModel.FK_dbo_Address_dbo_Person_idPersonalData" ManuallyRouted="false" />
+        <AssociationConnector Association="GymPassModel.FK_dbo_LuckyCode_dbo_Receipt_idReceipt" ManuallyRouted="false" />
+        <AssociationConnector Association="GymPassModel.FK_dbo_NewsSending_dbo_Person_idPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="GymPassModel.FK_dbo_NewsSending_dbo_Receipt_idReceipt" ManuallyRouted="false" />
+        <AssociationConnector Association="GymPassModel.FK_dbo_Receipt_dbo_Person_idPersonalData" ManuallyRouted="false" />
+        <AssociationConnector Association="GymPassModel.FK_dbo_Receipt_dbo_Product_idProduct" ManuallyRouted="false" />
+        <AssociationConnector Association="GymPassModel.FK_dbo_SequenceSeries_dbo_Series_idSerie" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GymPassModel.ViewReceiptExport" Width="1.5" PointX="7.375" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

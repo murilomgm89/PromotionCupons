@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5997B23B-5369-45D2-878C-F8B09A32D71B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Promotion.Coupon.Application</RootNamespace>
+    <AssemblyName>Promotion.Coupon.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Applications\AddressApplication.cs" />
+    <Compile Include="Applications\AddressCepApplication.cs" />
+    <Compile Include="Applications\AdminAccountApplication.cs" />
+    <Compile Include="Applications\Base\ApplicationBase.cs" />
+    <Compile Include="Applications\BlockedCpfApplication.cs" />
+    <Compile Include="Applications\CityApplication.cs" />
+    <Compile Include="Applications\NewsSendingApplication.cs" />
+    <Compile Include="Applications\LuckyCodeApplication.cs" />
+    <Compile Include="Applications\PersonApplication.cs" />
+    <Compile Include="Applications\ProductApplication.cs" />
+    <Compile Include="Applications\ReceiptApplication.cs" />
+    <Compile Include="Applications\SequenceSeriesApplication.cs" />
+    <Compile Include="Applications\SeriesApplication.cs" />
+    <Compile Include="Applications\VendorApplication.cs" />
+    <Compile Include="Interfaces\Base\IApplicationBase.cs" />
+    <Compile Include="Interfaces\IAddressApplication.cs" />
+    <Compile Include="Interfaces\IAddressCepApplication.cs" />
+    <Compile Include="Interfaces\IAdminAccountApplication.cs" />
+    <Compile Include="Interfaces\IBlockedCpfApplication.cs" />
+    <Compile Include="Interfaces\ICityApplication.cs" />
+    <Compile Include="Interfaces\ILuckyCodeApplication.cs" />
+    <Compile Include="Interfaces\INewsSendingApplication.cs" />
+    <Compile Include="Interfaces\IPersonApplication.cs" />
+    <Compile Include="Interfaces\IProductApplication.cs" />
+    <Compile Include="Interfaces\IReceiptApplication.cs" />
+    <Compile Include="Interfaces\ISequenceSeriesApplication.cs" />
+    <Compile Include="Interfaces\ISeriesApplication.cs" />
+    <Compile Include="Interfaces\IVendorApplication.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Promotion.Coupon.Entity\Promotion.Coupon.Entity.csproj">
+      <Project>{58a389d4-c2cd-4901-b326-9a4824a6c3ab}</Project>
+      <Name>Promotion.Coupon.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Promotion.Coupon.Repository\Promotion.Coupon.Repository.csproj">
+      <Project>{c75060c9-03a7-4714-b970-6109c71f7793}</Project>
+      <Name>Promotion.Coupon.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

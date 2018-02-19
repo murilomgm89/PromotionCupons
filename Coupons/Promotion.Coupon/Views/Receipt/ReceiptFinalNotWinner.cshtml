@@ -1,0 +1,165 @@
+﻿@using Promotion.Coupon.Entity.Extensions
+@model Promotion.Coupon.Models.ReceiptSaveViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ReceiptFinalWinner</title>
+    <link rel="stylesheet" href="/Content/css/index.css">
+	
+    @*<script src="//assets.adobedtm.com/9b74220da1d0b361973dbd26a530b8f49255d00c/satelliteLib-b69ce53ba3fa1db9f06b40a159d15cee47132b4e.js"></script>*@
+</head>
+<body>
+    @*<!--
+    Start of DoubleClick Floodlight Tag: Please do not remove
+    Activity name of this tag: Promoção Tanque Cheio - Tanque Cheio Toda Hora (Visita A) Cadastro CUPOM
+    URL of the webpage where the tag is expected to be placed: http://www.shell.com.br/motoristas/promocoes-e-campanhas/promocao-tanque-cheio/tanque-cheio-toda-hora-vpower.html
+    This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+    Creation Date: 07/12/2016
+    -->
+    <script type="text/javascript">
+    var axel = Math.random() + "";
+    var a = axel * 10000000000000;
+    document.write('<iframe src="https://5860106.fls.doubleclick.net/activityi;src=5860106;type=tanqu0;cat=promo006;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+    </script>
+    <noscript>
+    <iframe src="https://5860106.fls.doubleclick.net/activityi;src=5860106;type=tanqu0;cat=promo006;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+    </noscript>
+    <!-- End of DoubleClick Floodlight Tag: Please do not remove -->
+
+    <!--
+
+    Start of DoubleClick Floodlight Tag: Please do not remove
+
+    Activity name of this tag: Raizen_Promocao Tanque Cheio_Tanque Cheio Toda Hora (Visita A)_Cadastro Cupom_Sem DCM
+
+    URL of the webpage where the tag is expected to be placed: http://www.shell.com.br
+
+    This tag must be placed between the <body> and </body> tags, as close as possible to the opening tag.
+
+    Creation Date: 07/21/2016
+
+    -->
+
+    <script type="text/javascript">
+
+        var axel = Math.random() + "";
+
+        var a = axel * 10000000000000;
+
+        document.write('<iframe src="https://5876400.fls.doubleclick.net/activityi;src=5876400;type=invmedia;cat=3hgvbruy;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+
+    </script>
+
+    <noscript>
+
+        <iframe src="https://5876400.fls.doubleclick.net/activityi;src=5876400;type=invmedia;cat=3hgvbruy;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+
+    </noscript>
+
+    <!-- End of DoubleClick Floodlight Tag: Please do not remove -->*@
+    <form action="/promotion/receipt/save" method="post" enctype="multipart/form-data" name="internal.frm" autocomplete="off">
+        @Html.HiddenFor(e => e.Receipt.idPerson)
+        <div class="cupom">
+             <header>
+                <span class="disable">
+                    <strong>Dados Pessoais</strong>
+                    <small>Os campos marcados com * são de preenchimento obrigatório</small>
+                </span>
+                <span>
+                    <strong>Cadastro do Cupom</strong>
+                    <small>@*Envie uma foto do cupom fiscal.*@</small>
+                </span>
+                <a href="javascript:;">&times;</a>
+            </header> 
+            <div>
+            	<h2 class="success">
+            		@Model.Receipt.Person.name.Split(' ')[0],
+            		<strong>Continue tentando!</strong>
+            	</h2>
+            	<p>
+            		Não foi dessa vez, mas não se esqueça: você pode participar novamente. Basta cadastrar novos cupons e torcer.
+            	</p>
+            	@*<a href="/promotion/receipt-data" class="btn">Cadastrar novo cupom</a>*@
+            </div>
+        </div>
+        @{
+            if (Model.Receipts.Count >= 1)
+            {
+                <div class="enviados">
+                    <h3>Histórico de Cupons Enviados</h3>
+                    <ul class="abas">
+
+                        @if (Model.Receipts.Where(rs => rs.Product.type == "v-power").Count() > 0)
+                        {
+                            <li><span class="active">V-Power</span></li>
+                        }
+
+                        @if (Model.Receipts.Where(rs => rs.Product.type == "lubrificantes").Count() > 0)
+                        {
+                            <li><span class="active">Lubrificantes</span></li>
+                        }
+
+                    </ul>
+                    <div>
+                        @{
+                        var isWinnerClass = "";
+                        var listCupom = "";
+                        var len = 0;
+                        if (Model.Receipts.Where(rs => rs.Product.type == "v-power").Count() > 0)
+                        {
+                            <ul class="vpower active">
+                                @foreach (var receipt in Model.Receipts.Where(rs => rs.Product.type == "v-power"))
+                                {
+                                    if (receipt.isWinner == true)
+                                    {
+                                        isWinnerClass = " class='premiado'";
+                                    }
+                                    @Html.Raw("<li><span>CNPJ Estabelecimento: " + receipt.vendorCNPJ + "</span><a href='/receipt/file?id=" + receipt.idReceipt.ToString().Base64Encode() + "'" + isWinnerClass + " target='_blank'>ver imagem do cupom</a></li>");
+                                    isWinnerClass = "";
+                                }
+                            </ul>
+                        }
+
+                        if (Model.Receipts.Where(rs => rs.Product.type == "lubrificantes").Count() > 0)
+                        {
+                            <ul class="lub">
+                                @foreach (var receipt in Model.Receipts.Where(rs => rs.Product.type == "lubrificantes"))
+                                {
+                                    listCupom = "";
+                                    len = receipt.LuckyCode.Count();
+                                    for (int i = 0; i < len; i++)
+                                    {
+                                        var lucky = receipt.LuckyCode.ElementAt(i);
+                                        isWinnerClass = lucky.isWinner == true ? " class='premiado'" : "";
+                                        listCupom += "<tr " + Html.Raw(isWinnerClass) + ">";
+                                        if (i == 0)
+                                        {
+                                            listCupom += "<td class='td1' rowspan='" + len + "'>" + String.Format("{0:dd/MM/yyyy}", receipt.dtCreation) + "</td>";
+                                        }
+                                        var dt = String.Format("{0:dd/MM/yyyy}", lucky.dtRaffle);
+                                        listCupom += "<td class='td2'>" + dt + "</td>";
+                                        listCupom += "<td class='td3'>" + (lucky.code.ToString().Length == 6 ? lucky.code.ToString().Insert(1, "-") : (lucky.code.ToString().Length == 7 ? lucky.code.ToString().Insert(2, "-") : (lucky.code.ToString().Length == 8 ? lucky.code.ToString().Insert(3, "-") : ""))) + "</td>";
+                                        listCupom += "<td class='td4'><span></span></td></tr>";
+                                    }
+                                    @Html.Raw("<li><span>CNPJ Estabelecimento: " + receipt.vendorCNPJ + "</span><a href='/receipt/file?id=" + receipt.idReceipt.ToString().Base64Encode() + "' target='_blank'>ver imagem do cupom</a>");
+                                    @Html.Raw("<table class='cupom'><thead><tr><th class='th1'>Data do cadastro</th><th class='th2'>Data do sorteio</th><th class='td3'>Número da Sorte</th><th class='td4'>Resultado</th></tr></thead>");
+                                    @Html.Raw("<tbody>" + @listCupom + "</tbody></table></li>");
+                                }
+                            </ul>
+                        }
+                        }
+                    </div>
+                </div>
+            }
+        }
+        </form>
+    <script src="/Scripts/js.js"></script>
+</body>
+</html>

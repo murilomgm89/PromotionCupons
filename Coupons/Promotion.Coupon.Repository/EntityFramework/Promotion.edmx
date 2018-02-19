@@ -1,0 +1,955 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GymPassModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="int" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="number" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="complement" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="district" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="idCity" Type="int" Nullable="false" />
+          <Property Name="CEP" Type="nvarchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'intimusgympass.dbo.AddressCEP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AddressCEP">
+          <Key>
+            <PropertyRef Name="cep" />
+            <PropertyRef Name="state" />
+            <PropertyRef Name="city" />
+            <PropertyRef Name="district" />
+            <PropertyRef Name="address" />
+          </Key>
+          <Property Name="cep" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="state" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="72" Nullable="false" />
+          <Property Name="district" Type="varchar" MaxLength="72" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="137" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminAccount">
+          <Key>
+            <PropertyRef Name="idAdminAccount" />
+          </Key>
+          <Property Name="idAdminAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="BlockedCPFs">
+          <Key>
+            <PropertyRef Name="CPF" />
+          </Key>
+          <Property Name="CPF" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="idCity" />
+          </Key>
+          <Property Name="idCity" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="60" />
+          <Property Name="state" Type="varchar" MaxLength="2" />
+          <Property Name="ddd" Type="int" />
+        </EntityType>
+        <EntityType Name="LuckyCode">
+          <Key>
+            <PropertyRef Name="idLuckyCode" />
+          </Key>
+          <Property Name="idLuckyCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="idReceipt" Type="int" Nullable="false" />
+          <Property Name="dtWinner" Type="datetime" />
+          <Property Name="dtRaffle" Type="datetime" />
+          <Property Name="idSerie" Type="int" Nullable="false" />
+          <Property Name="serie" Type="int" Nullable="false" />
+          <Property Name="isWinner" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsSending">
+          <Key>
+            <PropertyRef Name="idNewsSending" />
+          </Key>
+          <Property Name="idNewsSending" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Destination" Type="nvarchar" MaxLength="80" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+          <Property Name="dtSending" Type="datetime" />
+          <Property Name="StatusDetail" Type="nvarchar(max)" />
+          <Property Name="idReceipt" Type="int" />
+          <Property Name="fileName" Type="nvarchar" MaxLength="80" />
+          <Property Name="idPerson" Type="int" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cpf" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="birth" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="dtCreation" Type="datetime" Nullable="false" />
+          <Property Name="isVPowerTerms" Type="int" />
+          <Property Name="isLubTerms" Type="int" />
+          <Property Name="imported" Type="int" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="idReceipt" />
+          </Key>
+          <Property Name="idReceipt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idPerson" Type="int" Nullable="false" />
+          <Property Name="idProduct" Type="int" Nullable="false" />
+          <Property Name="vendorCNPJ" Type="varchar" MaxLength="17" Nullable="false" />
+          <Property Name="isWinner" Type="bit" Nullable="false" />
+          <Property Name="dtCreation" Type="datetime" Nullable="false" />
+          <Property Name="isValidated" Type="bit" />
+          <Property Name="invalidateDescription" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SequenceSeries">
+          <Key>
+            <PropertyRef Name="idSequenceSeries" />
+          </Key>
+          <Property Name="idSequenceSeries" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idSerie" Type="int" Nullable="false" />
+          <Property Name="value" Type="int" Nullable="false" />
+          <Property Name="ordem" Type="int" Nullable="false" />
+          <Property Name="quant" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Series">
+          <Key>
+            <PropertyRef Name="idSerie" />
+          </Key>
+          <Property Name="idSerie" Type="int" Nullable="false" />
+          <Property Name="RndStart" Type="int" Nullable="false" />
+          <Property Name="RndEnd" Type="int" Nullable="false" />
+          <Property Name="dtStart" Type="datetime" Nullable="false" />
+          <Property Name="dtEnd" Type="datetime" Nullable="false" />
+          <Property Name="qtdSort" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="CNPJ" />
+          </Key>
+          <Property Name="CNPJ" Type="varchar" MaxLength="17" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" />
+          <Property Name="IBM" Type="varchar" MaxLength="10" />
+          <Property Name="address" Type="nvarchar" MaxLength="150" />
+          <Property Name="district" Type="nvarchar" MaxLength="70" />
+          <Property Name="cityName" Type="nvarchar" MaxLength="70" />
+          <Property Name="CEP" Type="nvarchar" MaxLength="9" />
+          <Property Name="state" Type="nvarchar" MaxLength="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewReceiptExport">
+          <Key>
+            <PropertyRef Name="idReceipt" />
+            <PropertyRef Name="CNPJ_do_estabelecimento" />
+            <PropertyRef Name="Produto" />
+            <PropertyRef Name="Tipo_do_Produto" />
+            <PropertyRef Name="Premiado" />
+            <PropertyRef Name="Data_do_Cadastro_do_Recibo" />
+            <PropertyRef Name="Nome_do_Participante" />
+            <PropertyRef Name="cpf" />
+            <PropertyRef Name="nascimento" />
+            <PropertyRef Name="telefone" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="endereco" />
+            <PropertyRef Name="PersonNumero" />
+            <PropertyRef Name="PensonComplemento" />
+            <PropertyRef Name="Bairro" />
+            <PropertyRef Name="CEP" />
+            <PropertyRef Name="Data_de_Cadastro_do_Participante" />
+          </Key>
+          <Property Name="idReceipt" Type="int" Nullable="false" />
+          <Property Name="CNPJ_do_estabelecimento" Type="varchar" MaxLength="17" Nullable="false" />
+          <Property Name="Produto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tipo_do_Produto" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="Premiado" Type="bit" Nullable="false" />
+          <Property Name="Validado" Type="bit" />
+          <Property Name="Motivo_da_Validacao" Type="nvarchar" MaxLength="200" />
+          <Property Name="Data_do_Cadastro_do_Recibo" Type="datetime" Nullable="false" />
+          <Property Name="Nome_do_Participante" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="cpf" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="nascimento" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="telefone" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="uf" Type="varchar" MaxLength="2" />
+          <Property Name="PersonCidade" Type="varchar" MaxLength="60" />
+          <Property Name="endereco" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PersonNumero" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PensonComplemento" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Bairro" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CEP" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="Data_de_Cadastro_do_Participante" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Address_dbo_City_idCity">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="idCity" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="idCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Address_dbo_Person_idPersonalData">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LuckyCode_dbo_Receipt_idReceipt">
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LuckyCode" Type="Self.LuckyCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="idReceipt" />
+            </Principal>
+            <Dependent Role="LuckyCode">
+              <PropertyRef Name="idReceipt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_NewsSending_dbo_Person_idPerson">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="NewsSending" Type="Self.NewsSending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="NewsSending">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_NewsSending_dbo_Receipt_idReceipt">
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsSending" Type="Self.NewsSending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="idReceipt" />
+            </Principal>
+            <Dependent Role="NewsSending">
+              <PropertyRef Name="idReceipt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Receipt_dbo_Person_idPersonalData">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Receipt_dbo_Product_idProduct">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SequenceSeries_dbo_Series_idSerie">
+          <End Role="Series" Type="Self.Series" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SequenceSeries" Type="Self.SequenceSeries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Series">
+              <PropertyRef Name="idSerie" />
+            </Principal>
+            <Dependent Role="SequenceSeries">
+              <PropertyRef Name="idSerie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GymPassModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminAccount" EntityType="Self.AdminAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlockedCPFs" EntityType="Self.BlockedCPFs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LuckyCode" EntityType="Self.LuckyCode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsSending" EntityType="Self.NewsSending" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SequenceSeries" EntityType="Self.SequenceSeries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Series" EntityType="Self.Series" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AddressCEP" EntityType="Self.AddressCEP" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AddressCEP].[cep] AS [cep], 
+    [AddressCEP].[state] AS [state], 
+    [AddressCEP].[city] AS [city], 
+    [AddressCEP].[district] AS [district], 
+    [AddressCEP].[address] AS [address]
+    FROM [dbo].[AddressCEP] AS [AddressCEP]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewReceiptExport" EntityType="Self.ViewReceiptExport" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewReceiptExport].[idReceipt] AS [idReceipt], 
+    [ViewReceiptExport].[CNPJ_do_estabelecimento] AS [CNPJ_do_estabelecimento], 
+    [ViewReceiptExport].[Produto] AS [Produto], 
+    [ViewReceiptExport].[Tipo_do_Produto] AS [Tipo_do_Produto], 
+    [ViewReceiptExport].[Premiado] AS [Premiado], 
+    [ViewReceiptExport].[Validado] AS [Validado], 
+    [ViewReceiptExport].[Motivo_da_Validacao] AS [Motivo_da_Validacao], 
+    [ViewReceiptExport].[Data_do_Cadastro_do_Recibo] AS [Data_do_Cadastro_do_Recibo], 
+    [ViewReceiptExport].[Nome_do_Participante] AS [Nome_do_Participante], 
+    [ViewReceiptExport].[cpf] AS [cpf], 
+    [ViewReceiptExport].[nascimento] AS [nascimento], 
+    [ViewReceiptExport].[telefone] AS [telefone], 
+    [ViewReceiptExport].[email] AS [email], 
+    [ViewReceiptExport].[uf] AS [uf], 
+    [ViewReceiptExport].[PersonCidade] AS [PersonCidade], 
+    [ViewReceiptExport].[endereco] AS [endereco], 
+    [ViewReceiptExport].[PersonNumero] AS [PersonNumero], 
+    [ViewReceiptExport].[PensonComplemento] AS [PensonComplemento], 
+    [ViewReceiptExport].[Bairro] AS [Bairro], 
+    [ViewReceiptExport].[CEP] AS [CEP], 
+    [ViewReceiptExport].[Data_de_Cadastro_do_Participante] AS [Data_de_Cadastro_do_Participante]
+    FROM [dbo].[ViewReceiptExport] AS [ViewReceiptExport]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_dbo_Address_dbo_City_idCity" Association="Self.FK_dbo_Address_dbo_City_idCity">
+            <End Role="City" EntitySet="City" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Address_dbo_Person_idPersonalData" Association="Self.FK_dbo_Address_dbo_Person_idPersonalData">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LuckyCode_dbo_Receipt_idReceipt" Association="Self.FK_dbo_LuckyCode_dbo_Receipt_idReceipt">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="LuckyCode" EntitySet="LuckyCode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_NewsSending_dbo_Person_idPerson" Association="Self.FK_dbo_NewsSending_dbo_Person_idPerson">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="NewsSending" EntitySet="NewsSending" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_NewsSending_dbo_Receipt_idReceipt" Association="Self.FK_dbo_NewsSending_dbo_Receipt_idReceipt">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="NewsSending" EntitySet="NewsSending" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Receipt_dbo_Person_idPersonalData" Association="Self.FK_dbo_Receipt_dbo_Person_idPersonalData">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Receipt_dbo_Product_idProduct" Association="Self.FK_dbo_Receipt_dbo_Product_idProduct">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SequenceSeries_dbo_Series_idSerie" Association="Self.FK_dbo_SequenceSeries_dbo_Series_idSerie">
+            <End Role="Series" EntitySet="Series" />
+            <End Role="SequenceSeries" EntitySet="SequenceSeries" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GymPassModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="Int32" Nullable="false" />
+          <Property Name="address1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="complement" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="district" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idCity" Type="Int32" Nullable="false" />
+          <Property Name="CEP" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_dbo_Address_dbo_City_idCity" FromRole="Address" ToRole="City" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_Address_dbo_Person_idPersonalData" FromRole="Address" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="AdminAccount">
+          <Key>
+            <PropertyRef Name="idAdminAccount" />
+          </Key>
+          <Property Name="idAdminAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BlockedCPFs">
+          <Key>
+            <PropertyRef Name="CPF" />
+          </Key>
+          <Property Name="CPF" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="idCity" />
+          </Key>
+          <Property Name="idCity" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="state" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ddd" Type="Int32" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_dbo_Address_dbo_City_idCity" FromRole="City" ToRole="Address" />
+        </EntityType>
+        <EntityType Name="LuckyCode">
+          <Key>
+            <PropertyRef Name="idLuckyCode" />
+          </Key>
+          <Property Name="idLuckyCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="idReceipt" Type="Int32" Nullable="false" />
+          <Property Name="dtWinner" Type="DateTime" Precision="3" />
+          <Property Name="dtRaffle" Type="DateTime" Precision="3" />
+          <Property Name="idSerie" Type="Int32" Nullable="false" />
+          <Property Name="serie" Type="Int32" Nullable="false" />
+          <Property Name="isWinner" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Receipt" Relationship="Self.FK_dbo_LuckyCode_dbo_Receipt_idReceipt" FromRole="LuckyCode" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="NewsSending">
+          <Key>
+            <PropertyRef Name="idNewsSending" />
+          </Key>
+          <Property Name="idNewsSending" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Destination" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="dtSending" Type="DateTime" Precision="3" />
+          <Property Name="StatusDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="idReceipt" Type="Int32" />
+          <Property Name="fileName" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="idPerson" Type="Int32" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_NewsSending_dbo_Person_idPerson" FromRole="NewsSending" ToRole="Person" />
+          <NavigationProperty Name="Receipt" Relationship="Self.FK_dbo_NewsSending_dbo_Receipt_idReceipt" FromRole="NewsSending" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cpf" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="birth" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dtCreation" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isVPowerTerms" Type="Int32" />
+          <Property Name="isLubTerms" Type="Int32" />
+          <Property Name="imported" Type="Int32" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_dbo_Address_dbo_Person_idPersonalData" FromRole="Person" ToRole="Address" />
+          <NavigationProperty Name="NewsSending" Relationship="Self.FK_dbo_NewsSending_dbo_Person_idPerson" FromRole="Person" ToRole="NewsSending" />
+          <NavigationProperty Name="Receipt" Relationship="Self.FK_dbo_Receipt_dbo_Person_idPersonalData" FromRole="Person" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Receipt" Relationship="Self.FK_dbo_Receipt_dbo_Product_idProduct" FromRole="Product" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="idReceipt" />
+          </Key>
+          <Property Name="idReceipt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPerson" Type="Int32" Nullable="false" />
+          <Property Name="idProduct" Type="Int32" Nullable="false" />
+          <Property Name="vendorCNPJ" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isWinner" Type="Boolean" Nullable="false" />
+          <Property Name="dtCreation" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isValidated" Type="Boolean" />
+          <Property Name="invalidateDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LuckyCode" Relationship="Self.FK_dbo_LuckyCode_dbo_Receipt_idReceipt" FromRole="Receipt" ToRole="LuckyCode" />
+          <NavigationProperty Name="NewsSending" Relationship="Self.FK_dbo_NewsSending_dbo_Receipt_idReceipt" FromRole="Receipt" ToRole="NewsSending" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_dbo_Receipt_dbo_Person_idPersonalData" FromRole="Receipt" ToRole="Person" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_dbo_Receipt_dbo_Product_idProduct" FromRole="Receipt" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="SequenceSeries">
+          <Key>
+            <PropertyRef Name="idSequenceSeries" />
+          </Key>
+          <Property Name="idSequenceSeries" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSerie" Type="Int32" Nullable="false" />
+          <Property Name="value" Type="Int32" Nullable="false" />
+          <Property Name="ordem" Type="Int32" Nullable="false" />
+          <Property Name="quant" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Series" Relationship="Self.FK_dbo_SequenceSeries_dbo_Series_idSerie" FromRole="SequenceSeries" ToRole="Series" />
+        </EntityType>
+        <EntityType Name="Series">
+          <Key>
+            <PropertyRef Name="idSerie" />
+          </Key>
+          <Property Name="idSerie" Type="Int32" Nullable="false" />
+          <Property Name="RndStart" Type="Int32" Nullable="false" />
+          <Property Name="RndEnd" Type="Int32" Nullable="false" />
+          <Property Name="dtStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dtEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="qtdSort" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SequenceSeries" Relationship="Self.FK_dbo_SequenceSeries_dbo_Series_idSerie" FromRole="Series" ToRole="SequenceSeries" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="CNPJ" />
+          </Key>
+          <Property Name="CNPJ" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IBM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="district" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="cityName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="CEP" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AddressCEP">
+          <Key>
+            <PropertyRef Name="cep" />
+            <PropertyRef Name="state" />
+            <PropertyRef Name="city" />
+            <PropertyRef Name="district" />
+            <PropertyRef Name="address" />
+          </Key>
+          <Property Name="cep" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="state" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="72" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="district" Type="String" MaxLength="72" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="137" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Address_dbo_City_idCity">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="idCity" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="idCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Address_dbo_Person_idPersonalData">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LuckyCode_dbo_Receipt_idReceipt">
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LuckyCode" Type="Self.LuckyCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="idReceipt" />
+            </Principal>
+            <Dependent Role="LuckyCode">
+              <PropertyRef Name="idReceipt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_NewsSending_dbo_Person_idPerson">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="NewsSending" Type="Self.NewsSending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="NewsSending">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_NewsSending_dbo_Receipt_idReceipt">
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="NewsSending" Type="Self.NewsSending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="idReceipt" />
+            </Principal>
+            <Dependent Role="NewsSending">
+              <PropertyRef Name="idReceipt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Receipt_dbo_Person_idPersonalData">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Receipt_dbo_Product_idProduct">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SequenceSeries_dbo_Series_idSerie">
+          <End Role="Series" Type="Self.Series" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SequenceSeries" Type="Self.SequenceSeries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Series">
+              <PropertyRef Name="idSerie" />
+            </Principal>
+            <Dependent Role="SequenceSeries">
+              <PropertyRef Name="idSerie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GymPass" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Address" EntityType="Self.Address" />
+          <EntitySet Name="AdminAccount" EntityType="Self.AdminAccount" />
+          <EntitySet Name="BlockedCPFs" EntityType="Self.BlockedCPFs" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="LuckyCode" EntityType="Self.LuckyCode" />
+          <EntitySet Name="NewsSending" EntityType="Self.NewsSending" />
+          <EntitySet Name="Person" EntityType="Self.Person" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" />
+          <EntitySet Name="SequenceSeries" EntityType="Self.SequenceSeries" />
+          <EntitySet Name="Series" EntityType="Self.Series" />
+          <EntitySet Name="Vendor" EntityType="Self.Vendor" />
+          <EntitySet Name="AddressCEP" EntityType="Self.AddressCEP" />
+          <AssociationSet Name="FK_dbo_Address_dbo_City_idCity" Association="Self.FK_dbo_Address_dbo_City_idCity">
+            <End Role="City" EntitySet="City" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Address_dbo_Person_idPersonalData" Association="Self.FK_dbo_Address_dbo_Person_idPersonalData">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LuckyCode_dbo_Receipt_idReceipt" Association="Self.FK_dbo_LuckyCode_dbo_Receipt_idReceipt">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="LuckyCode" EntitySet="LuckyCode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_NewsSending_dbo_Person_idPerson" Association="Self.FK_dbo_NewsSending_dbo_Person_idPerson">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="NewsSending" EntitySet="NewsSending" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_NewsSending_dbo_Receipt_idReceipt" Association="Self.FK_dbo_NewsSending_dbo_Receipt_idReceipt">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="NewsSending" EntitySet="NewsSending" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Receipt_dbo_Person_idPersonalData" Association="Self.FK_dbo_Receipt_dbo_Person_idPersonalData">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Receipt_dbo_Product_idProduct" Association="Self.FK_dbo_Receipt_dbo_Product_idProduct">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SequenceSeries_dbo_Series_idSerie" Association="Self.FK_dbo_SequenceSeries_dbo_Series_idSerie">
+            <End Role="Series" EntitySet="Series" />
+            <End Role="SequenceSeries" EntitySet="SequenceSeries" />
+          </AssociationSet>
+          <EntitySet Name="ViewReceiptExport" EntityType="GymPassModel.ViewReceiptExport" />
+        </EntityContainer>
+        <EntityType Name="ViewReceiptExport">
+          <Key>
+            <PropertyRef Name="idReceipt" />
+            <PropertyRef Name="CNPJ_do_estabelecimento" />
+            <PropertyRef Name="Produto" />
+            <PropertyRef Name="Tipo_do_Produto" />
+            <PropertyRef Name="Premiado" />
+            <PropertyRef Name="Data_do_Cadastro_do_Recibo" />
+            <PropertyRef Name="Nome_do_Participante" />
+            <PropertyRef Name="cpf" />
+            <PropertyRef Name="nascimento" />
+            <PropertyRef Name="telefone" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="endereco" />
+            <PropertyRef Name="PersonNumero" />
+            <PropertyRef Name="PensonComplemento" />
+            <PropertyRef Name="Bairro" />
+            <PropertyRef Name="CEP" />
+            <PropertyRef Name="Data_de_Cadastro_do_Participante" />
+          </Key>
+          <Property Name="idReceipt" Type="Int32" Nullable="false" />
+          <Property Name="CNPJ_do_estabelecimento" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="Produto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo_do_Produto" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="Premiado" Type="Boolean" Nullable="false" />
+          <Property Name="Validado" Type="Boolean" />
+          <Property Name="Motivo_da_Validacao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Data_do_Cadastro_do_Recibo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Nome_do_Participante" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="cpf" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="nascimento" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="telefone" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="uf" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="PersonCidade" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="endereco" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PersonNumero" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PensonComplemento" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Bairro" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CEP" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="Data_de_Cadastro_do_Participante" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GymPassModelStoreContainer" CdmEntityContainer="GymPass">
+          <EntitySetMapping Name="Address">
+            <EntityTypeMapping TypeName="GymPassModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+                <ScalarProperty Name="address1" ColumnName="address" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="complement" ColumnName="complement" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="idCity" ColumnName="idCity" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminAccount">
+            <EntityTypeMapping TypeName="GymPassModel.AdminAccount">
+              <MappingFragment StoreEntitySet="AdminAccount">
+                <ScalarProperty Name="idAdminAccount" ColumnName="idAdminAccount" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlockedCPFs">
+            <EntityTypeMapping TypeName="GymPassModel.BlockedCPFs">
+              <MappingFragment StoreEntitySet="BlockedCPFs">
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="GymPassModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="idCity" ColumnName="idCity" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="ddd" ColumnName="ddd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LuckyCode">
+            <EntityTypeMapping TypeName="GymPassModel.LuckyCode">
+              <MappingFragment StoreEntitySet="LuckyCode">
+                <ScalarProperty Name="idLuckyCode" ColumnName="idLuckyCode" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
+                <ScalarProperty Name="dtWinner" ColumnName="dtWinner" />
+                <ScalarProperty Name="dtRaffle" ColumnName="dtRaffle" />
+                <ScalarProperty Name="idSerie" ColumnName="idSerie" />
+                <ScalarProperty Name="serie" ColumnName="serie" />
+                <ScalarProperty Name="isWinner" ColumnName="isWinner" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsSending">
+            <EntityTypeMapping TypeName="GymPassModel.NewsSending">
+              <MappingFragment StoreEntitySet="NewsSending">
+                <ScalarProperty Name="idNewsSending" ColumnName="idNewsSending" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="dtSending" ColumnName="dtSending" />
+                <ScalarProperty Name="StatusDetail" ColumnName="StatusDetail" />
+                <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
+                <ScalarProperty Name="fileName" ColumnName="fileName" />
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="GymPassModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="birth" ColumnName="birth" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="dtCreation" ColumnName="dtCreation" />
+                <ScalarProperty Name="isVPowerTerms" ColumnName="isVPowerTerms" />
+                <ScalarProperty Name="isLubTerms" ColumnName="isLubTerms" />
+                <ScalarProperty Name="imported" ColumnName="imported" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="GymPassModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipt">
+            <EntityTypeMapping TypeName="GymPassModel.Receipt">
+              <MappingFragment StoreEntitySet="Receipt">
+                <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="vendorCNPJ" ColumnName="vendorCNPJ" />
+                <ScalarProperty Name="isWinner" ColumnName="isWinner" />
+                <ScalarProperty Name="dtCreation" ColumnName="dtCreation" />
+                <ScalarProperty Name="isValidated" ColumnName="isValidated" />
+                <ScalarProperty Name="invalidateDescription" ColumnName="invalidateDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SequenceSeries">
+            <EntityTypeMapping TypeName="GymPassModel.SequenceSeries">
+              <MappingFragment StoreEntitySet="SequenceSeries">
+                <ScalarProperty Name="idSequenceSeries" ColumnName="idSequenceSeries" />
+                <ScalarProperty Name="idSerie" ColumnName="idSerie" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="ordem" ColumnName="ordem" />
+                <ScalarProperty Name="quant" ColumnName="quant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Series">
+            <EntityTypeMapping TypeName="GymPassModel.Series">
+              <MappingFragment StoreEntitySet="Series">
+                <ScalarProperty Name="idSerie" ColumnName="idSerie" />
+                <ScalarProperty Name="RndStart" ColumnName="RndStart" />
+                <ScalarProperty Name="RndEnd" ColumnName="RndEnd" />
+                <ScalarProperty Name="dtStart" ColumnName="dtStart" />
+                <ScalarProperty Name="dtEnd" ColumnName="dtEnd" />
+                <ScalarProperty Name="qtdSort" ColumnName="qtdSort" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendor">
+            <EntityTypeMapping TypeName="GymPassModel.Vendor">
+              <MappingFragment StoreEntitySet="Vendor">
+                <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="IBM" ColumnName="IBM" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="cityName" ColumnName="cityName" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="state" ColumnName="state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddressCEP">
+            <EntityTypeMapping TypeName="GymPassModel.AddressCEP">
+              <MappingFragment StoreEntitySet="AddressCEP">
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="address" ColumnName="address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewReceiptExport">
+            <EntityTypeMapping TypeName="GymPassModel.ViewReceiptExport">
+              <MappingFragment StoreEntitySet="ViewReceiptExport">
+                <ScalarProperty Name="Data_de_Cadastro_do_Participante" ColumnName="Data_de_Cadastro_do_Participante" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="PensonComplemento" ColumnName="PensonComplemento" />
+                <ScalarProperty Name="PersonNumero" ColumnName="PersonNumero" />
+                <ScalarProperty Name="endereco" ColumnName="endereco" />
+                <ScalarProperty Name="PersonCidade" ColumnName="PersonCidade" />
+                <ScalarProperty Name="uf" ColumnName="uf" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="nascimento" ColumnName="nascimento" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="Nome_do_Participante" ColumnName="Nome_do_Participante" />
+                <ScalarProperty Name="Data_do_Cadastro_do_Recibo" ColumnName="Data_do_Cadastro_do_Recibo" />
+                <ScalarProperty Name="Motivo_da_Validacao" ColumnName="Motivo_da_Validacao" />
+                <ScalarProperty Name="Validado" ColumnName="Validado" />
+                <ScalarProperty Name="Premiado" ColumnName="Premiado" />
+                <ScalarProperty Name="Tipo_do_Produto" ColumnName="Tipo_do_Produto" />
+                <ScalarProperty Name="Produto" ColumnName="Produto" />
+                <ScalarProperty Name="CNPJ_do_estabelecimento" ColumnName="CNPJ_do_estabelecimento" />
+                <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

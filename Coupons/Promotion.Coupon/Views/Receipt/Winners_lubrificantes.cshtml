@@ -1,0 +1,50 @@
+﻿@model Promotion.Coupon.Models.ReceiptSaveViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Winners</title>
+    <link rel="stylesheet" href="/Content/css/index.css">
+	
+    @*<script src="//assets.adobedtm.com/9b74220da1d0b361973dbd26a530b8f49255d00c/satelliteLib-b69ce53ba3fa1db9f06b40a159d15cee47132b4e.js"></script>*@
+</head>
+<body style="background: #fff;">
+    <div class="winners">    	
+    	<table data-index="A" class="active">
+    		<thead>
+    			<tr>
+    				<th>Nome</th>
+    				<th>CPF</th>
+    				<th>Estado</th>
+    				<th>Data do sorteio</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    			@{
+                    if (Model.Receipts.Count != 0 )
+                    {
+                        foreach (var winner in Model.Receipts)
+                        {
+                            
+                            
+                            <tr>
+                                <td>@Html.Raw(winner.Person.name)</td>
+                                <td>@Html.Raw(winner.Person.cpf.Substring(0, 3) + ".XXX.XXX-XX")</td>
+                                <td>@Html.Raw(winner.Person.Address.City.state)</td>
+                                <td>@Html.Raw(String.Format("{0:dd/MM/yyyy}", winner.LuckyCode.Where(l => l.idReceipt == winner.idReceipt).FirstOrDefault().dtRaffle))</td>
+                            </tr>
+                        }
+                    }
+                }              
+    		</tbody>
+    	</table>    	
+    </div>
+    <script src="/Scripts/js.js"></script>
+</body>
+</html>
