@@ -7,6 +7,8 @@ namespace Promotion.Coupon.Controllers
         // GET: Home
         public ActionResult Index()
         {
+
+
             return Redirect("/Admin/Login");
         }
     }
