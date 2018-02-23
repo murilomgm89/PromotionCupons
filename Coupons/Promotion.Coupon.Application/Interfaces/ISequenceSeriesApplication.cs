@@ -3,7 +3,7 @@ using Promotion.Coupon.Entity.Entities;
 
 namespace Promotion.Coupon.Application.Interfaces
 {
-    public interface ISequenceSeriesApplication : IApplicationBase<SequenceSeries>
+    public interface ISequenceSeriesApplication //: IApplicationBase<SequenceSeries>
     {
         
     }

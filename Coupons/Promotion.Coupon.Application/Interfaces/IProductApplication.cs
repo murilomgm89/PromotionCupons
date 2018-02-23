@@ -4,8 +4,8 @@ using Promotion.Coupon.Entity.Entities;
 
 namespace Promotion.Coupon.Application.Interfaces
 {
-    public interface IProductApplication : IApplicationBase<Product>
+    public interface IProductApplication //: IApplicationBase<Product>
     {
-        IEnumerable<Product> GetByType(string type);
+        //IEnumerable<Product> GetByType(string type);
     }
 }

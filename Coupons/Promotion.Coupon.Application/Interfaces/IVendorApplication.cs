@@ -3,7 +3,7 @@ using Promotion.Coupon.Entity.Entities;
 
 namespace Promotion.Coupon.Application.Interfaces
 {
-    public interface IVendorApplication : IApplicationBase<Vendor>
+    public interface IVendorApplication //: IApplicationBase<Vendor>
     {
         
     }

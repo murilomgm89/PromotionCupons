@@ -10,12 +10,13 @@
         <EntityTypeShape EntityType="GymPassModel.Person" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="GymPassModel.Promotion" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="GymPassModel.Receipt" Width="1.5" PointX="3" PointY="4.5" />
-        <EntityTypeShape EntityType="GymPassModel.Voucher" Width="1.5" PointX="7.75" PointY="2.25" />
         <EntityTypeShape EntityType="GymPassModel.ViewReceiptExport" Width="1.5" PointX="2.75" PointY="9.25" />
         <AssociationConnector Association="GymPassModel.FK_dbo_NewsSending_dbo_Person_idPerson" />
         <AssociationConnector Association="GymPassModel.FK_dbo_NewsSending_dbo_Receipt_idReceipt" />
         <AssociationConnector Association="GymPassModel.FK_dbo_Receipt_dbo_Person_idPersonalData" />
         <AssociationConnector Association="GymPassModel.FK_dbo_Receipt_dbo_Product_idProduct" />
+        <EntityTypeShape EntityType="GymPassModel.Voucher" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="GymPassModel.FK__Voucher__idPerso__32E0915F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,9 +18,9 @@ namespace Promotion.Coupon.Repository.Repositories
                 return context.NewsSending
                     .Include(ns => ns.Person)
                     .Include(ns => ns.Receipt)
-                    .Include(ns => ns.Receipt.Product)
+                    //.Include(ns => ns.Receipt.Product)
                     .Include(ns => ns.Receipt.Person)
-                    .Include(ns => ns.Receipt.LuckyCode)
+                    //.Include(ns => ns.Receipt.LuckyCode)
                     .Where(ns => ns.dtSending == null)
                     .OrderBy(ns => ns.idNewsSending)
                     .Take(count)

@@ -11,15 +11,15 @@ namespace Promotion.Coupon.Controllers
         private readonly ILuckyCodeApplication _luckyCodeApplication;
         public WinnerApiController()
         {
-            _luckyCodeApplication = new LuckyCodeApplication();
+            //_luckyCodeApplication = new LuckyCodeApplication();
         }
         [GET("/api/lubrificantes/winners/{numberCode}")]
         public ActionResult GetWinnerLubrificantes(int numberCode)
         {
             var model = new LubrificantesWinnersViewModel
             {
-                receiptsUP = _luckyCodeApplication.GetWinnerMaiorLubrificantes(numberCode),
-                receiptsDown = _luckyCodeApplication.GetWinnerMenorLubrificantes(numberCode),
+                //receiptsUP = _luckyCodeApplication.GetWinnerMaiorLubrificantes(numberCode),
+                //receiptsDown = _luckyCodeApplication.GetWinnerMenorLubrificantes(numberCode),
                 codeSort = numberCode.ToString()
             };
             return View("~/Areas/Admin/Views/Shared/ListReceipts.cshtml", model);

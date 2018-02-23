@@ -14,12 +14,12 @@ namespace Promotion.Coupon.Application.Applications
     public class PersonApplication : ApplicationBase<Person>, IPersonApplication
     {
         private readonly IPersonRepository _personRepository;
-        private readonly IBlockedCpfRepository _blockedCpfRepository;
+        //private readonly IBlockedCpfRepository _blockedCpfRepository;
 
         public PersonApplication()
         {
             _personRepository = new PersonRepository();
-            _blockedCpfRepository = new BlockedCpfRepository();
+            //_blockedCpfRepository = new BlockedCpfRepository();
         }
 
         public Dictionary<string, int> GetCountPerDateBy(DateTime? @from = null, DateTime? to = null)
@@ -94,8 +94,8 @@ namespace Promotion.Coupon.Application.Applications
 
         public bool IsAllowedToSave(Person person)
         {
-            if (_blockedCpfRepository.IsCpfBlocked(person.cpf))
-                throw new PersonCpfFoundInBlacklistException();
+            //if (_blockedCpfRepository.IsCpfBlocked(person.cpf))
+            //    throw new PersonCpfFoundInBlacklistException();
             
             if (person.cpf.Length != 11)
                 throw new PersonCpfNotValidException();

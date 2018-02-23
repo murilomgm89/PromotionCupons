@@ -10,7 +10,7 @@ namespace Promotion.Coupon.Models
         public Receipt Receipt { get; set; }
         public List<Receipt> Receipts { get; set; }
         public HttpPostedFileBase ReceiptFile { get; set; }
-        public List<Product> ProductList { get; set; }
+        //public List<Product> ProductList { get; set; }
         public string Status { get; set; }
         public string ErrorCode { get; set; }
         public string cpf { get; set; }

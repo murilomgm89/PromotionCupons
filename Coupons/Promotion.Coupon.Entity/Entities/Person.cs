@@ -19,6 +19,7 @@ namespace Promotion.Coupon.Entity.Entities
         {
             this.NewsSending = new HashSet<NewsSending>();
             this.Receipt = new HashSet<Receipt>();
+            this.Voucher = new HashSet<Voucher>();
         }
     
         public int idPerson { get; set; }
@@ -31,5 +32,7 @@ namespace Promotion.Coupon.Entity.Entities
         public virtual ICollection<NewsSending> NewsSending { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Receipt> Receipt { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Voucher> Voucher { get; set; }
     }
 }

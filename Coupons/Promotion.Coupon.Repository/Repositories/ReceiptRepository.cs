@@ -18,10 +18,10 @@ namespace Promotion.Coupon.Repository.Repositories
             {
                 var query = context.Receipt.AsQueryable();
 
-                if (productType != null)
-                {
-                    query = query.Where(r => r.Product.type == productType);
-                }
+                //if (productType != null)
+                //{
+                //    //query = query.Where(r => r.Product.type == productType);
+                //}
 
                 if (from != null)
                 {
@@ -43,10 +43,10 @@ namespace Promotion.Coupon.Repository.Repositories
             {
                 var query = context.Receipt.AsQueryable();
 
-                if (productType != null)
-                {
-                    query = query.Where(r => r.Product.type == productType);
-                }
+                //if (productType != null)
+                //{
+                //    query = query.Where(r => r.Product.type == productType);
+                //}
 
                 if (from != null)
                 {
@@ -72,9 +72,9 @@ namespace Promotion.Coupon.Repository.Repositories
             using (var context = new GymPass())
             {
                 return context.Receipt
-                    .Include(r => r.LuckyCode)
+                    //.Include(r => r.LuckyCode)
                     .Include(r => r.Person)
-                    .Include(r => r.Product)
+                    //.Include(r => r.Product)
                     .Where(r => r.idPerson == idPerson)
                     .ToList();
             }
@@ -85,9 +85,9 @@ namespace Promotion.Coupon.Repository.Repositories
             using (var context = new GymPass())
             {
                 return context.Receipt
-                    .Include(r => r.LuckyCode)
+                    //.Include(r => r.LuckyCode)
                     .Include(r => r.Person)
-                    .Include(r => r.Product)
+                    //.Include(r => r.Product)
                     .Where(r => r.dtCreation >= from && r.dtCreation <= to)
                     .ToList();
             }
@@ -116,7 +116,8 @@ namespace Promotion.Coupon.Repository.Repositories
             using (var context = new GymPass())
             {
                 var entity = context.Receipt
-                    .Where(r => r.isValidated == true && r.Product.type == type)
+                    //.Where(r => r.isValidated == true && r.Product.type == type)
+                    .Where(r => r.isValidated == true)
                     .ToList();
 
                 return entity;
@@ -129,9 +130,9 @@ namespace Promotion.Coupon.Repository.Repositories
             {
                 return context.Receipt
                     .Include(rts => rts.Person)
-                    .Include(rts => rts.LuckyCode)
-                    .Include(rts => rts.Product)
-                    .Where(r => r.isValidated == isValidated && r.Product.type == type)
+                    //.Include(rts => rts.LuckyCode)
+                    //.Include(rts => rts.Product)
+                    .Where(r => r.isValidated == isValidated )
                     .OrderByDescending(r => r.dtCreation)
                     .ToList();
             }
@@ -142,8 +143,7 @@ namespace Promotion.Coupon.Repository.Repositories
             using (var context = new GymPass())
             {
                 return context.Receipt
-                    .Where(r => r.idPerson == idPerson && 
-                                r.Product.type == productType)
+                    .Where(r => r.idPerson == idPerson)
                     .OrderByDescending(r => r.dtCreation)
                     .FirstOrDefault();
             }
@@ -155,7 +155,7 @@ namespace Promotion.Coupon.Repository.Repositories
             {
                 return context.Receipt
                     .Include(r => r.Person)
-                    .Include(r => r.Product)
+                    //.Include(r => r.Product)
                     .Where(r => r.idReceipt == idReceipt)
                     .OrderByDescending(r => r.dtCreation)
                     .FirstOrDefault();
@@ -167,7 +167,7 @@ namespace Promotion.Coupon.Repository.Repositories
             using (var context = new GymPass())
             {
                 return context.Receipt
-                    .Where(r => r.Product.type == productType)
+                    //.Where(r => r.Product.type == productType)
                     .OrderByDescending(r => r.dtCreation)
                     .FirstOrDefault();
             }
@@ -177,7 +177,7 @@ namespace Promotion.Coupon.Repository.Repositories
         {
             using (var context = new GymPass())
             {
-                return context.Receipt.Count(r => r.idPerson == idPerson && r.Product.type == productType);
+                return context.Receipt.Count(r => r.idPerson == idPerson);
             }
         }
 
@@ -185,7 +185,7 @@ namespace Promotion.Coupon.Repository.Repositories
         {
             using (var context = new GymPass())
             {
-                return context.Receipt.Count(r => r.isValidated == isWinner && r.Product.type == productType);
+                return context.Receipt.Count(r => r.isValidated == isWinner);
             }
         }
 
@@ -193,7 +193,7 @@ namespace Promotion.Coupon.Repository.Repositories
         {
             using (var context = new GymPass())
             {
-                return context.Receipt.Count(r => r.Product.type == productType);
+                return context.Receipt.Count();
             }
         }
 
@@ -203,10 +203,10 @@ namespace Promotion.Coupon.Repository.Repositories
             {
                 var query = context.Receipt.Where(r => r.dtCreation >= dtSince).AsQueryable();
 
-                if (productType != null)
-                {
-                    query = query.Where(r => r.Product.type == productType);
-                }
+                //if (productType != null)
+                //{
+                //    query = query.Where(r => r.Product.type == productType);
+                //}
 
                 if (dtUntil != null)
                 {
@@ -221,8 +221,9 @@ namespace Promotion.Coupon.Repository.Repositories
         {
             using (var context = new GymPass())
             {
-                var query = context.Receipt.Where(r => r.Product.type == productType).ToList();
-                return query.Count();
+                //var query = context.Receipt.Where(r => r.Product.type == productType).ToList();
+                //return query.Count();
+                return 0;
             }
         }
 

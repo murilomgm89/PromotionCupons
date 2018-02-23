@@ -15,8 +15,10 @@ namespace Promotion.Coupon.Entity.Entities
     public partial class Voucher
     {
         public int idVoucher { get; set; }
-        public string idPerson { get; set; }
+        public Nullable<int> idPerson { get; set; }
         public int code { get; set; }
         public Nullable<System.DateTime> dtWinner { get; set; }
+    
+        public virtual Person Person { get; set; }
     }
 }

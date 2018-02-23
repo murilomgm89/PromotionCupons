@@ -64,7 +64,7 @@
             <PropertyRef Name="idVoucher" />
           </Key>
           <Property Name="idVoucher" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idPerson" Type="nchar" MaxLength="10" />
+          <Property Name="idPerson" Type="int" />
           <Property Name="code" Type="int" Nullable="false" />
           <Property Name="dtWinner" Type="datetime" />
         </EntityType>
@@ -112,6 +112,18 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
           <Property Name="CEP" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="Data_de_Cadastro_do_Participante" Type="datetime" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Voucher__idPerso__32E0915F">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_NewsSending_dbo_Person_idPerson">
           <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
           <End Role="NewsSending" Type="Self.NewsSending" Multiplicity="*" />
@@ -196,6 +208,10 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
     [ViewReceiptExport].[Data_de_Cadastro_do_Participante] AS [Data_de_Cadastro_do_Participante]
     FROM [dbo].[ViewReceiptExport] AS [ViewReceiptExport]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__Voucher__idPerso__32E0915F" Association="Self.FK__Voucher__idPerso__32E0915F">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_NewsSending_dbo_Person_idPerson" Association="Self.FK_dbo_NewsSending_dbo_Person_idPerson">
             <End Role="Person" EntitySet="Person" />
             <End Role="NewsSending" EntitySet="NewsSending" />
@@ -223,7 +239,6 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
           <EntitySet Name="Person" EntityType="GymPassModel.Person" />
           <EntitySet Name="Promotion" EntityType="GymPassModel.Promotion" />
           <EntitySet Name="Receipt" EntityType="GymPassModel.Receipt" />
-          <EntitySet Name="Voucher" EntityType="GymPassModel.Voucher" />
           <EntitySet Name="ViewReceiptExport" EntityType="GymPassModel.ViewReceiptExport" />
           <AssociationSet Name="FK_dbo_NewsSending_dbo_Person_idPerson" Association="GymPassModel.FK_dbo_NewsSending_dbo_Person_idPerson">
             <End Role="Person" EntitySet="Person" />
@@ -240,6 +255,11 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
           <AssociationSet Name="FK_dbo_Receipt_dbo_Product_idProduct" Association="GymPassModel.FK_dbo_Receipt_dbo_Product_idProduct">
             <End Role="Promotion" EntitySet="Promotion" />
             <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <EntitySet Name="Voucher" EntityType="GymPassModel.Voucher" />
+          <AssociationSet Name="FK__Voucher__idPerso__32E0915F" Association="GymPassModel.FK__Voucher__idPerso__32E0915F">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Voucher" EntitySet="Voucher" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AdminAccount">
@@ -277,6 +297,7 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
           <Property Name="dtCreation" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="NewsSending" Relationship="GymPassModel.FK_dbo_NewsSending_dbo_Person_idPerson" FromRole="Person" ToRole="NewsSending" />
           <NavigationProperty Name="Receipt" Relationship="GymPassModel.FK_dbo_Receipt_dbo_Person_idPersonalData" FromRole="Person" ToRole="Receipt" />
+          <NavigationProperty Name="Voucher" Relationship="GymPassModel.FK__Voucher__idPerso__32E0915F" FromRole="Person" ToRole="Voucher" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -303,15 +324,6 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
           <NavigationProperty Name="NewsSending" Relationship="GymPassModel.FK_dbo_NewsSending_dbo_Receipt_idReceipt" FromRole="Receipt" ToRole="NewsSending" />
           <NavigationProperty Name="Person" Relationship="GymPassModel.FK_dbo_Receipt_dbo_Person_idPersonalData" FromRole="Receipt" ToRole="Person" />
           <NavigationProperty Name="Promotion" Relationship="GymPassModel.FK_dbo_Receipt_dbo_Product_idProduct" FromRole="Receipt" ToRole="Promotion" />
-        </EntityType>
-        <EntityType Name="Voucher">
-          <Key>
-            <PropertyRef Name="idVoucher" />
-          </Key>
-          <Property Name="idVoucher" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idPerson" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="code" Type="Int32" Nullable="false" />
-          <Property Name="dtWinner" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ViewReceiptExport">
           <Key>
@@ -407,6 +419,28 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Voucher">
+          <Key>
+            <PropertyRef Name="idVoucher" />
+          </Key>
+          <Property Name="idVoucher" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idPerson" Type="Int32" />
+          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="dtWinner" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Person" Relationship="GymPassModel.FK__Voucher__idPerso__32E0915F" FromRole="Voucher" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK__Voucher__idPerso__32E0915F">
+          <End Type="GymPassModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="GymPassModel.Voucher" Role="Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="idPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -472,16 +506,6 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Voucher">
-            <EntityTypeMapping TypeName="GymPassModel.Voucher">
-              <MappingFragment StoreEntitySet="Voucher">
-                <ScalarProperty Name="dtWinner" ColumnName="dtWinner" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
-                <ScalarProperty Name="idVoucher" ColumnName="idVoucher" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ViewReceiptExport">
             <EntityTypeMapping TypeName="GymPassModel.ViewReceiptExport">
               <MappingFragment StoreEntitySet="ViewReceiptExport">
@@ -506,6 +530,16 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
                 <ScalarProperty Name="Produto" ColumnName="Produto" />
                 <ScalarProperty Name="CNPJ_do_estabelecimento" ColumnName="CNPJ_do_estabelecimento" />
                 <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Voucher">
+            <EntityTypeMapping TypeName="GymPassModel.Voucher">
+              <MappingFragment StoreEntitySet="Voucher">
+                <ScalarProperty Name="dtWinner" ColumnName="dtWinner" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+                <ScalarProperty Name="idVoucher" ColumnName="idVoucher" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

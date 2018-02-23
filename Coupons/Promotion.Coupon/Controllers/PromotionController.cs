@@ -258,7 +258,7 @@ namespace Promotion.Coupon.Controllers
                 }
             }
 
-            receipt.ProductList = _productApplication.GetByType(receipt.productType == "v-power" ? "v-power" : "lubrificantes").ToList();
+            //receipt.ProductList = _productApplication.GetByType(receipt.productType == "v-power" ? "v-power" : "lubrificantes").ToList();
             return View("ReceiptDataForm", receipt);
         }
 
@@ -336,19 +336,19 @@ namespace Promotion.Coupon.Controllers
                 result.Status = "success";
                 result.Receipt = model.Receipt.ApiSerialize();
 
-                model.Receipt.LuckyCode = model.Receipt.LuckyCode == null ? null : model.Receipt.LuckyCode.Select(lc => lc.ApiSerialize()).ToList();
+                //model.Receipt.LuckyCode = model.Receipt.LuckyCode == null ? null : model.Receipt.LuckyCode.Select(lc => lc.ApiSerialize()).ToList();
                 result.Receipt = model.Receipt;
 
                 result.Receipts = _receiptApplication.GetReceiptsByIdPerson(model.Receipt.idPerson);
 
-                if (result.Receipt.LuckyCode == null || !result.Receipt.LuckyCode.Any()) // v-power 
-                {
-                    return View("ReceiptFinalWinner", result);
-                }
-                else // lubrificantes
-                {
-                    return View("ReceiptFinalShowLuckyCode", result);
-                }
+                //if (result.Receipt.LuckyCode == null || !result.Receipt.LuckyCode.Any()) // v-power 
+                //{
+                //    return View("ReceiptFinalWinner", result);
+                //}
+                //else // lubrificantes
+                //{
+                //    return View("ReceiptFinalShowLuckyCode", result);
+                //}
             }
             else
             {
@@ -357,6 +357,8 @@ namespace Promotion.Coupon.Controllers
 
                 return ReceiptDataForm(model);
             }
+
+            return null;
         }
 
     }

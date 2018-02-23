@@ -15,13 +15,13 @@ namespace Promotion.Coupon.Application.Applications
     public class ReceiptApplication : ApplicationBase<Receipt>, IReceiptApplication
     {
         private readonly IReceiptRepository _receiptRepository;
-        private readonly IProductRepository _productRepository;
+        //private readonly IProductRepository _productRepository;
         private static object _receiptSaveLock = new object();
 
         public ReceiptApplication()
         {
             _receiptRepository = new ReceiptRepository();
-            _productRepository = new ProductRepository();
+            //_productRepository = new ProductRepository();
         }
 
         public Dictionary<string, int> GetCountPerDateBy(string productType, DateTime? @from = null, DateTime? to = null)
@@ -106,18 +106,18 @@ namespace Promotion.Coupon.Application.Applications
 
         public bool IsAllowedToSave(int idPerson, int idProduct, string cnpj)
         {
-            var product = _productRepository.Get(idProduct);
+            //var product = _productRepository.Get(idProduct);
 
-            var lastReceipt = GetLastBy(idPerson, product.type);
-            bool isLastReceiptNotToday = lastReceipt == null || (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) > new DateTime(lastReceipt.dtCreation.Year, lastReceipt.dtCreation.Month, lastReceipt.dtCreation.Day));
-            if (!isLastReceiptNotToday)
-                throw new AnotherReceiptFoundTodayException();
+            //var lastReceipt = GetLastBy(idPerson, product.type);
+            //bool isLastReceiptNotToday = lastReceipt == null || (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) > new DateTime(lastReceipt.dtCreation.Year, lastReceipt.dtCreation.Month, lastReceipt.dtCreation.Day));
+            //if (!isLastReceiptNotToday)
+            //    throw new AnotherReceiptFoundTodayException();
 
 
-            var countReceipts = GetCountBy(idPerson, product.type);
-            bool isReceiptCountUnderLimit = countReceipts < (product.type == "v-power" ? 30 : 5);
-            if (!isReceiptCountUnderLimit)
-                throw new ReceiptCountPerPersonExceededException();
+            //var countReceipts = GetCountBy(idPerson, product.type);
+            //bool isReceiptCountUnderLimit = countReceipts < (product.type == "v-power" ? 30 : 5);
+            //if (!isReceiptCountUnderLimit)
+            //    throw new ReceiptCountPerPersonExceededException();
 
             return true;
         }

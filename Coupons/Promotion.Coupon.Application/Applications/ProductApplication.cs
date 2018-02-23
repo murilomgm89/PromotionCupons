@@ -7,18 +7,18 @@ using Promotion.Coupon.Repository.Repositories;
 
 namespace Promotion.Coupon.Application.Applications
 {
-    public class ProductApplication : ApplicationBase<Product>, IProductApplication
+    public class ProductApplication //: ApplicationBase<Product>, IProductApplication
     {
-        private readonly IProductRepository _productRepository;
+        //private readonly IProductRepository _productRepository;
 
-        public ProductApplication()
-        {
-            _productRepository = new ProductRepository();
-        }
+        //public ProductApplication()
+        //{
+        //    _productRepository = new ProductRepository();
+        //}
 
-        public IEnumerable<Product> GetByType(string type)
-        {
-            return _productRepository.GetByType(type);
-        }
+        //public IEnumerable<Product> GetByType(string type)
+        //{
+        //    return _productRepository.GetByType(type);
+        //}
     }
 }

@@ -30,7 +30,7 @@ namespace Promotion.Coupon.Entity.Entities
         public virtual DbSet<Person> Person { get; set; }
         public virtual DbSet<Promotion> Promotion { get; set; }
         public virtual DbSet<Receipt> Receipt { get; set; }
-        public virtual DbSet<Voucher> Voucher { get; set; }
         public virtual DbSet<ViewReceiptExport> ViewReceiptExport { get; set; }
+        public virtual DbSet<Voucher> Voucher { get; set; }
     }
 }

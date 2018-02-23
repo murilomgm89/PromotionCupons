@@ -4,7 +4,7 @@ using Promotion.Coupon.Entity.Entities;
 
 namespace Promotion.Coupon.Application.Interfaces
 {
-    public interface IAddressApplication : IApplicationBase<Address>
+    public interface IAddressApplication// : IApplicationBase<Address>
     {   
     }
 }

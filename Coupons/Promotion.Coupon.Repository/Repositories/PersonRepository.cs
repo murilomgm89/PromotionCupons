@@ -118,7 +118,7 @@ namespace Promotion.Coupon.Repository.Repositories
                 return context.Person
                     .Where(pd => pd.cpf == cpf)
                     .Include(pd => pd.Receipt)
-                    .Include(pd => pd.Receipt.Select(r => r.Product))
+                    //.Include(pd => pd.Receipt.Select(r => r.Product))
                     .FirstOrDefault();
             }
         }
@@ -130,7 +130,7 @@ namespace Promotion.Coupon.Repository.Repositories
                 return context.Person
                     .Where(pd => pd.cpf == cpf)
                     .Include(pd => pd.Receipt)
-                    .Include(pd => pd.Receipt.Select(r => r.Product))
+                    //.Include(pd => pd.Receipt.Select(r => r.Product))
                     .FirstOrDefault();
             }
         }
@@ -156,9 +156,9 @@ namespace Promotion.Coupon.Repository.Repositories
                 return context.Person
                     .Where(pd => pd.idPerson == id)
                     .Include(pd => pd.Receipt)
-                    .Include(pd => pd.Receipt.Select(r => r.Product))
-                    .Include(pd => pd.Address)
-                    .Include(pd => pd.Address.City)
+                    //.Include(pd => pd.Receipt.Select(r => r.Product))
+                    //.Include(pd => pd.Address)
+                    //.Include(pd => pd.Address.City)
                     .FirstOrDefault();
             }
         }
