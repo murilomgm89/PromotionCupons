@@ -287,7 +287,7 @@
     <Compile Include="Areas\Admin\Models\PersonDetailsViewModel.cs" />
     <Compile Include="Areas\Admin\Models\VPowerWinnersViewModel.cs" />
     <Compile Include="Areas\Admin\Models\WinnerListViewModel.cs" />
-    <Compile Include="ControllersApi\LubrificanteController.cs" />
+    <Compile Include="ControllersApi\CupomController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PromotionController.cs" />
     <Compile Include="Controllers\ReceiptController.cs" />
@@ -354,6 +354,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\App_Start\" />
+    <Folder Include="ReceiptFiles\" />
     <Folder Include="Views\WinnerApi\" />
   </ItemGroup>
   <ItemGroup>

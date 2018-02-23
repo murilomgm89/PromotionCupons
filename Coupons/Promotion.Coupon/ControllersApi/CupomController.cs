@@ -7,7 +7,12 @@ using System.Web.Http;
 
 namespace Promotion.Coupon.ControllersApi
 {
-    public class LubrificanteController : ApiController
+    public class CupomController : ApiController
     {
+
+        public object PostCupom()
+        {
+            return null;
+        }
     }
 }
