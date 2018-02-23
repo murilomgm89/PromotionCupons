@@ -14,7 +14,9 @@ namespace Promotion.Coupon.Models
         public string Status { get; set; }
         public string ErrorCode { get; set; }
         public string cpf { get; set; }
+
         public string productType { get; set; }
+        public string email { get; set; }
         public Person person { get; set; }
 
         public class MemoryFile : HttpPostedFileBase

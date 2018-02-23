@@ -343,6 +343,7 @@
     <Content Include="Views\Receipt\Winners_lubrificantes.cshtml" />
     <Content Include="Views\Receipt\Winners_v-power.cshtml" />
     <Content Include="Views\Receipt\Winners_v-power_DINAMICA.cshtml" />
+    <Content Include="Views\Home\InitFlow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,115 @@
+﻿@model Promotion.Coupon.Models.ReceiptViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8" />
+    <title>Promoção Gympass</title>
+    <link href="/Content/Styles/Admin/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/Content/Styles/Admin/css.css" rel="stylesheet" type="text/css">
+    <link href="/Content/Styles/Admin/styles.css" rel="stylesheet" type="text/css">
+    <link href="/Content/Styles/Admin/icons.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/charts/sparkline.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/forms/select2.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/forms/inputmask.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/forms/autosize.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/forms/inputlimit.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/forms/listbox.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/forms/multiselect.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/forms/validate.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/forms/tags.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/forms/switch.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/interface/daterangepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/interface/fancybox.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/interface/moment.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/interface/jgrowl.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/interface/datatables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/interface/colorpicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/interface/fullcalendar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/interface/timepicker.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/application.js")"></script>
+</head>
+<body>
+
+    <form>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h6 class="panel-title">
+                    <i class="icon-bug"></i>
+                    Promoção GymPass
+                </h6>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Cpf:</label>
+                            <input type="text" class="form-control" id="cpf">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Email:</label>
+                            <input type="text" class="form-control" id="email" placeholder="seu@email.com">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Cupom:</label>
+                            <div class="uploader" id="uniform-report-screenshot">
+                                <input type="file" id="file" name="file" class="form-control">
+                            </div>
+                            <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-actions text-right">
+                    <input type="button" id="btnEnviar" value="Submit report" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+    </form>
+<script type="text/javascript">
+
+
+    //var formData = new FormData($(this)[0]);
+    $('#btnEnviar').click(function() {
+        var obj = {
+            cpf: $('#cpf')[0].value,
+            email: $('#email')[0].value,
+            ReceiptFile: $("#file")[0].files[0]
+        };
+        var fdata = new FormData();
+    
+        fdata.append("cpf", $('#cpf')[0].value);
+        fdata.append("email", $('#email')[0].value);
+        if ($("#file")[0].files.length > 0)
+            fdata.append("ReceiptFile", $("#file")[0].files[0]);
+
+        $.ajax({
+            url: '../Home/PostInitFlow',
+            type: 'POST',
+            data: fdata,
+            async: false,
+            success: function (data) {
+                alert(data);
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });  
+    })
+    
+</script>
+
+</body>
+
+</html>
