@@ -24,15 +24,9 @@ namespace Promotion.Coupon.Entity.Entities
         public int idPerson { get; set; }
         public string cpf { get; set; }
         public string name { get; set; }
-        public string birth { get; set; }
-        public string phone { get; set; }
         public string email { get; set; }
         public System.DateTime dtCreation { get; set; }
-        public Nullable<int> isVPowerTerms { get; set; }
-        public Nullable<int> isLubTerms { get; set; }
-        public Nullable<int> imported { get; set; }
     
-        public virtual Address Address { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NewsSending> NewsSending { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

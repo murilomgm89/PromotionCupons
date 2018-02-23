@@ -47,19 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Address.cs">
-      <DependentUpon>GymPassModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\AddressCEP.cs">
-      <DependentUpon>GymPassModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\AdminAccount.cs">
-      <DependentUpon>GymPassModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\BlockedCPFs.cs">
-      <DependentUpon>GymPassModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\City.cs">
       <DependentUpon>GymPassModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\GymPassModel.Context.cs">
@@ -72,31 +60,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GymPassModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\LuckyCode.cs">
-      <DependentUpon>GymPassModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\NewsSending.cs">
       <DependentUpon>GymPassModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Person.cs">
       <DependentUpon>GymPassModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Product.cs">
+    <Compile Include="Entities\Promotion.cs">
       <DependentUpon>GymPassModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Receipt.cs">
       <DependentUpon>GymPassModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\SequenceSeries.cs">
-      <DependentUpon>GymPassModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Series.cs">
-      <DependentUpon>GymPassModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Vendor.cs">
-      <DependentUpon>GymPassModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\ViewReceiptExport.cs">
+      <DependentUpon>GymPassModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Voucher.cs">
       <DependentUpon>GymPassModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Enum\ENewsType.cs" />
@@ -107,20 +86,12 @@
     <Compile Include="Exceptions\VendorNotFoundException.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Interfaces\IAddressCepRepository.cs" />
-    <Compile Include="Interfaces\IAddressRepository.cs" />
     <Compile Include="Interfaces\IAdminAccountRepository.cs" />
-    <Compile Include="Interfaces\IBlockedCpfRepository.cs" />
-    <Compile Include="Interfaces\ICityRepository.cs" />
-    <Compile Include="Interfaces\ILuckyCodeRepository.cs" />
     <Compile Include="Interfaces\INewsSendingRepository.cs" />
     <Compile Include="Interfaces\IPersonRepository.cs" />
-    <Compile Include="Interfaces\IProductRepository.cs" />
+    <Compile Include="Interfaces\IPromotionRepository.cs" />
     <Compile Include="Interfaces\IReceiptRepository.cs" />
     <Compile Include="Interfaces\IRepositoryBase.cs" />
-    <Compile Include="Interfaces\ISequenceSeriesRepository.cs" />
-    <Compile Include="Interfaces\ISeriesRepository.cs" />
-    <Compile Include="Interfaces\IVendorRepository.cs" />
     <Compile Include="Poco\InvalidateDescription.cs" />
     <Compile Include="Poco\PersonSaveResult.cs" />
     <Compile Include="Poco\ReceiptSaveResult.cs" />

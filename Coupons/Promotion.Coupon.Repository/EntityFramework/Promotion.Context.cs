@@ -25,19 +25,12 @@ namespace Promotion.Coupon.Entity.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<AdminAccount> AdminAccount { get; set; }
-        public virtual DbSet<BlockedCPFs> BlockedCPFs { get; set; }
-        public virtual DbSet<City> City { get; set; }
-        public virtual DbSet<LuckyCode> LuckyCode { get; set; }
         public virtual DbSet<NewsSending> NewsSending { get; set; }
         public virtual DbSet<Person> Person { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Promotion> Promotion { get; set; }
         public virtual DbSet<Receipt> Receipt { get; set; }
-        public virtual DbSet<SequenceSeries> SequenceSeries { get; set; }
-        public virtual DbSet<Series> Series { get; set; }
-        public virtual DbSet<Vendor> Vendor { get; set; }
-        public virtual DbSet<AddressCEP> AddressCEP { get; set; }
+        public virtual DbSet<Voucher> Voucher { get; set; }
         public virtual DbSet<ViewReceiptExport> ViewReceiptExport { get; set; }
     }
 }

@@ -12,17 +12,11 @@ namespace Promotion.Coupon.Entity.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Address
+    public partial class Voucher
     {
-        public int idPerson { get; set; }
-        public string address1 { get; set; }
-        public string number { get; set; }
-        public string complement { get; set; }
-        public string district { get; set; }
-        public int idCity { get; set; }
-        public string CEP { get; set; }
-    
-        public virtual City City { get; set; }
-        public virtual Person Person { get; set; }
+        public int idVoucher { get; set; }
+        public string idPerson { get; set; }
+        public int code { get; set; }
+        public Nullable<System.DateTime> dtWinner { get; set; }
     }
 }

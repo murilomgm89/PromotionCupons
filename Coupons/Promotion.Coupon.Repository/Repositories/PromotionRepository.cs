@@ -6,13 +6,13 @@ using Promotion.Coupon.Repository.Repositories.Base;
 
 namespace Promotion.Coupon.Repository.Repositories
 {
-    public class ProductRepository : RepositoryBase<Product>, IProductRepository
+    public class PromotionRepository : RepositoryBase<Promotion>, IPromotionRepository
     {
-        public IEnumerable<Product> GetByType(string type)
+        public IEnumerable<Promotion> GetByType(string type)
         {
             using (var context = new GymPass())
             {
-                return context.Product
+                return context.Promotion
                     .Where(p => p.type == type)
                     .ToList();
             }

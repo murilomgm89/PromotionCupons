@@ -40,20 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Applications\AddressApplication.cs" />
-    <Compile Include="Applications\AddressCepApplication.cs" />
     <Compile Include="Applications\AdminAccountApplication.cs" />
     <Compile Include="Applications\Base\ApplicationBase.cs" />
-    <Compile Include="Applications\BlockedCpfApplication.cs" />
-    <Compile Include="Applications\CityApplication.cs" />
     <Compile Include="Applications\NewsSendingApplication.cs" />
-    <Compile Include="Applications\LuckyCodeApplication.cs" />
     <Compile Include="Applications\PersonApplication.cs" />
     <Compile Include="Applications\ProductApplication.cs" />
     <Compile Include="Applications\ReceiptApplication.cs" />
-    <Compile Include="Applications\SequenceSeriesApplication.cs" />
-    <Compile Include="Applications\SeriesApplication.cs" />
-    <Compile Include="Applications\VendorApplication.cs" />
     <Compile Include="Interfaces\Base\IApplicationBase.cs" />
     <Compile Include="Interfaces\IAddressApplication.cs" />
     <Compile Include="Interfaces\IAddressCepApplication.cs" />

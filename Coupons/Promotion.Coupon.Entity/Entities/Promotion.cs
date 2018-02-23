@@ -12,20 +12,22 @@ namespace Promotion.Coupon.Entity.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class City
+    public partial class Promotion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public City()
+        public Promotion()
         {
-            this.Address = new HashSet<Address>();
+            this.Receipt = new HashSet<Receipt>();
         }
     
-        public int idCity { get; set; }
+        public int idPromotion { get; set; }
+        public string type { get; set; }
         public string name { get; set; }
-        public string state { get; set; }
-        public Nullable<int> ddd { get; set; }
+        public Nullable<System.DateTime> dtStart { get; set; }
+        public Nullable<System.DateTime> dtEnd { get; set; }
+        public Nullable<bool> isActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Address> Address { get; set; }
+        public virtual ICollection<Receipt> Receipt { get; set; }
     }
 }
