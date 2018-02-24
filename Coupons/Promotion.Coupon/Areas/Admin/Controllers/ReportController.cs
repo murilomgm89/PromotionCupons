@@ -23,7 +23,7 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
         public ReportController()
         {
             _receiptApplication = new ReceiptApplication();
-            _luckyCodeApplication = new LuckyCodeApplication();
+            //_luckyCodeApplication = new LuckyCodeApplication();
             _personApplication = new PersonApplication();
 
         }
@@ -87,10 +87,10 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
             }
             model.to = model.to.AddDays(1);
 
-            model.LuckyCodeChartData = _luckyCodeApplication.GetCountPerDateBy(model.from, model.to).Select(d => new DashboardViewModel.ChartItem() { Label = d.Key, Value = d.Value }).OrderBy(d => d.Label).ToList();
-            model.LuckyCodeCount = _luckyCodeApplication.GetCountBy(model.from, model.to.AddDays(1));
-
-            model.LuckyCodes = _luckyCodeApplication.GetBy(model.from, model.to.AddDays(1)).ToList();
+            //model.LuckyCodeChartData = _luckyCodeApplication.GetCountPerDateBy(model.from, model.to).Select(d => new DashboardViewModel.ChartItem() { Label = d.Key, Value = d.Value }).OrderBy(d => d.Label).ToList();
+            //model.LuckyCodeCount = _luckyCodeApplication.GetCountBy(model.from, model.to.AddDays(1));
+            //
+            //model.LuckyCodes = _luckyCodeApplication.GetBy(model.from, model.to.AddDays(1)).ToList();
 
             model.to = model.to.AddDays(-1);
 
@@ -150,21 +150,21 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
                 to = (DateTime)Session["Participations.To"];
             }
 
-            var codes = _luckyCodeApplication.GetBy(from, to.AddDays(1));
+            //var codes = _luckyCodeApplication.GetBy(from, to.AddDays(1));
 
             var sbResult = new StringBuilder();
             sbResult.Append("Numero da Sorte; Data de Cadastro; Data de Sorteio\n");
 
-            foreach (var p in codes)
-            {
-                sbResult.Append(p.code);
-                sbResult.Append(";");
-                sbResult.Append(p.Receipt.dtCreation.ToString("dd/MM/yyyy HH:mm"));
-                sbResult.Append(";");
-                sbResult.Append(p.dtRaffle.Value.ToString("dd/MM/yyyy HH:mm"));
-                sbResult.Append(";");
-                sbResult.Append("\n");
-            }
+            //foreach (var p in codes)
+            //{
+            //    sbResult.Append(p.code);
+            //    sbResult.Append(";");
+            //    sbResult.Append(p.Receipt.dtCreation.ToString("dd/MM/yyyy HH:mm"));
+            //    sbResult.Append(";");
+            //    sbResult.Append(p.dtRaffle.Value.ToString("dd/MM/yyyy HH:mm"));
+            //    sbResult.Append(";");
+            //    sbResult.Append("\n");
+            //}
 
             return File(new System.Text.UnicodeEncoding().GetBytes(sbResult.ToString()), "text/csv", "Exportacao_NumerosSorte_" + DateTime.Now.ToString("dd-MM-yyyy-HH-mm") + ".csv");
         }

@@ -26,7 +26,7 @@ namespace Promotion.Coupon.Controllers
             _personApplication = new PersonApplication();
             _receiptApplication = new ReceiptApplication();
             _newsSendingApplication = new NewsSendingApplication();
-            _productApplication = new ProductApplication();
+            //_productApplication = new ProductApplication();
         }
         // GET: Promotion
         public ActionResult Index()

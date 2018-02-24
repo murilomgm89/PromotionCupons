@@ -262,7 +262,7 @@ namespace Promotion.Coupon.Application.Applications
             if (receipt != null)
             {
                 receipt.isValidated = isValidated;
-                receipt.invalidateDescription = invalidateDescription;
+                //receipt.invalidateDescription = invalidateDescription;
                 new ReceiptRepository().Insert(receipt);
             }
 
@@ -271,73 +271,73 @@ namespace Promotion.Coupon.Application.Applications
                 if (receipt.isValidated == true)
                 {
                     
-                    new NewsSendingRepository().SetToSend(receipt.Person.email, ENewsType.VPowerWinnerBullet, receipt.idReceipt);
-                }
-                else
-                {
-                    int idDescription = InvalidateDescription.GetIdByDescription(receipt.invalidateDescription);
-                    var newsType = ENewsType.CupomIlegivel;
-                    switch (idDescription)
-                    {
-                        case 1:
-                            newsType = ENewsType.CupomIlegivel;
-                            break;
-                        case 2:
-                            newsType = ENewsType.DataInvalida;
-                            break;
-                        case 3:
-                            newsType = ENewsType.ImagemNaoECupom;
-                            break;
-                        case 4:
-                            newsType = ENewsType.CupomIncompleto;
-                            break;
-                        case 5:
-                            newsType = ENewsType.CupomDiferenteProduto;
-                            break;
-                        case 6:
-                            newsType = ENewsType.CupomJaCadastrado;
-                            break;
-                        case 7:
-                            newsType = ENewsType.CupomSemPreenchimento;
-                            break;
-                        case 8:
-                            newsType = ENewsType.CupomValorAbaixo;
-                            break;
-                        case 9:
-                            newsType = ENewsType.CupomProdutoNaoParticipante;
-                            break;
-                    }
+            //        new NewsSendingRepository().SetToSend(receipt.Person.email, ENewsType.VPowerWinnerBullet, receipt.idReceipt);
+            //    }
+            //    else
+            //    {
+            //        //int idDescription = InvalidateDescription.GetIdByDescription(receipt.invalidateDescription);
+            //        var newsType = ENewsType.CupomIlegivel;
+            //        switch (idDescription)
+            //        {
+            //            case 1:
+            //                newsType = ENewsType.CupomIlegivel;
+            //                break;
+            //            case 2:
+            //                newsType = ENewsType.DataInvalida;
+            //                break;
+            //            case 3:
+            //                newsType = ENewsType.ImagemNaoECupom;
+            //                break;
+            //            case 4:
+            //                newsType = ENewsType.CupomIncompleto;
+            //                break;
+            //            case 5:
+            //                newsType = ENewsType.CupomDiferenteProduto;
+            //                break;
+            //            case 6:
+            //                newsType = ENewsType.CupomJaCadastrado;
+            //                break;
+            //            case 7:
+            //                newsType = ENewsType.CupomSemPreenchimento;
+            //                break;
+            //            case 8:
+            //                newsType = ENewsType.CupomValorAbaixo;
+            //                break;
+            //            case 9:
+            //                newsType = ENewsType.CupomProdutoNaoParticipante;
+            //                break;
+            //        }
 
-                    new NewsSendingRepository().SetToSend(receipt.Person.email, newsType, receipt.idReceipt);
-                }
-            }
+            //        new NewsSendingRepository().SetToSend(receipt.Person.email, newsType, receipt.idReceipt);
+            //    }
+            //}
         }
 
         public void ApplyProductPromotion(Receipt receipt)
         {
-                var product = new ProductRepository().Get(receipt.idProduct);
+                //var product = new ProductRepository().Get(receipt.idProduct);
 
-                if (product.type == "intimus")
-                {
-                    receipt.LuckyCode = null;
-                    var lastWinnerReceipt = GetLastBy(true, product.type);
-                    int notWinnerCount = 0;
-                    notWinnerCount = lastWinnerReceipt == null ? GetCountByAll(product.type) : GetCountBy(lastWinnerReceipt.dtCreation, product.type);
+                //if (product.type == "intimus")
+                //{
+                //    receipt.LuckyCode = null;
+                //    var lastWinnerReceipt = GetLastBy(true, product.type);
+                //    int notWinnerCount = 0;
+                //    notWinnerCount = lastWinnerReceipt == null ? GetCountByAll(product.type) : GetCountBy(lastWinnerReceipt.dtCreation, product.type);
 
-                    if (notWinnerCount >= 140)
-                    {
-                        receipt.isValidated = true;
+                //    if (notWinnerCount >= 140)
+                //    {
+                //        receipt.isValidated = true;
 
-                        new ReceiptRepository().DeclaredWinner(receipt);
-                    //Disparo vencedor
+                //        new ReceiptRepository().DeclaredWinner(receipt);
+                //    //Disparo vencedor
 
-                        new NewsSendingRepository().SetToSend(receipt.Person.email, ENewsType.VPowerWinner, receipt.idReceipt);
-                    }
-                    else
-                    {
-                        new NewsSendingRepository().SetToSend(receipt.Person.email, ENewsType.VPowerNotWinner, receipt.idReceipt);
-                    }
-                }
+                //        new NewsSendingRepository().SetToSend(receipt.Person.email, ENewsType.VPowerWinner, receipt.idReceipt);
+                //    }
+                //    else
+                //    {
+                //        new NewsSendingRepository().SetToSend(receipt.Person.email, ENewsType.VPowerNotWinner, receipt.idReceipt);
+                //    }
+                //}
             
         }
 

@@ -6,9 +6,9 @@ using Promotion.Coupon.Repository.Repositories.Base;
 
 namespace Promotion.Coupon.Repository.Repositories
 {
-    public class PromotionRepository : RepositoryBase<Promotion>, IPromotionRepository
+    public class PromotionRepository : RepositoryBase<Entity.Entities.Promotion>, IPromotionRepository
     {
-        public IEnumerable<Promotion> GetByType(string type)
+        public IEnumerable<Entity.Entities.Promotion> GetByType(string type)
         {
             using (var context = new GymPass())
             {

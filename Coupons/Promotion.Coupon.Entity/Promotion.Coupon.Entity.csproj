@@ -92,6 +92,7 @@
     <Compile Include="Interfaces\IPromotionRepository.cs" />
     <Compile Include="Interfaces\IReceiptRepository.cs" />
     <Compile Include="Interfaces\IRepositoryBase.cs" />
+    <Compile Include="Interfaces\IVoucherRepository.cs" />
     <Compile Include="Poco\InvalidateDescription.cs" />
     <Compile Include="Poco\PersonSaveResult.cs" />
     <Compile Include="Poco\ReceiptSaveResult.cs" />

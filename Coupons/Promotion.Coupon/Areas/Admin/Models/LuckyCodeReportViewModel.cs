@@ -12,7 +12,7 @@ namespace Promotion.Coupon.Areas.Admin.Models
         public DateTime to { get; set; }
 
         public int LuckyCodeCount { get; set; }
-        public List<LuckyCode> LuckyCodes { get; set; }
+        //public List<LuckyCode> LuckyCodes { get; set; }
 
         public List<DashboardViewModel.ChartItem> LuckyCodeChartData { get; set; }
         public string SerializedLuckyCodeData
