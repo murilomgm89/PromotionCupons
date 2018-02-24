@@ -15,10 +15,11 @@ namespace Promotion.Coupon
         void Application_Start(object sender, EventArgs e)
         {
             // Código que é executado na inicialização do aplicativo
+
             AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
 }

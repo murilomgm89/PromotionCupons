@@ -23,7 +23,6 @@ namespace Promotion.Coupon.Entity.Extensions
             {
                 dtCreation = receipt.dtCreation,
                 idPerson = receipt.idPerson,
-                idProduct = receipt.idProduct,
                 idReceipt = receipt.idReceipt,               
                 Person = receipt.Person.ApiSerialize()
             };

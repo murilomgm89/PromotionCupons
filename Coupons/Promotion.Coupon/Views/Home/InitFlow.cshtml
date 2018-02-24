@@ -67,6 +67,10 @@
                             </div>
                             <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
                         </div>
+                        <div class="col-md-6">
+                            <label>Nome:</label>
+                            <input type="text" class="form-control" id="name" placeholder="Nome">
+                        </div>
                     </div>
                 </div>
 
@@ -82,20 +86,17 @@
 
     //var formData = new FormData($(this)[0]);
     $('#btnEnviar').click(function() {
-        var obj = {
-            cpf: $('#cpf')[0].value,
-            email: $('#email')[0].value,
-            ReceiptFile: $("#file")[0].files[0]
-        };
+        
         var fdata = new FormData();
     
         fdata.append("cpf", $('#cpf')[0].value);
         fdata.append("email", $('#email')[0].value);
+        fdata.append("name", $('#name')[0].value);
         if ($("#file")[0].files.length > 0)
             fdata.append("ReceiptFile", $("#file")[0].files[0]);
 
         $.ajax({
-            url: '../Home/PostInitFlow',
+            url: '../Promotion/receipt/save',
             type: 'POST',
             data: fdata,
             async: false,

@@ -28,11 +28,24 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
 
             var vPowerData = _receiptApplication.GetCountPerDateBy("intimus");
 
-            model.LineChartVPowerData = vPowerData.Select(d => new DashboardViewModel.ChartItem() { Label = d.Key, Value = d.Value }).OrderBy(d => d.Label).ToList();
+            model.LineChartVPowerData = vPowerData.Select(d => new DashboardViewModel.ChartItem()
+            {
+                Label = d.Key,
+                Value = d.Value
+            })
+            .OrderBy(d => d.Label)
+            .ToList();
 
             //var vPowerData2 = _receiptApplication.GetCountByParticipation("intimus");
 
-            model.PersonsChartData = _personApplication.GetCountPerDateBy(Convert.ToDateTime(vPowerData.OrderBy(k => k.Key).FirstOrDefault().Key), DateTime.Now).Select(d => new DashboardViewModel.ChartItem() { Label = d.Key, Value = d.Value }).OrderBy(d => d.Label).ToList();
+            model.PersonsChartData = _personApplication.GetCountPerDateBy(Convert.ToDateTime(vPowerData.OrderBy(k => k.Key).FirstOrDefault().Key), DateTime.Now)
+                .Select(d => new DashboardViewModel.ChartItem()
+                {
+                    Label = d.Key,
+                    Value = d.Value
+                })
+                .OrderBy(d => d.Label)
+                .ToList();
 
             model.VPowerWinners = _receiptApplication.GetCountBy("intimus", true);
 

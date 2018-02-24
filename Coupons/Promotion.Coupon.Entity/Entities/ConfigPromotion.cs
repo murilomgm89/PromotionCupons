@@ -12,22 +12,13 @@ namespace Promotion.Coupon.Entity.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Promotion
+    public partial class ConfigPromotion
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Promotion()
-        {
-            this.Receipt = new HashSet<Receipt>();
-        }
-    
         public int idPromotion { get; set; }
         public string type { get; set; }
         public string name { get; set; }
         public Nullable<System.DateTime> dtStart { get; set; }
         public Nullable<System.DateTime> dtEnd { get; set; }
         public Nullable<bool> isActive { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Receipt> Receipt { get; set; }
     }
 }

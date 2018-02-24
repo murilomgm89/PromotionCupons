@@ -281,81 +281,94 @@ namespace Promotion.Coupon.Controllers
             //modelEnd.Receipts = new List<Receipt>();
             //return View("ReceiptEndPromotion", modelEnd);
 
-            ReceiptSaveViewModel result = new ReceiptSaveViewModel();
-            if (Session["Entity.Person"] != null)
+            try
             {
-                var person = (Person)Session["Entity.Person"];
-                model.Receipt.idPerson = person.idPerson;
-                model.Receipt.Person = person;
-            }
-            else
-            {
-                if (model.cpf != null)
+
+
+                Person entity;
+                ReceiptSaveViewModel result = new ReceiptSaveViewModel();
+                if (Session["Entity.Person"] != null)
                 {
-                    var person = _personApplication.GetByCpf(model.cpf);
+                    var person = (Person)Session["Entity.Person"];
                     model.Receipt.idPerson = person.idPerson;
                     model.Receipt.Person = person;
                 }
-            }
+                else
+                {
+                    if (model.cpf != null)
+                    {
+                        var person = _personApplication.GetByCpf(model.cpf);
+                        if (person == null)
+                        {
+                            entity = model.Parse();
+                            _personApplication.Insert(entity);
+                            person = _personApplication.GetByCpf(model.cpf);
+                        }
+                        model.Receipt.idPerson = person.idPerson;
+                        model.Receipt.Person = person;
+                    }
+                }
 
-            //if (!ModelState.IsValid)
-            //{
-            //    model.Status = "error";
-            //    model.ErrorCode = "error_model_not_valid";
 
-            //    return ReceiptDataForm(model);
-            //}
 
-            var validImageTypes = new string[]
-            {
+                var validImageTypes = new string[]
+                {
                 "image/gif",
                 "image/jpg",
                 "image/jpeg",
                 "image/pjpeg",
                 "image/png"
-            };
+                };
 
-            if (model.ReceiptFile == null || model.ReceiptFile.ContentLength == 0 || !validImageTypes.Contains(model.ReceiptFile.ContentType))
-            {
-                model.Status = "error";
-                model.ErrorCode = "error_upload_not_valid";
+                if (model.ReceiptFile == null || model.ReceiptFile.ContentLength == 0 || !validImageTypes.Contains(model.ReceiptFile.ContentType))
+                {
+                    model.Status = "error";
+                    model.ErrorCode = "error_upload_not_valid";
 
-                return ReceiptDataForm(model);
+                    return ReceiptDataForm(model);
+                }
+
+                model.Receipt.isValidated = null;
+
+                var saveResult = _receiptApplication.Save(model.Receipt);
+
+                if (saveResult.isSuccess)
+                {
+                    var uploadDir = "~/ReceiptFiles";
+                    var imagePath = Path.Combine(Server.MapPath(uploadDir), model.Receipt.idReceipt + ".jpg");
+                    model.ReceiptFile.SaveAs(imagePath);
+
+                    result.Status = "success";
+                    result.Receipt = model.Receipt.ApiSerialize();
+
+                    //model.Receipt.LuckyCode = model.Receipt.LuckyCode == null ? null : model.Receipt.LuckyCode.Select(lc => lc.ApiSerialize()).ToList();
+                    result.Receipt = model.Receipt;
+
+                    result.Receipts = _receiptApplication.GetReceiptsByIdPerson(model.Receipt.idPerson);
+
+
+                    //Fazer a diferenciação aqui se ele ja venceu
+                    if (result.Receipt == null ) // v-power 
+                    {
+                        return View("ReceiptFinalWinner", result);
+                    }
+                    else // lubrificantes
+                    {
+                        return View("ReceiptFinalShowLuckyCode", result);
+                    }
+                }
+                else
+                {
+                    model.Status = "error";
+                    model.ErrorCode = saveResult.ErrorCode;
+
+                    return ReceiptDataForm(model);
+                }
             }
-
-            model.Receipt.isValidated = null;
-
-            var saveResult = _receiptApplication.Save(model.Receipt);
-
-            if (saveResult.isSuccess)
+            catch (Exception e)
             {
-                var uploadDir = "~/ReceiptFiles";
-                var imagePath = Path.Combine(Server.MapPath(uploadDir), model.Receipt.idReceipt + ".jpg");
-                model.ReceiptFile.SaveAs(imagePath);
-
-                result.Status = "success";
-                result.Receipt = model.Receipt.ApiSerialize();
-
-                //model.Receipt.LuckyCode = model.Receipt.LuckyCode == null ? null : model.Receipt.LuckyCode.Select(lc => lc.ApiSerialize()).ToList();
-                result.Receipt = model.Receipt;
-
-                result.Receipts = _receiptApplication.GetReceiptsByIdPerson(model.Receipt.idPerson);
-
-                //if (result.Receipt.LuckyCode == null || !result.Receipt.LuckyCode.Any()) // v-power 
-                //{
-                //    return View("ReceiptFinalWinner", result);
-                //}
-                //else // lubrificantes
-                //{
-                //    return View("ReceiptFinalShowLuckyCode", result);
-                //}
-            }
-            else
-            {
-                model.Status = "error";
-                model.ErrorCode = saveResult.ErrorCode;
-
-                return ReceiptDataForm(model);
+                Console.WriteLine(e);
+                throw;
             }
 
             return null;

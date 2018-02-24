@@ -50,6 +50,9 @@
     <Compile Include="Entities\AdminAccount.cs">
       <DependentUpon>GymPassModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ConfigPromotion.cs">
+      <DependentUpon>GymPassModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\GymPassModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -64,9 +67,6 @@
       <DependentUpon>GymPassModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Person.cs">
-      <DependentUpon>GymPassModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Promotion.cs">
       <DependentUpon>GymPassModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Receipt.cs">

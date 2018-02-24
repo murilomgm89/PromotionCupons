@@ -22,7 +22,6 @@ namespace Promotion.Coupon.Entity.Entities
     
         public int idReceipt { get; set; }
         public int idPerson { get; set; }
-        public int idProduct { get; set; }
         public bool isWinner { get; set; }
         public System.DateTime dtCreation { get; set; }
         public Nullable<bool> isValidated { get; set; }
@@ -30,6 +29,5 @@ namespace Promotion.Coupon.Entity.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NewsSending> NewsSending { get; set; }
         public virtual Person Person { get; set; }
-        public virtual Promotion Promotion { get; set; }
     }
 }

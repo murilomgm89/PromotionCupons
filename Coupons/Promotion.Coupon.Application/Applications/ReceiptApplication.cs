@@ -15,6 +15,7 @@ namespace Promotion.Coupon.Application.Applications
     public class ReceiptApplication : ApplicationBase<Receipt>, IReceiptApplication
     {
         private readonly IReceiptRepository _receiptRepository;
+        
         //private readonly IProductRepository _productRepository;
         private static object _receiptSaveLock = new object();
 
@@ -222,11 +223,11 @@ namespace Promotion.Coupon.Application.Applications
             {
                 lock (_receiptSaveLock)
                 {
-                    if (IsAllowedToSave(receipt.idPerson, receipt.idProduct, "1"))
+                    if (IsAllowedToSave(receipt.idPerson, 1, "1"))
                     {
                         receipt.Person = null;
                         receipt.dtCreation = DateTime.Now;
-                        new ReceiptRepository().Insert(receipt);
+                        _receiptRepository.Insert(receipt);
                         receipt.Person = tmpPerson;
                         ApplyProductPromotion(receipt);
 

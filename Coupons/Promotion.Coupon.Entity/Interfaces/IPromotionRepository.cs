@@ -3,8 +3,8 @@ using Promotion.Coupon.Entity.Entities;
 
 namespace Promotion.Coupon.Entity.Interfaces
 {
-    public interface IPromotionRepository : IRepositoryBase<Entities.Promotion>
+    public interface IPromotionRepository : IRepositoryBase<Entities.ConfigPromotion>
     {
-        IEnumerable<Entities.Promotion> GetByType(string type);
+        IEnumerable<Entities.ConfigPromotion> GetByType(string type);
     }
 }

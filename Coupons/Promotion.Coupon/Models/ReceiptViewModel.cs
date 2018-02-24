@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using Promotion.Coupon.Entity.Entities;
@@ -7,6 +8,11 @@ namespace Promotion.Coupon.Models
 {
     public class ReceiptViewModel
     {
+
+        public ReceiptViewModel()
+        {
+            Receipt = new Receipt();
+        }
         public Receipt Receipt { get; set; }
         public List<Receipt> Receipts { get; set; }
         public HttpPostedFileBase ReceiptFile { get; set; }
@@ -18,6 +24,18 @@ namespace Promotion.Coupon.Models
         public string productType { get; set; }
         public string email { get; set; }
         public Person person { get; set; }
+        public string name { get; set; }
+
+        public Person Parse()
+        {
+            return new Person()
+            {
+                cpf = this.cpf,
+                email = this.email,
+                name = this.name,
+                dtCreation = DateTime.Now
+            };
+        }
 
         public class MemoryFile : HttpPostedFileBase
         {

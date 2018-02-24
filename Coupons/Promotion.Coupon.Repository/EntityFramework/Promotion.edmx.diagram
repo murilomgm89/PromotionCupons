@@ -8,16 +8,15 @@
         <EntityTypeShape EntityType="GymPassModel.AdminAccount" Width="1.5" PointX="0.75" PointY="8.25" />
         <EntityTypeShape EntityType="GymPassModel.NewsSending" Width="1.5" PointX="5.25" PointY="4.375" />
         <EntityTypeShape EntityType="GymPassModel.Person" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="GymPassModel.Promotion" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="GymPassModel.Receipt" Width="1.5" PointX="3" PointY="4.5" />
         <EntityTypeShape EntityType="GymPassModel.ViewReceiptExport" Width="1.5" PointX="2.75" PointY="9.25" />
         <AssociationConnector Association="GymPassModel.FK_dbo_NewsSending_dbo_Person_idPerson" />
-        <AssociationConnector Association="GymPassModel.FK_dbo_NewsSending_dbo_Receipt_idReceipt" />
-        <AssociationConnector Association="GymPassModel.FK_dbo_Receipt_dbo_Person_idPersonalData" />
-        <AssociationConnector Association="GymPassModel.FK_dbo_Receipt_dbo_Product_idProduct" />
         <EntityTypeShape EntityType="GymPassModel.Voucher" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="GymPassModel.FK__Voucher__idPerso__32E0915F" />
-      </Diagram>
+        <EntityTypeShape EntityType="GymPassModel.ConfigPromotion" Width="1.5" PointX="5.375" PointY="1" />
+        <EntityTypeShape EntityType="GymPassModel.Receipt" Width="1.5" PointX="3" PointY="4.875" />
+        <AssociationConnector Association="GymPassModel.FK_dbo_NewsSending_dbo_Receipt_idReceipt" />
+        <AssociationConnector Association="GymPassModel.FK_dbo_Receipt_dbo_Person_idPersonalData" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

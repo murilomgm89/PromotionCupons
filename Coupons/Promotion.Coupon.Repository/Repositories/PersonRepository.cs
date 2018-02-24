@@ -105,10 +105,12 @@ namespace Promotion.Coupon.Repository.Repositories
             return result;
         }
 
-        [Obsolete]
         public bool IsAllowedToSave(Person person)
         {
-            throw new NotImplementedException();
+            if (person.cpf.Length != 11)
+                throw new PersonCpfNotValidException();
+
+            return true;
         }
 
         public Person GetByCpf(string cpf)
