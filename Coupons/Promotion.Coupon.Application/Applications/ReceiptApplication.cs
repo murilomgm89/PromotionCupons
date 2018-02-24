@@ -266,10 +266,10 @@ namespace Promotion.Coupon.Application.Applications
                 new ReceiptRepository().Insert(receipt);
             }
 
-            if (receipt.Product.type == "intimus")
-            {
-                if (receipt.isValidated == true)
-                {
+            //if (receipt.Product.type == "intimus")
+            //{
+            //    if (receipt.isValidated == true)
+            //    {
                     
             //        new NewsSendingRepository().SetToSend(receipt.Person.email, ENewsType.VPowerWinnerBullet, receipt.idReceipt);
             //    }
