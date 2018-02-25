@@ -31,5 +31,6 @@ namespace Promotion.Coupon.Application.Interfaces
         void SetValidated(int idReceipt, bool isValidated, string invalidateDescription = null);
         void ApplyProductPromotion(Receipt receipt);
         int LuckyCodeRandom();
+
     }
 }

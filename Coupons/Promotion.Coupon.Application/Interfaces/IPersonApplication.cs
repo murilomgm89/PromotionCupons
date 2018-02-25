@@ -17,5 +17,6 @@ namespace Promotion.Coupon.Application.Interfaces
         Person GetByCpfNotBlackList(string cpf);
         int GetCountBy(DateTime dtSince, DateTime? dtUntil = null);
         Person GetById(int id);
+        bool AlreadyWinner(int idPerson);
     }
 }

@@ -15,13 +15,6 @@
                             <th>Nome</th>
                             <th>E-mail</th>                          
                             <th>Data do Cadastro</th>
-                            @{
-                                if (name == "reprovados")
-                                {
-                                     <th>Motivo</th>
-                                }
-                            }
-                           
                             <th></th>                           
                             <th></th>
                         </tr>
@@ -33,14 +26,7 @@
                                 <td><a href="/admin/person/@receipt.idPerson">@receipt.Person.name</a></td>
                                 <td><a href="/admin/person/@receipt.idPerson">@receipt.Person.email</a></td>  
                                 <td>@receipt.dtCreation.ToString("dd/MM/yyyy HH:mm") </td>
-                                @{
-                                    if (name == "reprovados")
-                                    {
-                                        <td>
-                                            @*@receipt.invalidateDescription*@ ???
-                                        </td>
-                                    }
-                                }                                 
+                                                           
                                 <td>
                                     <a class="btn-xs btn-default" target="_blank" href="/receipt/file?id=@receipt.idReceipt.ToString().PadLeft(8, '0').Base64Encode()"><i class="icon-file3" style="margin-right: 5px;"></i> Ver cupom</a>
                                 </td>                               

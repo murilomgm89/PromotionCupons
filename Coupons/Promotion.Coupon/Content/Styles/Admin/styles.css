@@ -3215,7 +3215,7 @@ body > .jGrowl {
 
 .uploader span.action {
   width: 28px;
-  background: url(../images/forms/add_files.png) no-repeat 0 0;
+  background: url(/Content/Images/Admin/forms/add_files.png) no-repeat 0 0;
   height: 28px;
   cursor: pointer;
   float: right;

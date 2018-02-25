@@ -5,12 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using Promotion.Coupon.Models;
 using System.Collections.Generic;
+using System.Net;
 using Promotion.Coupon.Entity.Enum;
 using Promotion.Coupon.Entity.Entities;
 using Promotion.Coupon.Entity.Exceptions;
 using Promotion.Coupon.Entity.Extensions;
 using Promotion.Coupon.Application.Interfaces;
 using Promotion.Coupon.Application.Applications;
+using Promotion.Coupon.Entity.Handle;
 
 namespace Promotion.Coupon.Controllers
 {
@@ -276,41 +278,38 @@ namespace Promotion.Coupon.Controllers
         [Route("receipt/save")]
         public ActionResult SaveReceipt(ReceiptViewModel model)
         {
-            //força fim campanha
-            //EndPromiton modelEnd = new EndPromiton();
-            //modelEnd.Receipts = new List<Receipt>();
-            //return View("ReceiptEndPromotion", modelEnd);
+            
+            Person person;
+            Person entity;
+            ReceiptSaveViewModel result = new ReceiptSaveViewModel();
 
             try
             {
-
-
-                Person entity;
-                ReceiptSaveViewModel result = new ReceiptSaveViewModel();
-                if (Session["Entity.Person"] != null)
+                //Valida se existe cpf que ja ganhou
+                person = _personApplication.GetByCpf(model.cpf);
+                if (person != null)
                 {
-                    var person = (Person)Session["Entity.Person"];
-                    model.Receipt.idPerson = person.idPerson;
-                    model.Receipt.Person = person;
-                }
-                else
-                {
-                    if (model.cpf != null)
+                    var recieptPerson = _receiptApplication.GetReceiptsByIdPerson(person.idPerson);
+                    if (recieptPerson.Any(a => a.isValidated == true))
                     {
-                        var person = _personApplication.GetByCpf(model.cpf);
-                        if (person == null)
-                        {
-                            entity = model.Parse();
-                            _personApplication.Insert(entity);
-                            person = _personApplication.GetByCpf(model.cpf);
-                        }
-                        model.Receipt.idPerson = person.idPerson;
-                        model.Receipt.Person = person;
+                        return Redirect("~/promotion/winner");
                     }
                 }
 
 
-
+                if (model.cpf != null)
+                {
+                    person = _personApplication.GetByCpf(model.cpf);
+                    if (person == null)
+                    {
+                        entity = model.Parse();
+                        _personApplication.Insert(entity);
+                        person = _personApplication.GetByCpf(model.cpf);
+                    }
+                    model.Receipt.idPerson = person.idPerson;
+                    model.Receipt.Person = person;
+                }
+                
                 var validImageTypes = new string[]
                 {
                 "image/gif",
@@ -341,21 +340,26 @@ namespace Promotion.Coupon.Controllers
                     result.Status = "success";
                     result.Receipt = model.Receipt.ApiSerialize();
 
-                    //model.Receipt.LuckyCode = model.Receipt.LuckyCode == null ? null : model.Receipt.LuckyCode.Select(lc => lc.ApiSerialize()).ToList();
                     result.Receipt = model.Receipt;
 
                     result.Receipts = _receiptApplication.GetReceiptsByIdPerson(model.Receipt.idPerson);
 
+#warning ALTERAR OS DADOS DO EMAIL
+                    var @from = "Promoção Gym Pass <promocaogympass@gympass.com.br>";
+                    var message = "Seu cupom foi enviado com sucesso, obrigado por participar.";
+#warning DESCOMENTAR COM OS DADOS CORRETOS PARA FUNCIONAR
+                    //EmailHandle.SendEmail(@from,model.email,"Obrigado por Participar", message);
 
-                    //Fazer a diferenciação aqui se ele ja venceu
-                    if (result.Receipt == null ) // v-power 
-                    {
-                        return View("ReceiptFinalWinner", result);
-                    }
-                    else // lubrificantes
-                    {
-                        return View("ReceiptFinalShowLuckyCode", result);
-                    }
+                    return Redirect("~/promotion/finish");
+                    //Fazer a diferenciação aqui se ganhou
+                    //if (result.Receipt == null ) // v-power 
+                    //{
+                    //    return View("~/Views/Promotion/ReceiptFinalWinner.cshtml", result);
+                    //}
+                    //else // lubrificantes
+                    //{
+                    //    return View("~/Views/Promotion/ReceiptFinalShowLuckyCode.cshtml", result);
+                    //}
                 }
                 else
                 {
@@ -368,10 +372,23 @@ namespace Promotion.Coupon.Controllers
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                throw new Exception(e.Message);
             }
 
             return null;
+        }
+        [HttpGet]
+        [Route("winner")]
+        public ActionResult JaGanhou()
+        {
+            return View("~/Views/Promotion/JaGanhou.cshtml");
+        }
+
+        [HttpGet]
+        [Route("Finish")]
+        public ActionResult Finish()
+        {
+            return View("~/Views/Promotion/FimParticipacao.cshtml");
         }
 
     }

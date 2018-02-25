@@ -86,6 +86,7 @@
     <Compile Include="Exceptions\VendorNotFoundException.cs" />
     <Compile Include="Extensions\EntityExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Handle\EmailHandle.cs" />
     <Compile Include="Interfaces\IAdminAccountRepository.cs" />
     <Compile Include="Interfaces\INewsSendingRepository.cs" />
     <Compile Include="Interfaces\IPersonRepository.cs" />

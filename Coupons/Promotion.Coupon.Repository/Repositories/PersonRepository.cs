@@ -164,5 +164,13 @@ namespace Promotion.Coupon.Repository.Repositories
                     .FirstOrDefault();
             }
         }
+
+        public bool AlreadyWinner(int idPerson)
+        {
+            using (var context = new GymPass())
+            {
+                return context.Receipt.Where(w => w.idPerson == idPerson).Any(a=> a.isValidated == true);
+            }
+        }
     }
 }

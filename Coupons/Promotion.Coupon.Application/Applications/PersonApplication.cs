@@ -126,5 +126,10 @@ namespace Promotion.Coupon.Application.Applications
         {
             return _personRepository.GetById(id);
         }
+
+        public bool AlreadyWinner(int idPerson)
+        {
+            return _personRepository.AlreadyWinner(idPerson);
+        }
     }
 }

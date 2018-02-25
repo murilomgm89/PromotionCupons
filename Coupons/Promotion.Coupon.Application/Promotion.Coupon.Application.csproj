@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Applications\AdminAccountApplication.cs" />
     <Compile Include="Applications\Base\ApplicationBase.cs" />
+    <Compile Include="Applications\ConfigPromotionApplication.cs" />
     <Compile Include="Applications\NewsSendingApplication.cs" />
     <Compile Include="Applications\PersonApplication.cs" />
     <Compile Include="Applications\ProductApplication.cs" />
@@ -53,14 +54,12 @@
     <Compile Include="Interfaces\IAdminAccountApplication.cs" />
     <Compile Include="Interfaces\IBlockedCpfApplication.cs" />
     <Compile Include="Interfaces\ICityApplication.cs" />
+    <Compile Include="Interfaces\IConfigPromotionApplication.cs" />
     <Compile Include="Interfaces\ILuckyCodeApplication.cs" />
     <Compile Include="Interfaces\INewsSendingApplication.cs" />
     <Compile Include="Interfaces\IPersonApplication.cs" />
     <Compile Include="Interfaces\IProductApplication.cs" />
     <Compile Include="Interfaces\IReceiptApplication.cs" />
-    <Compile Include="Interfaces\ISequenceSeriesApplication.cs" />
-    <Compile Include="Interfaces\ISeriesApplication.cs" />
-    <Compile Include="Interfaces\IVendorApplication.cs" />
     <Compile Include="Interfaces\IVoucherApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

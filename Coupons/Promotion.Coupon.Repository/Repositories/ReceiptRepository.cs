@@ -262,7 +262,18 @@ namespace Promotion.Coupon.Repository.Repositories
 
         public int LuckyCodeRandom()
         {
-            throw new NotImplementedException();
+            Random rnd = new Random();
+            int luckyCode = rnd.Next(0, 99999);
+
+            using (var context = new GymPass())
+            {
+                var obj = context.Voucher.Any(a => a.code == luckyCode);
+                if (obj)
+                {
+                    luckyCode = rnd.Next(0, 99999);
+                }
+            }
+            return luckyCode;
         }
     }
 }

@@ -9,20 +9,24 @@ using Promotion.Coupon.Entity.Interfaces;
 using Promotion.Coupon.Application.Interfaces;
 using Promotion.Coupon.Repository.Repositories;
 using Promotion.Coupon.Application.Applications.Base;
+using Promotion.Coupon.Entity.Handle;
 
 namespace Promotion.Coupon.Application.Applications
 {
     public class ReceiptApplication : ApplicationBase<Receipt>, IReceiptApplication
     {
         private readonly IReceiptRepository _receiptRepository;
-        
+        private readonly INewsSendingRepository _newsSendingRepository;
+        private readonly IVoucherRepository _voucherRepository;
+
         //private readonly IProductRepository _productRepository;
         private static object _receiptSaveLock = new object();
 
         public ReceiptApplication()
         {
             _receiptRepository = new ReceiptRepository();
-            //_productRepository = new ProductRepository();
+            _newsSendingRepository = new NewsSendingRepository();
+            _voucherRepository = new VoucherRepository();
         }
 
         public Dictionary<string, int> GetCountPerDateBy(string productType, DateTime? @from = null, DateTime? to = null)
@@ -258,95 +262,108 @@ namespace Promotion.Coupon.Application.Applications
 
         public void SetValidated(int idReceipt, bool isValidated, string invalidateDescription = null)
         {
-            var receipt = new ReceiptRepository().Get(idReceipt);
+            var receipt = _receiptRepository.Get(idReceipt);
 
             if (receipt != null)
             {
                 receipt.isValidated = isValidated;
-                //receipt.invalidateDescription = invalidateDescription;
-                new ReceiptRepository().Insert(receipt);
+                if (receipt.idReceipt.Equals(0))
+                    _receiptRepository.Insert(receipt);
+                else
+                    _receiptRepository.Update(receipt);
             }
 
-            //if (receipt.Product.type == "intimus")
-            //{
-            //    if (receipt.isValidated == true)
-            //    {
-                    
-            //        new NewsSendingRepository().SetToSend(receipt.Person.email, ENewsType.VPowerWinnerBullet, receipt.idReceipt);
-            //    }
-            //    else
-            //    {
-            //        //int idDescription = InvalidateDescription.GetIdByDescription(receipt.invalidateDescription);
-            //        var newsType = ENewsType.CupomIlegivel;
-            //        switch (idDescription)
-            //        {
-            //            case 1:
-            //                newsType = ENewsType.CupomIlegivel;
-            //                break;
-            //            case 2:
-            //                newsType = ENewsType.DataInvalida;
-            //                break;
-            //            case 3:
-            //                newsType = ENewsType.ImagemNaoECupom;
-            //                break;
-            //            case 4:
-            //                newsType = ENewsType.CupomIncompleto;
-            //                break;
-            //            case 5:
-            //                newsType = ENewsType.CupomDiferenteProduto;
-            //                break;
-            //            case 6:
-            //                newsType = ENewsType.CupomJaCadastrado;
-            //                break;
-            //            case 7:
-            //                newsType = ENewsType.CupomSemPreenchimento;
-            //                break;
-            //            case 8:
-            //                newsType = ENewsType.CupomValorAbaixo;
-            //                break;
-            //            case 9:
-            //                newsType = ENewsType.CupomProdutoNaoParticipante;
-            //                break;
-            //        }
+            if (receipt == null)
+                return;
 
-            //        new NewsSendingRepository().SetToSend(receipt.Person.email, newsType, receipt.idReceipt);
+            if (receipt.isValidated == true)
+            {
+                
+                _voucherRepository.GenarateWinner(receipt.Person.idPerson);
+                var @from = "Promoção Gym Pass <promocaogympass@gympass.com.br>";
+                var message = "Voce ganhou um cupom de desconto Gym Pass, Obrigado por participar!.";
+                //EmailHandle.SendEmail(@from, receipt.Person.email, "Promoção Gym Pass - Você Ganhou", message);
+
+                _newsSendingRepository.SetToSend(receipt.Person.email, ENewsType.VPowerWinnerBullet, receipt.idReceipt);
+            }
+
+            if (receipt.isValidated == false)
+            {
+                var @from = "Promoção Gym Pass <promocaogympass@gympass.com.br>";
+                var message = $"Olá {receipt.Person.name}, nós recebemos a sua solicitação porem nao foi dessa vez, continue tentando.";
+                //EmailHandle.SendEmail(@from, receipt.Person.email, "Promoção Gym Pass - Não foi dessa vez", message);
+
+            }
+
+            //else
+            //{
+            //    //int idDescription = InvalidateDescription.GetIdByDescription(receipt.invalidateDescription);
+            //    var newsType = ENewsType.CupomIlegivel;
+            //    switch (idDescription)
+            //    {
+            //        case 1:
+            //            newsType = ENewsType.CupomIlegivel;
+            //            break;
+            //        case 2:
+            //            newsType = ENewsType.DataInvalida;
+            //            break;
+            //        case 3:
+            //            newsType = ENewsType.ImagemNaoECupom;
+            //            break;
+            //        case 4:
+            //            newsType = ENewsType.CupomIncompleto;
+            //            break;
+            //        case 5:
+            //            newsType = ENewsType.CupomDiferenteProduto;
+            //            break;
+            //        case 6:
+            //            newsType = ENewsType.CupomJaCadastrado;
+            //            break;
+            //        case 7:
+            //            newsType = ENewsType.CupomSemPreenchimento;
+            //            break;
+            //        case 8:
+            //            newsType = ENewsType.CupomValorAbaixo;
+            //            break;
+            //        case 9:
+            //            newsType = ENewsType.CupomProdutoNaoParticipante;
+            //            break;
             //    }
+
+            //    _newsSendingRepository.SetToSend(receipt.Person.email, newsType, receipt.idReceipt);
             //}
+
         }
 
         public void ApplyProductPromotion(Receipt receipt)
         {
-                //var product = new ProductRepository().Get(receipt.idProduct);
+            //
+                //receipt.LuckyCode = null;
+                //var lastWinnerReceipt = GetLastBy(true, product.type);
+                //int notWinnerCount = 0;
+                //notWinnerCount = lastWinnerReceipt == null ? GetCountByAll("1") : GetCountBy(lastWinnerReceipt.dtCreation, product.type);
 
-                //if (product.type == "intimus")
+                //if (notWinnerCount >= 140)
                 //{
-                //    receipt.LuckyCode = null;
-                //    var lastWinnerReceipt = GetLastBy(true, product.type);
-                //    int notWinnerCount = 0;
-                //    notWinnerCount = lastWinnerReceipt == null ? GetCountByAll(product.type) : GetCountBy(lastWinnerReceipt.dtCreation, product.type);
+                //    receipt.isValidated = true;
 
-                //    if (notWinnerCount >= 140)
-                //    {
-                //        receipt.isValidated = true;
-
-                //        new ReceiptRepository().DeclaredWinner(receipt);
+                //    _receiptRepository.DeclaredWinner(receipt);
                 //    //Disparo vencedor
 
-                //        new NewsSendingRepository().SetToSend(receipt.Person.email, ENewsType.VPowerWinner, receipt.idReceipt);
-                //    }
-                //    else
-                //    {
-                //        new NewsSendingRepository().SetToSend(receipt.Person.email, ENewsType.VPowerNotWinner, receipt.idReceipt);
-                //    }
+                //    _newsSendingRepository.SetToSend(receipt.Person.email, ENewsType.VPowerWinner, receipt.idReceipt);
                 //}
-            
+                //else
+                //{
+                //    _newsSendingRepository.SetToSend(receipt.Person.email, ENewsType.VPowerNotWinner, receipt.idReceipt);
+                //}
+            //}
+
         }
 
         public int LuckyCodeRandom()
         {
-            Random rnd = new Random();
-            int luckyCode = rnd.Next(0, 99999);
-            return luckyCode;
+            return _receiptRepository.LuckyCodeRandom();
+           
         }
     }
 }

@@ -1,5 +1,8 @@
 ﻿@model Promotion.Coupon.Models.ReceiptViewModel
-
+@{
+    var promotion = (ConfigPromotion)ViewBag.EndPromotion;
+    var codes = (int)ViewBag.NumbersCode;
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,84 +35,118 @@
     <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/interface/fullcalendar.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/interface/timepicker.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/admin/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="~/Scripts/admin/plugins/forms/uniform.min.js"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/admin/application.js")"></script>
 </head>
 <body>
-
-    <form>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h6 class="panel-title">
-                    <i class="icon-bug"></i>
-                    Promoção GymPass
-                </h6>
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Cpf:</label>
-                            <input type="text" class="form-control" id="cpf">
-                        </div>
-
-                        <div class="col-md-6">
-                            <label>Email:</label>
-                            <input type="text" class="form-control" id="email" placeholder="seu@email.com">
-                        </div>
-                    </div>
+    <div class="panel-body">
+        <div class="col-md-2"></div>
+        <div class="col-md-8"> <form id="frmUpCp">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h6 class="panel-title">
+                        <i class="icon-gift"></i>
+                        Promoção GymPass
+                    </h6>
                 </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Cupom:</label>
-                            <div class="uploader" id="uniform-report-screenshot">
-                                <div class="uploader" id="uniform-report-screenshot"><input type="file" class="styled form-control" id="file" name="file"><span class="filename" style="user-select: none;">No file selected</span><span class="action" style="user-select: none;">Choose File</span></div>
+                <div class="panel-body">
+                    @if (DateTime.Now >= promotion.dtEnd || codes >= 5000)
+                    {
+                        <div class="callout callout-danger fade in">
+                            @*<button type="button" class="close" data-dismiss="alert">×</button>*@
+                            <h5>Promoção encerrada.</h5>
+                            <p>Obrigado por participar.</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Cpf:</label>
+                                    <input type="text" class="form-control" id="cpf" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Email:</label>
+                                    <input type="text" class="form-control" id="email" placeholder="seu@email.com" required>
+                                </div>
                             </div>
-                            <span class="help-block">Accepted formats: gif, png, jpg. Max file size 2Mb</span>
                         </div>
-                        <div class="col-md-6">
-                            <label>Nome:</label>
-                            <input type="text" class="form-control" id="name" placeholder="Nome">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Cupom:</label>
+                                    <input type="file" id="file" name="file" class="styled"  />
+                                    <span class="help-block">@*Accepted formats: pdf, doc. Max file size 2Mb*@</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Nome:</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Nome" required>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
 
-                <div class="form-actions text-right">
-                    <input type="button" id="btnEnviar" value="Submit report" class="btn btn-primary">
+                        <div class="form-actions text-right">
+                            <input type="button" id="btnEnviar" value="Enviar" class="btn btn-primary">
+                        </div>
+                    }
                 </div>
             </div>
-        </div>
-    </form>
-<script type="text/javascript">
+        </form></div>
+        <div class="col-md-2"></div>
+       
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#cpf').inputmask({
+                mask: ['999.999.999-99'],
+                keepStatic: true
+            });
+            $(".styled, .multiselect-container input").uniform({ radioClass: 'choice', selectAutoWidth: false });
 
 
-    //var formData = new FormData($(this)[0]);
-    $('#btnEnviar').click(function() {
-        
-        var fdata = new FormData();
-    
-        fdata.append("cpf", $('#cpf')[0].value);
-        fdata.append("email", $('#email')[0].value);
-        fdata.append("name", $('#name')[0].value);
-        if ($("#file")[0].files.length > 0)
-            fdata.append("ReceiptFile", $("#file")[0].files[0]);
+            $('#btnEnviar').click(function (e) {
+                e.preventDefault();
+                if (!$("#frmUpCp").valid())
+                    return;
 
-        $.ajax({
-            url: '../Promotion/receipt/save',
-            type: 'POST',
-            data: fdata,
-            async: false,
-            success: function (data) {
-                alert(data);
-            },
-            cache: false,
-            contentType: false,
-            processData: false
-        });  
-    })
-    
-</script>
+                var fdata = new FormData();
+                fdata.append("cpf", $('#cpf')[0].value);
+                fdata.append("email", $('#email')[0].value);
+                fdata.append("name", $('#name')[0].value);
+                if ($("#file")[0].files.length > 0)
+                    fdata.append("ReceiptFile", $("#file")[0].files[0]);
+
+                $.ajax({
+                    url: '../Promotion/receipt/save',
+                    type: 'POST',
+                    data: fdata,
+                    async: false,
+                    beforeSend: function (data) {
+
+                        $('body').append(
+                            '<div class="overlay"><div class="opacity"></div><i class="icon-spinner2 spin"></i></div>');
+                        $('.overlay').fadeIn(150);
+                        window.setTimeout(function () {
+                            $('.overlay').fadeOut(150,
+                                function () {
+                                    $(this).remove();
+                                });
+                        },
+                            5000);
+                    },
+                    success: function (data) {
+                        window.document.write(data);
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+            });
+        });
+    </script>
 
 </body>
 

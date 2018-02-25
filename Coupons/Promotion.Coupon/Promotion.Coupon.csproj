@@ -346,6 +346,8 @@
     <Content Include="Views\Receipt\Winners_v-power.cshtml" />
     <Content Include="Views\Receipt\Winners_v-power_DINAMICA.cshtml" />
     <Content Include="Views\Home\InitFlow.cshtml" />
+    <Content Include="Views\Promotion\JaGanhou.cshtml" />
+    <Content Include="Views\Promotion\FimParticipacao.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
