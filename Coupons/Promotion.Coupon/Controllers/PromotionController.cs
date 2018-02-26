@@ -51,255 +51,30 @@ namespace Promotion.Coupon.Controllers
 
             return View("PromotionIndex");
         }
-
-        [HttpGet]
-        [Route("EndPromotion")]
-        public ActionResult PromotionEnd(string cpf)
-        {
-            var person = _personApplication.GetByCpfNotBlackList(cpf);
-            var model = new EndPromotionViewModel
-            {
-                Receipts = new List<Receipt>()
-            };
-
-            if (person != null)
-            {
-                model.Receipts = _receiptApplication.GetReceiptsByIdPerson(person.idPerson);
-            }
-            return View("ReceiptEndPromotion", model);
-        }
-
-        [HttpPost]
-        [Route("cpf-check")]
-        public ActionResult GetPersonByCPF(string cpf, string productType)
-        {
-            try
-            {
-                var person = _personApplication.GetByCpf(cpf);
-                Session["ProductType"] = productType;
-
-                DateTime dataStart = new DateTime(2019, 10, 3);
-                if (DateTime.Now > dataStart)
-                {
-                    if (person != null)
-                    {
-                        return PromotionEnd(cpf);
-                    }
-                    else
-                    {
-                        ViewBag.Error = "error_end_promotion";
-                        return PromotionIndex(productType);
-                    }
-                }
-
-
-                if (person != null)
-                {
-                    Session["Entity.Person"] = person;
-                    HttpCookie aCookie = new HttpCookie("person")
-                    {
-                        Value = cpf
-                    };
-                    Response.Cookies.Add(aCookie);
-                    HttpCookie cookie = new HttpCookie("productType");
-                    cookie.Value = productType;
-                    Response.Cookies.Add(cookie);
-                    ReceiptViewModel model = new ReceiptViewModel
-                    {
-                        productType = productType,
-                        cpf = person.cpf,
-                        person = person
-                    };
-
-                    //Promoção finalizada
-                    return View("PersonalDataConfirmation", model);
-                }
-
-                Session["Entity.Person"] = new Person()
-                {
-                    cpf = cpf
-                };
-
-                ViewBag.ProductType = productType;
-                //Promoção finalizada
-                return PersonalDataForm(cpf, productType);
-            }
-            catch (PersonCpfFoundInBlacklistException ex)
-            {
-                ViewBag.Error = "error_cpf_found_in_blacklist";
-                return PromotionIndex(productType);
-            }
-        }
-
-        [HttpGet]
-        [Route("personal-data")]
-        public ActionResult PersonalDataForm(string cpf, string productType)
-        {
-            var sessionPerson = (Person)Session["Entity.Person"];
-
-            //força fim campanha
-            //EndPromiton modelEnd = new EndPromiton();
-            //modelEnd.Receipts = new List<Receipt>();
-            //return View("ReceiptEndPromotion", modelEnd);
-
-            var person = new Person();
-
-            if (sessionPerson != null)
-            {
-                person = _personApplication.GetByCpf(sessionPerson.cpf);
-                if (person == null)
-                {
-                    person = new Person();
-                }
-                person.idPerson = sessionPerson.idPerson;
-                person.cpf = sessionPerson.cpf;
-            }
-            else
-            {
-                person = _personApplication.GetByCpf(cpf);
-                if (person != null)
-                {
-                    person.idPerson = person.idPerson;
-                    person.cpf = cpf;
-                }
-                else
-                {
-                    person = new Person();
-                    person.cpf = cpf;
-                }
-            }
-            ReceiptViewModel model = new ReceiptViewModel
-            {
-                productType = productType,
-                person = person,
-                cpf = person.cpf
-            };
-
-            return View("PersonalDataForm", model);
-        }
-
-        [HttpPost]
-        [Route("person/save")]
-        public ActionResult SavePerson(ReceiptViewModel model)
-        {
-            //força fim campanha
-            //EndPromiton modelEnd = new EndPromiton();
-            //modelEnd.Receipts = new List<Receipt>();
-            //return View("ReceiptEndPromotion", modelEnd);
-
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Error = "error_model_not_valid";
-                return View("PersonalDataForm", model.person);
-            }
-
-            var result = _personApplication.Save(model.person);
-
-            if (result.isSuccess)
-            {
-                Session["Entity.Person"] = model.person;
-                var productType = "";
-                if (Session["ProductType"] != null)
-                {
-                    productType = Session["ProductType"].ToString();
-                }
-                if (Session["ProductType"] == null)
-                {
-                    productType = model.productType;
-                }
-                var newsType = ENewsType.CreatePersonLubrificante;
-                if (productType == "v-power")
-                {
-                    newsType = ENewsType.CreatePersonVPower;
-                }
-                _newsSendingApplication.SetToSend(model.person.email, newsType, null, model.person.idPerson);
-                var modelR = new ReceiptViewModel
-                {
-                    productType = model.productType,
-                    person = model.person
-                };
-                return ReceiptDataForm(modelR);
-            }
-            else
-            {
-                ViewBag.Error = result.ErrorCode;
-                return View("PersonalDataForm");
-            }
-        }
-
-        [HttpGet]
-        [Route("receipt-data")]
-        public ActionResult ReceiptDataForm(ReceiptViewModel receipt)
-        {
-            //força fim campanha
-            //EndPromiton modelEnd = new EndPromiton();
-            //modelEnd.Receipts = new List<Receipt>();
-            //return View("ReceiptEndPromotion", modelEnd);
-            var session = Session["Entity.Person"];
-            if (session != null)
-            {
-                var person = (Person)Session["Entity.Person"];
-                receipt.Receipt = new Receipt()
-                {
-                    idPerson = person.idPerson,
-                    Person = person
-                };
-                receipt.Receipts = _receiptApplication.GetReceiptsByIdPerson(person.idPerson);
-            }
-            else
-            {
-                if (receipt.cpf != null)
-                {
-                    var person = _personApplication.GetByCpf(receipt.cpf);
-                    receipt.Receipt = new Receipt()
-                    {
-                        idPerson = person.idPerson,
-                        Person = person
-                    };
-                    receipt.Receipts = _receiptApplication.GetReceiptsByIdPerson(person.idPerson);
-                }
-            }
-
-            //receipt.ProductList = _productApplication.GetByType(receipt.productType == "v-power" ? "v-power" : "lubrificantes").ToList();
-            return View("ReceiptDataForm", receipt);
-        }
-
-        [HttpGet]
-        [Route("winners/{type}")]
-        public ActionResult Winners(string type)
-        {
-            ReceiptSaveViewModel winnersViewModel = new ReceiptSaveViewModel();
-            //winnersViewModel.Receipts = Business.Receipt.GetReceiptsByWinners(type);
-            return View("Winners_" + type, winnersViewModel);
-
-        }
-
+        
         [HttpPost]
         [Route("receipt/save")]
-        public ActionResult SaveReceipt(ReceiptViewModel model)
+        public String SaveReceipt(ReceiptViewModel model)
         {
             
             Person person;
             Person entity;
             ReceiptSaveViewModel result = new ReceiptSaveViewModel();
-
+            //dynamic response = new {
+            //    Status = 0,
+            //    ErrorCode = 0                                 
+            //                   };
             try
             {
                 //Valida se existe cpf que ja ganhou
                 person = _personApplication.GetByCpf(model.cpf);
                 if (person != null)
                 {
-                    var recieptPerson = _receiptApplication.GetReceiptsByIdPerson(person.idPerson);
-                    if (recieptPerson.Any(a => a.isValidated == true))
-                    {
-                        return Redirect("~/promotion/winner");
-                    }
+                    //Retornar que já participou e ganhou voucher
                 }
 
-
                 if (model.cpf != null)
-                {
-                    person = _personApplication.GetByCpf(model.cpf);
+                {                   
                     if (person == null)
                     {
                         entity = model.Parse();
@@ -321,10 +96,10 @@ namespace Promotion.Coupon.Controllers
 
                 if (model.ReceiptFile == null || model.ReceiptFile.ContentLength == 0 || !validImageTypes.Contains(model.ReceiptFile.ContentType))
                 {
-                    model.Status = "error";
-                    model.ErrorCode = "error_upload_not_valid";
+                    //response.Status = "error";
+                    //response.ErrorCode = "error_upload_not_valid";
 
-                    return ReceiptDataForm(model);
+                    return "error_upload_not_valid";
                 }
 
                 model.Receipt.isValidated = null;
@@ -350,23 +125,14 @@ namespace Promotion.Coupon.Controllers
 #warning DESCOMENTAR COM OS DADOS CORRETOS PARA FUNCIONAR
                     //EmailHandle.SendEmail(@from,model.email,"Obrigado por Participar", message);
 
-                    return Redirect("~/promotion/finish");
-                    //Fazer a diferenciação aqui se ganhou
-                    //if (result.Receipt == null ) // v-power 
-                    //{
-                    //    return View("~/Views/Promotion/ReceiptFinalWinner.cshtml", result);
-                    //}
-                    //else // lubrificantes
-                    //{
-                    //    return View("~/Views/Promotion/ReceiptFinalShowLuckyCode.cshtml", result);
-                    //}
+                    //response.Status = "sucess";
+                    return "sucesso";
                 }
                 else
                 {
-                    model.Status = "error";
-                    model.ErrorCode = saveResult.ErrorCode;
-
-                    return ReceiptDataForm(model);
+                    //response.Status = "error";
+                    //response.ErrorCode = saveResult.ErrorCode;
+                    return "error";
                 }
             }
             catch (Exception e)
@@ -374,22 +140,10 @@ namespace Promotion.Coupon.Controllers
                 Console.WriteLine(e);
                 throw new Exception(e.Message);
             }
-
-            return null;
+            
+            //response.Status = "error";
+            //response.ErrorCode = "system";
+            return "error"; ;
         }
-        [HttpGet]
-        [Route("winner")]
-        public ActionResult JaGanhou()
-        {
-            return View("~/Views/Promotion/JaGanhou.cshtml");
-        }
-
-        [HttpGet]
-        [Route("Finish")]
-        public ActionResult Finish()
-        {
-            return View("~/Views/Promotion/FimParticipacao.cshtml");
-        }
-
     }
 }

@@ -125,11 +125,13 @@
     <Content Include="Content\css\base.css" />
     <Content Include="Content\css\color.css" />
     <Content Include="Content\css\desktop.css" />
+    <Content Include="Content\css\index-site.css" />
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\mobile.css" />
     <Content Include="Content\css\reset.css" />
     <Content Include="Content\font\ft.svg" />
     <Content Include="Content\font\ftb.svg" />
+    <Content Include="Content\Images\absortion-img.png" />
     <Content Include="Content\Images\Admin\colorpicker\alpha.png" />
     <Content Include="Content\Images\Admin\colorpicker\hue.png" />
     <Content Include="Content\Images\Admin\colorpicker\saturation.png" />
@@ -190,6 +192,31 @@
     <Content Include="Content\Images\Admin\interface\zoom.png" />
     <Content Include="Content\Images\Admin\logo.png" />
     <Content Include="Content\Images\Admin\logo_dark.png" />
+    <Content Include="Content\Images\arrow.png" />
+    <Content Include="Content\Images\bg-1024.jpg" />
+    <Content Include="Content\Images\bg-1250.jpg" />
+    <Content Include="Content\Images\bg-1440.jpg" />
+    <Content Include="Content\Images\bg-1920.jpg" />
+    <Content Include="Content\Images\bg-320.jpg" />
+    <Content Include="Content\Images\bg-768.jpg" />
+    <Content Include="Content\Images\bg-buy-it.png" />
+    <Content Include="Content\Images\bg-header-desktop.png" />
+    <Content Include="Content\Images\first-step.png" />
+    <Content Include="Content\Images\fourth-step.png" />
+    <Content Include="Content\Images\icon-btn-menu.png" />
+    <Content Include="Content\Images\icon-close.png" />
+    <Content Include="Content\Images\icon-menu-calendario-menstrual.png" />
+    <Content Include="Content\Images\icon-menu-intimus.png" />
+    <Content Include="Content\Images\icon-menu-produtos.png" />
+    <Content Include="Content\Images\icon-social-facebook.png" />
+    <Content Include="Content\Images\icon-social-instagram.png" />
+    <Content Include="Content\Images\icon-social-youtube.png" />
+    <Content Include="Content\Images\kc-logo.jpg" />
+    <Content Include="Content\Images\logo-gympass.png" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\promo-logo.png" />
+    <Content Include="Content\Images\sec-step.png" />
+    <Content Include="Content\Images\third-step.png" />
     <Content Include="Content\img\check.png" />
     <Content Include="Content\img\close.png" />
     <Content Include="Content\img\dropdown-erro.png" />
@@ -266,6 +293,7 @@
     <Content Include="Scripts\admin\plugins\interface\tabletools.min.js" />
     <Content Include="Scripts\admin\plugins\interface\timepicker.min.js" />
     <Content Include="Scripts\admin\view\LubrificantesWinner.js" />
+    <Content Include="Scripts\index.js" />
     <Content Include="Scripts\js.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -331,23 +359,7 @@
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Receipt\erro.cshtml" />
-    <Content Include="Views\Receipt\GetFile.cshtml" />
-    <Content Include="Views\Receipt\NotStartPromotion.cshtml" />
-    <Content Include="Views\Promotion\PersonalDataConfirmation.cshtml" />
-    <Content Include="Views\Promotion\PersonalDataForm.cshtml" />
-    <Content Include="Views\Promotion\PromotionIndex.cshtml" />
-    <Content Include="Views\Promotion\ReceiptDataForm.cshtml" />
-    <Content Include="Views\Promotion\ReceiptEndPromotion.cshtml" />
-    <Content Include="Views\Receipt\ReceiptFinalNotWinner.cshtml" />
-    <Content Include="Views\Promotion\ReceiptFinalShowLuckyCode.cshtml" />
-    <Content Include="Views\Promotion\ReceiptFinalWinner.cshtml" />
-    <Content Include="Views\Receipt\Winners_lubrificantes.cshtml" />
-    <Content Include="Views\Receipt\Winners_v-power.cshtml" />
-    <Content Include="Views\Receipt\Winners_v-power_DINAMICA.cshtml" />
     <Content Include="Views\Home\InitFlow.cshtml" />
-    <Content Include="Views\Promotion\JaGanhou.cshtml" />
-    <Content Include="Views\Promotion\FimParticipacao.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -359,7 +371,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\App_Start\" />
     <Folder Include="ReceiptFiles\" />
-    <Folder Include="Views\WinnerApi\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Promotion.Coupon.Application\Promotion.Coupon.Application.csproj">

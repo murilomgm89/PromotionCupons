@@ -72,43 +72,20 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
         <EntityType Name="ViewReceiptExport">
           <Key>
             <PropertyRef Name="idReceipt" />
-            <PropertyRef Name="CNPJ_do_estabelecimento" />
-            <PropertyRef Name="Produto" />
-            <PropertyRef Name="Tipo_do_Produto" />
             <PropertyRef Name="Premiado" />
             <PropertyRef Name="Data_do_Cadastro_do_Recibo" />
             <PropertyRef Name="Nome_do_Participante" />
             <PropertyRef Name="cpf" />
-            <PropertyRef Name="nascimento" />
-            <PropertyRef Name="telefone" />
             <PropertyRef Name="email" />
-            <PropertyRef Name="endereco" />
-            <PropertyRef Name="PersonNumero" />
-            <PropertyRef Name="PensonComplemento" />
-            <PropertyRef Name="Bairro" />
-            <PropertyRef Name="CEP" />
             <PropertyRef Name="Data_de_Cadastro_do_Participante" />
           </Key>
           <Property Name="idReceipt" Type="int" Nullable="false" />
-          <Property Name="CNPJ_do_estabelecimento" Type="varchar" MaxLength="17" Nullable="false" />
-          <Property Name="Produto" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Tipo_do_Produto" Type="varchar" MaxLength="14" Nullable="false" />
           <Property Name="Premiado" Type="bit" Nullable="false" />
           <Property Name="Validado" Type="bit" />
-          <Property Name="Motivo_da_Validacao" Type="nvarchar" MaxLength="200" />
           <Property Name="Data_do_Cadastro_do_Recibo" Type="datetime" Nullable="false" />
           <Property Name="Nome_do_Participante" Type="varchar" MaxLength="75" Nullable="false" />
           <Property Name="cpf" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="nascimento" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="telefone" Type="varchar" MaxLength="14" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="uf" Type="varchar" MaxLength="2" />
-          <Property Name="PersonCidade" Type="varchar" MaxLength="60" />
-          <Property Name="endereco" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="PersonNumero" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="PensonComplemento" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Bairro" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="CEP" Type="nvarchar" MaxLength="9" Nullable="false" />
           <Property Name="Data_de_Cadastro_do_Participante" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK__Voucher__idPerso__32E0915F">
@@ -173,25 +150,12 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
           <EntitySet Name="ViewReceiptExport" EntityType="Self.ViewReceiptExport" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewReceiptExport].[idReceipt] AS [idReceipt], 
-    [ViewReceiptExport].[CNPJ_do_estabelecimento] AS [CNPJ_do_estabelecimento], 
-    [ViewReceiptExport].[Produto] AS [Produto], 
-    [ViewReceiptExport].[Tipo_do_Produto] AS [Tipo_do_Produto], 
     [ViewReceiptExport].[Premiado] AS [Premiado], 
     [ViewReceiptExport].[Validado] AS [Validado], 
-    [ViewReceiptExport].[Motivo_da_Validacao] AS [Motivo_da_Validacao], 
     [ViewReceiptExport].[Data_do_Cadastro_do_Recibo] AS [Data_do_Cadastro_do_Recibo], 
     [ViewReceiptExport].[Nome_do_Participante] AS [Nome_do_Participante], 
     [ViewReceiptExport].[cpf] AS [cpf], 
-    [ViewReceiptExport].[nascimento] AS [nascimento], 
-    [ViewReceiptExport].[telefone] AS [telefone], 
     [ViewReceiptExport].[email] AS [email], 
-    [ViewReceiptExport].[uf] AS [uf], 
-    [ViewReceiptExport].[PersonCidade] AS [PersonCidade], 
-    [ViewReceiptExport].[endereco] AS [endereco], 
-    [ViewReceiptExport].[PersonNumero] AS [PersonNumero], 
-    [ViewReceiptExport].[PensonComplemento] AS [PensonComplemento], 
-    [ViewReceiptExport].[Bairro] AS [Bairro], 
-    [ViewReceiptExport].[CEP] AS [CEP], 
     [ViewReceiptExport].[Data_de_Cadastro_do_Participante] AS [Data_de_Cadastro_do_Participante]
     FROM [dbo].[ViewReceiptExport] AS [ViewReceiptExport]</DefiningQuery>
           </EntitySet>
@@ -220,7 +184,6 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
           <EntitySet Name="AdminAccount" EntityType="GymPassModel.AdminAccount" />
           <EntitySet Name="NewsSending" EntityType="GymPassModel.NewsSending" />
           <EntitySet Name="Person" EntityType="GymPassModel.Person" />
-          <EntitySet Name="ViewReceiptExport" EntityType="GymPassModel.ViewReceiptExport" />
           <AssociationSet Name="FK_dbo_NewsSending_dbo_Person_idPerson" Association="GymPassModel.FK_dbo_NewsSending_dbo_Person_idPerson">
             <End Role="Person" EntitySet="Person" />
             <End Role="NewsSending" EntitySet="NewsSending" />
@@ -240,6 +203,7 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
             <End Role="Person" EntitySet="Person" />
             <End Role="Receipt" EntitySet="Receipt" />
           </AssociationSet>
+          <EntitySet Name="ViewReceiptExport" EntityType="GymPassModel.ViewReceiptExport" />
           </EntityContainer>
         <EntityType Name="AdminAccount">
           <Key>
@@ -277,48 +241,6 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
           <NavigationProperty Name="NewsSending" Relationship="GymPassModel.FK_dbo_NewsSending_dbo_Person_idPerson" FromRole="Person" ToRole="NewsSending" />
           <NavigationProperty Name="Voucher" Relationship="GymPassModel.FK__Voucher__idPerso__32E0915F" FromRole="Person" ToRole="Voucher" />
           <NavigationProperty Name="Receipt" Relationship="GymPassModel.FK_dbo_Receipt_dbo_Person_idPersonalData" FromRole="Person" ToRole="Receipt" />
-        </EntityType>
-        <EntityType Name="ViewReceiptExport">
-          <Key>
-            <PropertyRef Name="idReceipt" />
-            <PropertyRef Name="CNPJ_do_estabelecimento" />
-            <PropertyRef Name="Produto" />
-            <PropertyRef Name="Tipo_do_Produto" />
-            <PropertyRef Name="Premiado" />
-            <PropertyRef Name="Data_do_Cadastro_do_Recibo" />
-            <PropertyRef Name="Nome_do_Participante" />
-            <PropertyRef Name="cpf" />
-            <PropertyRef Name="nascimento" />
-            <PropertyRef Name="telefone" />
-            <PropertyRef Name="email" />
-            <PropertyRef Name="endereco" />
-            <PropertyRef Name="PersonNumero" />
-            <PropertyRef Name="PensonComplemento" />
-            <PropertyRef Name="Bairro" />
-            <PropertyRef Name="CEP" />
-            <PropertyRef Name="Data_de_Cadastro_do_Participante" />
-          </Key>
-          <Property Name="idReceipt" Type="Int32" Nullable="false" />
-          <Property Name="CNPJ_do_estabelecimento" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="false" />
-          <Property Name="Produto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Tipo_do_Produto" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Name="Premiado" Type="Boolean" Nullable="false" />
-          <Property Name="Validado" Type="Boolean" />
-          <Property Name="Motivo_da_Validacao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Data_do_Cadastro_do_Recibo" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Nome_do_Participante" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="cpf" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Name="nascimento" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="telefone" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="uf" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="PersonCidade" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="endereco" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PersonNumero" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="PensonComplemento" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Bairro" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CEP" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
-          <Property Name="Data_de_Cadastro_do_Participante" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK_dbo_NewsSending_dbo_Person_idPerson">
           <End Type="GymPassModel.Person" Role="Person" Multiplicity="0..1" />
@@ -405,6 +327,25 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ViewReceiptExport">
+          <Key>
+            <PropertyRef Name="idReceipt" />
+            <PropertyRef Name="Premiado" />
+            <PropertyRef Name="Data_do_Cadastro_do_Recibo" />
+            <PropertyRef Name="Nome_do_Participante" />
+            <PropertyRef Name="cpf" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="Data_de_Cadastro_do_Participante" />
+          </Key>
+          <Property Name="idReceipt" Type="Int32" Nullable="false" />
+          <Property Name="Premiado" Type="Boolean" Nullable="false" />
+          <Property Name="Validado" Type="Boolean" />
+          <Property Name="Data_do_Cadastro_do_Recibo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Nome_do_Participante" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="cpf" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Data_de_Cadastro_do_Participante" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -446,33 +387,6 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ViewReceiptExport">
-            <EntityTypeMapping TypeName="GymPassModel.ViewReceiptExport">
-              <MappingFragment StoreEntitySet="ViewReceiptExport">
-                <ScalarProperty Name="Data_de_Cadastro_do_Participante" ColumnName="Data_de_Cadastro_do_Participante" />
-                <ScalarProperty Name="CEP" ColumnName="CEP" />
-                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
-                <ScalarProperty Name="PensonComplemento" ColumnName="PensonComplemento" />
-                <ScalarProperty Name="PersonNumero" ColumnName="PersonNumero" />
-                <ScalarProperty Name="endereco" ColumnName="endereco" />
-                <ScalarProperty Name="PersonCidade" ColumnName="PersonCidade" />
-                <ScalarProperty Name="uf" ColumnName="uf" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="telefone" ColumnName="telefone" />
-                <ScalarProperty Name="nascimento" ColumnName="nascimento" />
-                <ScalarProperty Name="cpf" ColumnName="cpf" />
-                <ScalarProperty Name="Nome_do_Participante" ColumnName="Nome_do_Participante" />
-                <ScalarProperty Name="Data_do_Cadastro_do_Recibo" ColumnName="Data_do_Cadastro_do_Recibo" />
-                <ScalarProperty Name="Motivo_da_Validacao" ColumnName="Motivo_da_Validacao" />
-                <ScalarProperty Name="Validado" ColumnName="Validado" />
-                <ScalarProperty Name="Premiado" ColumnName="Premiado" />
-                <ScalarProperty Name="Tipo_do_Produto" ColumnName="Tipo_do_Produto" />
-                <ScalarProperty Name="Produto" ColumnName="Produto" />
-                <ScalarProperty Name="CNPJ_do_estabelecimento" ColumnName="CNPJ_do_estabelecimento" />
-                <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Voucher">
             <EntityTypeMapping TypeName="GymPassModel.Voucher">
               <MappingFragment StoreEntitySet="Voucher">
@@ -502,6 +416,20 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
                 <ScalarProperty Name="dtCreation" ColumnName="dtCreation" />
                 <ScalarProperty Name="isWinner" ColumnName="isWinner" />
                 <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+                <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewReceiptExport">
+            <EntityTypeMapping TypeName="GymPassModel.ViewReceiptExport">
+              <MappingFragment StoreEntitySet="ViewReceiptExport">
+                <ScalarProperty Name="Data_de_Cadastro_do_Participante" ColumnName="Data_de_Cadastro_do_Participante" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="Nome_do_Participante" ColumnName="Nome_do_Participante" />
+                <ScalarProperty Name="Data_do_Cadastro_do_Recibo" ColumnName="Data_do_Cadastro_do_Recibo" />
+                <ScalarProperty Name="Validado" ColumnName="Validado" />
+                <ScalarProperty Name="Premiado" ColumnName="Premiado" />
                 <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
               </MappingFragment>
             </EntityTypeMapping>

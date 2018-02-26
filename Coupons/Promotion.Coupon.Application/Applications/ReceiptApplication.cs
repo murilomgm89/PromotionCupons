@@ -290,7 +290,7 @@ namespace Promotion.Coupon.Application.Applications
             if (receipt.isValidated == false)
             {
                 var @from = "Promoção Gym Pass <promocaogympass@gympass.com.br>";
-                var message = $"Olá {receipt.Person.name}, nós recebemos a sua solicitação porem nao foi dessa vez, continue tentando.";
+                var message = "Olá {receipt.Person.name}, nós recebemos a sua solicitação porem nao foi dessa vez, continue tentando.";
                 //EmailHandle.SendEmail(@from, receipt.Person.email, "Promoção Gym Pass - Não foi dessa vez", message);
 
             }

@@ -1,6 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using System.Collections.Generic;
+using System.Net;
 using Promotion.Coupon.Application.Applications;
 using Promotion.Coupon.Application.Interfaces;
 using Promotion.Coupon.Entity.Entities;
@@ -26,9 +30,8 @@ namespace Promotion.Coupon.Controllers
         }
         public ActionResult Index()
         {
-            return Redirect("/Admin/Login");
-        }
-
+            return InitFlow();
+        }      
         public ActionResult InitFlow()
         {
             ViewBag.NumbersCode = _voucherApplication.NumberCoupons();

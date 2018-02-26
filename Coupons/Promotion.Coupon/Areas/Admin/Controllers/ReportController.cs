@@ -189,16 +189,14 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
 
 
             var sbResult = new StringBuilder();
-            sbResult.Append("Premiado; Validado; Motivo da Validacao; Data do Cadastro do Recibo; Nome do Participante;CPF;Email;Data de Cadastro do Participante;\n");
+            sbResult.Append("Premiado; Validado; Data do Cadastro do Recibo; Nome do Participante;CPF;Email;Data de Cadastro do Participante;\n");
 
             foreach (var r in receipts)
             {
                 sbResult.Append(r.Validado == true ? "SIM" : (r.Validado == false ? "NAO" : "Aprovação Pendente"));
                 sbResult.Append(";");
                 sbResult.Append(r.Validado == true ? "Aprovado" : (r.Validado == false ? "Reprovado" : "Aprovação Pendente"));
-                sbResult.Append(";");
-                sbResult.Append(r.Motivo_da_Validacao);
-                sbResult.Append(";");
+                sbResult.Append(";");     
                 sbResult.Append(r.Data_do_Cadastro_do_Recibo.ToString("dd/MM/yyyy HH:mm"));
                 sbResult.Append(";");
                 sbResult.Append(r.Nome_do_Participante);

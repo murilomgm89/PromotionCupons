@@ -119,8 +119,7 @@ namespace Promotion.Coupon.Repository.Repositories
             {
                 return context.Person
                     .Where(pd => pd.cpf == cpf)
-                    .Include(pd => pd.Receipt)
-                    //.Include(pd => pd.Receipt.Select(r => r.Product))
+                    .Include(pd => pd.Receipt)                   
                     .FirstOrDefault();
             }
         }
