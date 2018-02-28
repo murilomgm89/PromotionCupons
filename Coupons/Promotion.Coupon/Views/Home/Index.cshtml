@@ -144,16 +144,15 @@
 				    <form name="intimus" id="frmUpCp">
 
 				    <label for="fname">Nome:</label>
-				    <input type="text" id="fname" name="firstname">
+                        <input type="text" id="fname" name="firstname" onchange="ValidateName()">
 
 				    <label for="cpf">CPF:</label>
                         <input type="text" id="cpf" name="cpf" onchange="ValidateCPF()">
 
 				    <label for="email">E-mail:</label>
-				    <input type="text" id="email" name="email">
-
+                        <input type="text" id="email" name="email" onchange="ValidateMail()">
 					    <div class="file-upload">
-						    <span>Enviar Cupom-fiscal</span>
+						    <span id="SpanImage">Enviar Cupom-fiscal</span>
                             <input type="file" name="pic" id="file">
 					    </div>
 
@@ -163,10 +162,11 @@
 							    <span class="checkmark"></span>
 						    </label>
 					    <br/>
-					    <label class="container">LI E CONCORDO COM O REGULAMENTO
-							    <input type="checkbox" id="rules">
-							    <span class="checkmark"></span>
-						    </label>
+                        <label class="container" id="containerRules">
+                            LI E CONCORDO COM O REGULAMENTO
+                            <input type="checkbox" id="rules">
+                            <span class="checkmark"></span>
+                        </label>
 				    </div>
 						    
                     <input type="button" id="btnEnviar" value="Cadastrar">
@@ -194,63 +194,7 @@
 	      	<div class="kc"><img src="/Content/Images/kc-logo.jpg" /></div>
         </div>
         <input type="hidden" id="codes" value="@Html.Raw(codes)">
-        <script src="/Scripts/index.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#cpf').inputmask({
-                    mask: ['999.999.999-99'],
-                    keepStatic: true
-                });
-                $('#btnEnviar').click(function (e) {
-                    if (!validateForm())
-                        return;
-                    e.preventDefault();
-                    //if (!$("#frmUpCp").valid())
-                    //    return;
-                    var fdata = new FormData();
-                    fdata.append("cpf", $('#cpf')[0].value);
-                    fdata.append("email", $('#email')[0].value);
-                    fdata.append("name", $('#fname')[0].value);
-                    if ($("#file")[0].files.length > 0)
-                        fdata.append("ReceiptFile", $("#file")[0].files[0]);
-
-                    $.ajax({
-                        url: '../Promotion/receipt/save',
-                        type: 'POST',
-                        data: fdata,
-                        async: false,
-                        beforeSend: function (data) {
-                            
-                        },
-                        success: function (data) {
-                            if (data == "sucesso") {
-                                $("#MsgErro").html("Participação realizada.");                                
-                            }
-                            if (data == "error_blockedCPF") {
-                                $("#MsgErro").html("CPF Bloqueado para participações");                               
-                            }
-                            if (data == "error_participation_computed") {
-                                $("#MsgErro").html("CPF já participou!");                               
-                            }
-                            if (data == "error_upload_not_valid") {
-                                $("#MsgErro").html("A imagem escolhida não é válida");                               
-                            }
-                            if (data == "error") {
-                                $("#MsgErro").html("Tente novamente mais tarde");                               
-                            }
-                            $("#MsgErro").show();
-                        },
-                        error: function (data) {
-                            $("#MsgErro").html("Tente novamente mais tarde");
-                            $("#MsgErro").show();
-                        },
-                        cache: false,
-                        contentType: false,
-                        processData: false
-                    });
-                });
-            });
-        </script>
+        <script src="/Scripts/index.js"></script>        
         <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
         <!-- <script>
             window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;

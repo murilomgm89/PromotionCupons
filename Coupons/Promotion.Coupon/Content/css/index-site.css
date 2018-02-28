@@ -345,6 +345,9 @@ table {
   display: block;
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
+#content .form-wrapper .form form .file-upload span.error{
+  color:red;
+}
 #content .form-wrapper .form form .file-upload input[type="file"]{
   position: absolute;
   top: 0;
@@ -390,6 +393,9 @@ table {
     -ms-user-select: none;
     padding-top: 0.2rem;
     user-select: none;
+}
+#content .form-wrapper .form form .inputs-wrapper label.container.error{
+    color:red;
 }
 #content .form-wrapper .form form .inputs-wrapper label.container input[type="checkbox"]{
     position: absolute;
