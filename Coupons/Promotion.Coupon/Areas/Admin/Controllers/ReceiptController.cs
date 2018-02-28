@@ -53,7 +53,17 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
 
             if (receipt != null)
             {
-                _receiptApplication.SetValidated(idReceipt, model.isValidated, desc);
+                string fileNews = "";
+                if (model.isValidated == true)
+                {
+                    fileNews = Server.MapPath("~/Views/News/NewsVoucherView.cshtml");
+                }
+                else
+                {
+                    fileNews = Server.MapPath("~/Views/News/NewsVoucherView.cshtml");
+                }
+
+                _receiptApplication.SetValidated(idReceipt, model.isValidated, fileNews);
             }
 
             return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);

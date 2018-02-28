@@ -30,7 +30,9 @@ namespace Promotion.Coupon.Controllers
         }
         public ActionResult Index()
         {
-            return InitFlow();
+            ViewBag.NumbersWinners = _voucherApplication.NumberCoupons();
+            ViewBag.EndPromotion = _configPromotionApplication.GetByType("intimus").FirstOrDefault();
+            return View();
         }      
         public ActionResult InitFlow()
         {

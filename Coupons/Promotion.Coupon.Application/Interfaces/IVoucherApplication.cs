@@ -1,9 +1,11 @@
-﻿namespace Promotion.Coupon.Application.Interfaces
+﻿using Promotion.Coupon.Application.Interfaces.Base;
+using Promotion.Coupon.Entity.Entities;
+namespace Promotion.Coupon.Application.Interfaces
 {
     public interface IVoucherApplication
     {
 
-        void GenarateWinner(int idPerson);
+        Voucher GenarateWinner(int idPerson);
         int NumberCoupons();
     }
 }

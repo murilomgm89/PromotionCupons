@@ -7,23 +7,37 @@ namespace Promotion.Coupon.Entity.Handle
     {
         public static void SendEmail(string from, string to, string subject, string message)
         {
-            //Exemplo de chamada
-            //var credential = new NetworkCredential("naoresponda@oi.com.br", "oioi2015");
-            //EmailHandle.SendEmail(from, to, "Comparação de planos", bd, credential);
+            SmtpClient mySmtpClient = new SmtpClient("smtp.gmail.com");
+            mySmtpClient.Port = 587;
+            mySmtpClient.EnableSsl = true;
+            mySmtpClient.UseDefaultCredentials = true;
             
-            using (var mm = new MailMessage(from, to))
-            {
-                mm.Subject = subject;
-                mm.Body = message;
-                mm.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.EnableSsl = true;
-                smtp.UseDefaultCredentials = true;
-                smtp.Credentials = new NetworkCredential("gympass@gmail.com.br", "gympass");
-                smtp.Port = 587;
-                smtp.Send(mm);
-            }
+            // set smtp-client with basicAuthentication
+            mySmtpClient.UseDefaultCredentials = false;
+            System.Net.NetworkCredential basicAuthenticationInfo = new
+            System.Net.NetworkCredential("gomes.vmlbrasil@gmail.com", "z3277009@");
+            mySmtpClient.Credentials = basicAuthenticationInfo;
+
+            // add from,to mailaddresses
+            MailAddress fromT = new MailAddress(from, "Promoção Intimus Sport");
+            MailAddress toT = new MailAddress(to, "");
+            MailMessage myMail = new System.Net.Mail.MailMessage(fromT, toT);
+
+            //// add ReplyTo
+            //MailAddress replyto = new MailAddress("reply@example.com");
+            //myMail.ReplyToList.Add(replyTo);
+
+            // set subject and encoding
+            myMail.Subject = subject;
+            myMail.SubjectEncoding = System.Text.Encoding.UTF8;
+
+            // set body-message and encoding
+            myMail.Body = message;
+            myMail.BodyEncoding = System.Text.Encoding.UTF8;
+            // text or html
+            myMail.IsBodyHtml = true;
+
+            mySmtpClient.Send(myMail);
         }
     }
 }

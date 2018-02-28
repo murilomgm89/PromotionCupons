@@ -14,9 +14,9 @@ namespace Promotion.Coupon.Application.Applications
         {
             _voucherRepository = new VoucherRepository();
         }
-        public void GenarateWinner(int idPerson)
+        public Voucher GenarateWinner(int idPerson)
         {
-            _voucherRepository.GenarateWinner(idPerson);
+            return _voucherRepository.GenarateWinner(idPerson);
         }
 
         public int NumberCoupons()

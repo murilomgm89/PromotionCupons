@@ -9,8 +9,7 @@ namespace Promotion.Coupon.Application.Interfaces
     public interface IReceiptApplication : IApplicationBase<Receipt>
     {
         Dictionary<string, int> GetCountPerDateBy(string productType, DateTime? from = null, DateTime? to = null);
-        Dictionary<string, int> GetCountPerDateBy2(string productType, DateTime? from = null, DateTime? to = null);
-        bool IsAllowedToSave(int idPerson, int idProduct, string cnpj);
+        Dictionary<string, int> GetCountPerDateBy2(string productType, DateTime? from = null, DateTime? to = null);        
         List<Receipt> GetReceiptsByIdPerson(int idPerson);
         List<Receipt> GetReceiptsBy(DateTime from, DateTime to);
         List<ViewReceiptExport> GetReceiptsBy2(DateTime from, DateTime to);
@@ -18,6 +17,7 @@ namespace Promotion.Coupon.Application.Interfaces
         List<Receipt> GetReceiptsByWinners(string type);
         List<Receipt> GetBy(string type, bool isWinner, bool? isValidated);
         Receipt GetLastBy(int idPerson, string productType);
+        Receipt GetReceiptWinnerByIdPerson(int idPerson);
         Receipt GetById(int idReceipt);
         Receipt GetLastBy(bool isWinner, string productType);
         int GetCountBy(int idPerson, string productType);
@@ -28,7 +28,7 @@ namespace Promotion.Coupon.Application.Interfaces
         void DeclaredWinner(Receipt receipt);
         void Save(Receipt receipt, bool direct);
         ReceiptSaveResult Save(Receipt receipt);
-        void SetValidated(int idReceipt, bool isValidated, string invalidateDescription = null);
+        void SetValidated(int idReceipt, bool isValidated, string FileNews);
         void ApplyProductPromotion(Receipt receipt);
         int LuckyCodeRandom();
 

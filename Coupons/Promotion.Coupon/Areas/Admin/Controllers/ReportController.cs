@@ -22,8 +22,7 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
 
         public ReportController()
         {
-            _receiptApplication = new ReceiptApplication();
-            //_luckyCodeApplication = new LuckyCodeApplication();
+            _receiptApplication = new ReceiptApplication();           
             _personApplication = new PersonApplication();
 
         }
@@ -49,13 +48,7 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
             }
 
             model.ReceiptsChartData = _receiptApplication.GetCountPerDateBy(null, model.from, model.to.AddDays(1)).Select(d => new DashboardViewModel.ChartItem() { Label = d.Key, Value = d.Value }).OrderBy(d => d.Label).ToList();
-            //model.PersonsChartData = Business.Person.GetCountPerDateBy(model.from, model.to.AddDays(1)).Select(d => new ShiftInc.Raizen.ShellTanqueCheio.Web.Areas.Admin.Models.DashboardViewModel.ChartItem() { Label = d.Key, Value = d.Value }).OrderBy(d => d.Label).ToList();
-
-            model.ReceiptCount = _receiptApplication.GetCountBy(model.from, null, model.to.AddDays(1));
-            //model.PersonCount = Business.Person.GetCountBy(model.from, model.to.AddDays(1));
-
-            //model.People = Business.Person.GetBy(model.from, model.to).ToList();
-
+                model.ReceiptCount = _receiptApplication.GetCountBy(model.from, null, model.to.AddDays(1));           
             return View("~/Areas/Admin/Views/Report/Participations.cshtml", model);
         }
 
@@ -86,12 +79,6 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
                 Session["Participations.To"] = model.to;
             }
             model.to = model.to.AddDays(1);
-
-            //model.LuckyCodeChartData = _luckyCodeApplication.GetCountPerDateBy(model.from, model.to).Select(d => new DashboardViewModel.ChartItem() { Label = d.Key, Value = d.Value }).OrderBy(d => d.Label).ToList();
-            //model.LuckyCodeCount = _luckyCodeApplication.GetCountBy(model.from, model.to.AddDays(1));
-            //
-            //model.LuckyCodes = _luckyCodeApplication.GetBy(model.from, model.to.AddDays(1)).ToList();
-
             model.to = model.to.AddDays(-1);
 
             return View("~/Areas/Admin/Views/Report/LuckyCodes.cshtml", model);
@@ -189,13 +176,13 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
 
 
             var sbResult = new StringBuilder();
-            sbResult.Append("Premiado; Validado; Data do Cadastro do Recibo; Nome do Participante;CPF;Email;Data de Cadastro do Participante;\n");
+            sbResult.Append("Premiado; Voucher; Data do Cadastro do Recibo; Nome do Participante;CPF;Email;Data de Cadastro do Participante;\n");
 
             foreach (var r in receipts)
             {
                 sbResult.Append(r.Validado == true ? "SIM" : (r.Validado == false ? "NAO" : "Aprovação Pendente"));
                 sbResult.Append(";");
-                sbResult.Append(r.Validado == true ? "Aprovado" : (r.Validado == false ? "Reprovado" : "Aprovação Pendente"));
+                sbResult.Append(r.VoucherVinculado == null ? "" : r.VoucherVinculado.ToString());
                 sbResult.Append(";");     
                 sbResult.Append(r.Data_do_Cadastro_do_Recibo.ToString("dd/MM/yyyy HH:mm"));
                 sbResult.Append(";");

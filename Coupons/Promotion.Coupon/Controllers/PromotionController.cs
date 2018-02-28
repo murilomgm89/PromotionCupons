@@ -23,12 +23,13 @@ namespace Promotion.Coupon.Controllers
         private readonly IReceiptApplication _receiptApplication;
         private readonly INewsSendingApplication _newsSendingApplication;
         private readonly IProductApplication _productApplication;
+        private readonly IBlockedCpfApplication _blockedCPFRepository;
         public PromotionController()
         {
             _personApplication = new PersonApplication();
             _receiptApplication = new ReceiptApplication();
             _newsSendingApplication = new NewsSendingApplication();
-            //_productApplication = new ProductApplication();
+            _blockedCPFRepository = new BlockedCPFApplication();
         }
         // GET: Promotion
         public ActionResult Index()
@@ -59,18 +60,24 @@ namespace Promotion.Coupon.Controllers
             
             Person person;
             Person entity;
-            ReceiptSaveViewModel result = new ReceiptSaveViewModel();
-            //dynamic response = new {
-            //    Status = 0,
-            //    ErrorCode = 0                                 
-            //                   };
+            ReceiptSaveViewModel result = new ReceiptSaveViewModel();           
             try
             {
-                //Valida se existe cpf que ja ganhou
+                if (model.cpf != null)
+                    model.cpf = model.cpf.Replace(".", "").Replace("-", "");
+                if (_blockedCPFRepository.GetCPF(long.Parse(model.cpf)) != null)
+                {
+                    return "error_blockedCPF";
+                }
+                
                 person = _personApplication.GetByCpf(model.cpf);
                 if (person != null)
                 {
-                    //Retornar que já participou e ganhou voucher
+                    //Valida se existe cpf que ja ganhou
+                    if (_receiptApplication.GetReceiptWinnerByIdPerson(person.idPerson) != null)
+                    {
+                        return "error_participation_computed";
+                    }                   
                 }
 
                 if (model.cpf != null)
@@ -95,10 +102,7 @@ namespace Promotion.Coupon.Controllers
                 };
 
                 if (model.ReceiptFile == null || model.ReceiptFile.ContentLength == 0 || !validImageTypes.Contains(model.ReceiptFile.ContentType))
-                {
-                    //response.Status = "error";
-                    //response.ErrorCode = "error_upload_not_valid";
-
+                {                   
                     return "error_upload_not_valid";
                 }
 
@@ -118,20 +122,17 @@ namespace Promotion.Coupon.Controllers
                     result.Receipt = model.Receipt;
 
                     result.Receipts = _receiptApplication.GetReceiptsByIdPerson(model.Receipt.idPerson);
+                   
+                    var @from = "Promoção Gympass Imtimus Sport <promocaogympass@intimus.com.br>";
+                    var subject = "Obrigado por participar, aguarde a válidação de seu cupom!";
 
-#warning ALTERAR OS DADOS DO EMAIL
-                    var @from = "Promoção Gym Pass <promocaogympass@gympass.com.br>";
-                    var message = "Seu cupom foi enviado com sucesso, obrigado por participar.";
-#warning DESCOMENTAR COM OS DADOS CORRETOS PARA FUNCIONAR
-                    //EmailHandle.SendEmail(@from,model.email,"Obrigado por Participar", message);
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/Views/News/NewsVoucherView.cshtml"));
+                    EmailHandle.SendEmail(@from, model.email, subject, content);
 
-                    //response.Status = "sucess";
                     return "sucesso";
                 }
                 else
-                {
-                    //response.Status = "error";
-                    //response.ErrorCode = saveResult.ErrorCode;
+                {                    
                     return "error";
                 }
             }
@@ -140,10 +141,7 @@ namespace Promotion.Coupon.Controllers
                 Console.WriteLine(e);
                 throw new Exception(e.Message);
             }
-            
-            //response.Status = "error";
-            //response.ErrorCode = "system";
-            return "error"; ;
+            return "error";
         }
     }
 }

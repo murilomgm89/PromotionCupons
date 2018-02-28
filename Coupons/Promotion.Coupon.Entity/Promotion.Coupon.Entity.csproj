@@ -50,6 +50,9 @@
     <Compile Include="Entities\AdminAccount.cs">
       <DependentUpon>GymPassModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\BlockedCPF.cs">
+      <DependentUpon>GymPassModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\ConfigPromotion.cs">
       <DependentUpon>GymPassModel.tt</DependentUpon>
     </Compile>
@@ -93,6 +96,7 @@
     <Compile Include="Interfaces\IPromotionRepository.cs" />
     <Compile Include="Interfaces\IReceiptRepository.cs" />
     <Compile Include="Interfaces\IRepositoryBase.cs" />
+    <Compile Include="Interfaces\IBlockedCPFRepository.cs" />
     <Compile Include="Interfaces\IVoucherRepository.cs" />
     <Compile Include="Poco\InvalidateDescription.cs" />
     <Compile Include="Poco\PersonSaveResult.cs" />

@@ -15,6 +15,7 @@
         <EntityTypeShape EntityType="GymPassModel.Receipt" Width="1.5" PointX="3" PointY="4.875" />
         <AssociationConnector Association="GymPassModel.FK_dbo_NewsSending_dbo_Receipt_idReceipt" />
         <AssociationConnector Association="GymPassModel.FK_dbo_Receipt_dbo_Person_idPersonalData" />
+        <EntityTypeShape EntityType="GymPassModel.BlockedCPF" Width="1.5" PointX="7.375" PointY="4.75" />
         <EntityTypeShape EntityType="GymPassModel.ViewReceiptExport" Width="1.5" PointX="7.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>

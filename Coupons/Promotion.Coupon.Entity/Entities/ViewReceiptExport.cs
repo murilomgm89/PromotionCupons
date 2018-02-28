@@ -17,6 +17,7 @@ namespace Promotion.Coupon.Entity.Entities
         public int idReceipt { get; set; }
         public bool Premiado { get; set; }
         public Nullable<bool> Validado { get; set; }
+        public Nullable<int> VoucherVinculado { get; set; }
         public System.DateTime Data_do_Cadastro_do_Recibo { get; set; }
         public string Nome_do_Participante { get; set; }
         public string cpf { get; set; }

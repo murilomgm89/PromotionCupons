@@ -3,8 +3,8 @@ using Promotion.Coupon.Entity.Entities;
 
 namespace Promotion.Coupon.Application.Interfaces
 {
-    public interface IBlockedCpfApplication //: IApplicationBase<BlockedCPFs>
+    public interface IBlockedCpfApplication : IApplicationBase<BlockedCPF>
     {
-        bool IsCpfBlocked(string cpf);
+        BlockedCPF GetCPF(long CPF);
     }
 }

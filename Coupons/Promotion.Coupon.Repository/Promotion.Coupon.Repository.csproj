@@ -66,6 +66,7 @@
     <Compile Include="Repositories\NewsSendingRepository.cs" />
     <Compile Include="Repositories\PromotionRepository.cs" />
     <Compile Include="Repositories\ReceiptRepository.cs" />
+    <Compile Include="Repositories\BlockedCPFRepository.cs" />
     <Compile Include="Repositories\VoucherRepository.cs" />
   </ItemGroup>
   <ItemGroup>

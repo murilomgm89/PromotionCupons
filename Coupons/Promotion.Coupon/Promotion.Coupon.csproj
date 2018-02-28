@@ -122,6 +122,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\base.css" />
     <Content Include="Content\css\color.css" />
     <Content Include="Content\css\desktop.css" />
@@ -222,6 +224,7 @@
     <Content Include="Content\img\dropdown-erro.png" />
     <Content Include="Content\img\dropdown.png" />
     <Content Include="Content\img\open.png" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\Styles\Admin\bootstrap.min.css" />
     <Content Include="Content\Styles\Admin\css.css" />
     <Content Include="Content\Styles\Admin\icons.css" />
@@ -230,6 +233,7 @@
     <Content Include="Content\Styles\Admin\londinium-theme.css" />
     <Content Include="Content\Styles\Admin\styles.css" />
     <Content Include="Content\Styles\Admin\wysihtml5\wysiwyg-color.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\admin\application.js" />
     <Content Include="Scripts\admin\application_blank.js" />
@@ -293,8 +297,14 @@
     <Content Include="Scripts\admin\plugins\interface\tabletools.min.js" />
     <Content Include="Scripts\admin\plugins\interface\timepicker.min.js" />
     <Content Include="Scripts\admin\view\LubrificantesWinner.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\index.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\js.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -357,9 +367,16 @@
     <Content Include="Areas\Admin\Views\Person\PersonDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\InitFlow.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\News\NewsVoucherView.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

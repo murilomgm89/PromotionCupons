@@ -67,6 +67,17 @@ namespace Promotion.Coupon.Repository.Repositories
             throw new NotImplementedException();
         }
 
+        public Receipt GetReceiptWinnerByIdPerson(int idPerson)
+        {
+            using (var context = new GymPass())
+            {
+                return context.Receipt                    
+                    .Include(r => r.Person)                    
+                    .Where(r => r.idPerson == idPerson && r.isValidated == true)
+                    .FirstOrDefault();
+            }
+        }
+
         public List<Receipt> GetReceiptsByIdPerson(int idPerson)
         {
             using (var context = new GymPass())
@@ -154,8 +165,7 @@ namespace Promotion.Coupon.Repository.Repositories
             using (var context = new GymPass())
             {
                 return context.Receipt
-                    .Include(r => r.Person)
-                    //.Include(r => r.Product)
+                    .Include(r => r.Person)                    
                     .Where(r => r.idReceipt == idReceipt)
                     .OrderByDescending(r => r.dtCreation)
                     .FirstOrDefault();
@@ -250,7 +260,7 @@ namespace Promotion.Coupon.Repository.Repositories
             throw new NotImplementedException();
         }
 
-        public void SetValidated(int idReceipt, bool isValidated, string invalidateDescription = null)
+        public void SetValidated(int idReceipt, bool isValidated, string FileNews)
         {
             throw new NotImplementedException();
         }

@@ -109,24 +109,6 @@ namespace Promotion.Coupon.Application.Applications
             return response;
         }
 
-        public bool IsAllowedToSave(int idPerson, int idProduct, string cnpj)
-        {
-            //var product = _productRepository.Get(idProduct);
-
-            //var lastReceipt = GetLastBy(idPerson, product.type);
-            //bool isLastReceiptNotToday = lastReceipt == null || (new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day) > new DateTime(lastReceipt.dtCreation.Year, lastReceipt.dtCreation.Month, lastReceipt.dtCreation.Day));
-            //if (!isLastReceiptNotToday)
-            //    throw new AnotherReceiptFoundTodayException();
-
-
-            //var countReceipts = GetCountBy(idPerson, product.type);
-            //bool isReceiptCountUnderLimit = countReceipts < (product.type == "v-power" ? 30 : 5);
-            //if (!isReceiptCountUnderLimit)
-            //    throw new ReceiptCountPerPersonExceededException();
-
-            return true;
-        }
-
         public List<Receipt> GetReceiptsByIdPerson(int idPerson)
         {
             return _receiptRepository.GetReceiptsByIdPerson(idPerson);
@@ -141,7 +123,10 @@ namespace Promotion.Coupon.Application.Applications
         {
             return _receiptRepository.GetReceiptsBy2(from, to);
         }
-
+        public Receipt GetReceiptWinnerByIdPerson(int idPerson)
+        {
+            return _receiptRepository.GetReceiptWinnerByIdPerson(idPerson);
+        }
         public int GetCountByNotWinners()
         {
             return _receiptRepository.GetCountByNotWinners();
@@ -226,18 +211,14 @@ namespace Promotion.Coupon.Application.Applications
             try
             {
                 lock (_receiptSaveLock)
-                {
-                    if (IsAllowedToSave(receipt.idPerson, 1, "1"))
-                    {
-                        receipt.Person = null;
-                        receipt.dtCreation = DateTime.Now;
-                        _receiptRepository.Insert(receipt);
-                        receipt.Person = tmpPerson;
-                        ApplyProductPromotion(receipt);
+                {                    
+                    receipt.Person = null;
+                    receipt.dtCreation = DateTime.Now;
+                    _receiptRepository.Insert(receipt);
+                    receipt.Person = tmpPerson;
+                    ApplyProductPromotion(receipt);
 
-                        result.isSuccess = true;
-
-                    }
+                    result.isSuccess = true;
                 }
             }
             catch (AnotherReceiptFoundTodayException)
@@ -260,9 +241,9 @@ namespace Promotion.Coupon.Application.Applications
             return result;
         }
 
-        public void SetValidated(int idReceipt, bool isValidated, string invalidateDescription = null)
+        public void SetValidated(int idReceipt, bool isValidated, string FileNews)
         {
-            var receipt = _receiptRepository.Get(idReceipt);
+            var receipt = _receiptRepository.GetById(idReceipt);
 
             if (receipt != null)
             {
@@ -278,63 +259,22 @@ namespace Promotion.Coupon.Application.Applications
 
             if (receipt.isValidated == true)
             {
-                
-                _voucherRepository.GenarateWinner(receipt.Person.idPerson);
-                var @from = "Promoção Gym Pass <promocaogympass@gympass.com.br>";
-                var message = "Voce ganhou um cupom de desconto Gym Pass, Obrigado por participar!.";
-                //EmailHandle.SendEmail(@from, receipt.Person.email, "Promoção Gym Pass - Você Ganhou", message);
-
-                _newsSendingRepository.SetToSend(receipt.Person.email, ENewsType.VPowerWinnerBullet, receipt.idReceipt);
+                var voucher = _voucherRepository.GenarateWinner(receipt.Person.idPerson);
+                var @from = "Promoção Gympass Imtimus Sport <promocaogympass@intimus.com.br>";
+                var subject = "Voce ganhou um voucher de desconto Gympass, Obrigado por participar!.";
+                string content = System.IO.File.ReadAllText(FileNews);
+                content = content.Replace("{VOUCHER}", voucher.code.ToString());
+                EmailHandle.SendEmail(@from, receipt.Person.email, subject, content);
             }
 
             if (receipt.isValidated == false)
             {
-                var @from = "Promoção Gym Pass <promocaogympass@gympass.com.br>";
-                var message = "Olá {receipt.Person.name}, nós recebemos a sua solicitação porem nao foi dessa vez, continue tentando.";
-                //EmailHandle.SendEmail(@from, receipt.Person.email, "Promoção Gym Pass - Não foi dessa vez", message);
-
+                var @from = "Promoção Gympass Imtimus Sport <promocaogympass@gympass.com.br>";
+                var subject = "Olá, nós recebemos a sua solicitação porém nao foi dessa vez, continue tentando.";
+                string content = System.IO.File.ReadAllText(FileNews);
+                EmailHandle.SendEmail(@from, receipt.Person.email, subject, content);
             }
-
-            //else
-            //{
-            //    //int idDescription = InvalidateDescription.GetIdByDescription(receipt.invalidateDescription);
-            //    var newsType = ENewsType.CupomIlegivel;
-            //    switch (idDescription)
-            //    {
-            //        case 1:
-            //            newsType = ENewsType.CupomIlegivel;
-            //            break;
-            //        case 2:
-            //            newsType = ENewsType.DataInvalida;
-            //            break;
-            //        case 3:
-            //            newsType = ENewsType.ImagemNaoECupom;
-            //            break;
-            //        case 4:
-            //            newsType = ENewsType.CupomIncompleto;
-            //            break;
-            //        case 5:
-            //            newsType = ENewsType.CupomDiferenteProduto;
-            //            break;
-            //        case 6:
-            //            newsType = ENewsType.CupomJaCadastrado;
-            //            break;
-            //        case 7:
-            //            newsType = ENewsType.CupomSemPreenchimento;
-            //            break;
-            //        case 8:
-            //            newsType = ENewsType.CupomValorAbaixo;
-            //            break;
-            //        case 9:
-            //            newsType = ENewsType.CupomProdutoNaoParticipante;
-            //            break;
-            //    }
-
-            //    _newsSendingRepository.SetToSend(receipt.Person.email, newsType, receipt.idReceipt);
-            //}
-
         }
-
         public void ApplyProductPromotion(Receipt receipt)
         {
             //

@@ -15,20 +15,18 @@ namespace Promotion.Coupon.Repository.Repositories
         {
             _receiptRepository = new ReceiptRepository();
         }
-        public void GenarateWinner(int idPerson)
-        {
-            var code = _receiptRepository.LuckyCodeRandom();
-            var data = new Voucher()
-            {
-                idPerson = idPerson,
-                code = code,
-                dtWinner = DateTime.Now
-            };
+        public Voucher GenarateWinner(int idPerson)
+        {            
             using (var context = new GymPass())
             {
-
-                context.Voucher.Add(data);
+                var voucher = context.Voucher.Where(v => v.idPerson == null).OrderBy(v => v.code).First();
+                if (voucher != null)
+                {
+                    voucher.idPerson = idPerson;                    
+                    voucher.dtWinner = DateTime.Now;
+                }
                 context.SaveChanges();
+                return voucher;
             }
         }
 
@@ -36,7 +34,7 @@ namespace Promotion.Coupon.Repository.Repositories
         {
             using (var context = new GymPass())
             {
-                return context.Voucher.ToList().Count;
+                return context.Voucher.Where(v => v.idPerson != null).ToList().Count;
             }
         }
     }

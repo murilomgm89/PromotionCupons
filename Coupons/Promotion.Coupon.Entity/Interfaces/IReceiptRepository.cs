@@ -18,6 +18,7 @@ namespace Promotion.Coupon.Entity.Interfaces
         List<Receipt> GetBy(string type, bool isWinner, bool? isValidated);
         Receipt GetLastBy(int idPerson, string productType);
         Receipt GetById(int idReceipt);
+        Receipt GetReceiptWinnerByIdPerson(int idPerson);
         Receipt GetLastBy(bool isWinner, string productType);
         int GetCountBy(int idPerson, string productType);
         int GetCountBy(string productType, bool isWinner);

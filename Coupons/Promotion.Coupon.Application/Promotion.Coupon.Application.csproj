@@ -46,6 +46,7 @@
     <Compile Include="Applications\NewsSendingApplication.cs" />
     <Compile Include="Applications\PersonApplication.cs" />
     <Compile Include="Applications\ProductApplication.cs" />
+    <Compile Include="Applications\BlockedCPFApplication.cs" />
     <Compile Include="Applications\ReceiptApplication.cs" />
     <Compile Include="Applications\VoucherApplication.cs" />
     <Compile Include="Interfaces\Base\IApplicationBase.cs" />

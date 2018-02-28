@@ -362,11 +362,12 @@ table {
     border: none;
     width: 20rem;
     height: 1.3rem;
+    color: white;
 }
 #content .form-wrapper .form form input[type="text"].error{
     border: solid 1px red;
 }
-#content .form-wrapper .form form input[type="submit"]{
+#content .form-wrapper .form form input[type="button"]{
     border: none;
     background-color: #c1498b;
     color:  white;

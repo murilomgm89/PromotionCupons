@@ -4,7 +4,7 @@ namespace Promotion.Coupon.Entity.Interfaces
 {
     public interface IVoucherRepository : IRepositoryBase<Voucher>
     {
-        void GenarateWinner(int idPerson);
+        Voucher GenarateWinner(int idPerson);
         int NumberCoupons();
     }
 }
