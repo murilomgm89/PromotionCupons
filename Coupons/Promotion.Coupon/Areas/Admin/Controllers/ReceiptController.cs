@@ -8,6 +8,7 @@ using Promotion.Coupon.Application.Applications;
 using Promotion.Coupon.Application.Interfaces;
 using Promotion.Coupon.Areas.Admin.Models;
 using Promotion.Coupon.Filters;
+using System.Configuration;
 
 namespace Promotion.Coupon.Areas.Admin.Controllers
 {
@@ -60,10 +61,10 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
                 }
                 else
                 {
-                    fileNews = Server.MapPath("~/Views/News/NewsVoucherView.cshtml");
+                    fileNews = Server.MapPath("~/Views/News/NewsCupomErrorView.cshtml");
                 }
 
-                _receiptApplication.SetValidated(idReceipt, model.isValidated, fileNews);
+                _receiptApplication.SetValidated(idReceipt, model.isValidated, fileNews, ConfigurationManager.AppSettings["Ambiente"].ToString());
             }
 
             return Json(new { status = "success" }, JsonRequestBehavior.AllowGet);

@@ -28,10 +28,10 @@ namespace Promotion.Coupon.Entity.Entities
         public virtual DbSet<AdminAccount> AdminAccount { get; set; }
         public virtual DbSet<NewsSending> NewsSending { get; set; }
         public virtual DbSet<Person> Person { get; set; }
-        public virtual DbSet<Voucher> Voucher { get; set; }
         public virtual DbSet<ConfigPromotion> ConfigPromotion { get; set; }
-        public virtual DbSet<Receipt> Receipt { get; set; }
         public virtual DbSet<BlockedCPF> BlockedCPF { get; set; }
+        public virtual DbSet<Voucher> Voucher { get; set; }
         public virtual DbSet<ViewReceiptExport> ViewReceiptExport { get; set; }
+        public virtual DbSet<Receipt> Receipt { get; set; }
     }
 }

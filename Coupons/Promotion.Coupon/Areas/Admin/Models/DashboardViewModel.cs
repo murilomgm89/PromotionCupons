@@ -91,6 +91,24 @@ namespace Promotion.Coupon.Areas.Admin.Models
                 return JsonConvert.SerializeObject(response);
             }
         }
+        public List<ChartItem> PieChartData2 { get; set; }
+        public string SerializedPieChartData2
+        {
+            get
+            {
+                var response = new List<List<string>>();
+
+                int i = 0;
+                foreach (var el in PieChartData2)
+                {
+                    response.Add(new List<string>() { el.Label, el.Value.ToString() });
+
+                    i++;
+                }
+
+                return JsonConvert.SerializeObject(response);
+            }
+        }
 
         public int VPowerWinners { get; set; }
         public int LubrificantesWinners { get; set; }

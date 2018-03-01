@@ -1,4 +1,4 @@
-$(document).ready(function () {
+Ôªø$(document).ready(function () {
     $('#cpf').inputmask({
         mask: ['999.999.999-99'],
         keepStatic: true
@@ -24,16 +24,16 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data == "sucesso") {
-                    $("#MsgErro").html("ParticipaÁ„o realizada.");
+                    $(".success-form").css('visibility', 'visible');                    
                 }
                 if (data == "error_blockedCPF") {
-                    $("#MsgErro").html("CPF Bloqueado para participaÁıes");
+                    $("#MsgErro").html("CPF Bloqueado para participa√ß√µes");
                 }
                 if (data == "error_participation_computed") {
-                    $("#MsgErro").html("CPF j· participou!");
+                    $("#MsgErro").html("CPF j√° participou!");
                 }
                 if (data == "error_upload_not_valid") {
-                    $("#MsgErro").html("A imagem escolhida n„o È v·lida");
+                    $("#MsgErro").html("A imagem escolhida n√£o √© v√°lida");
                 }
                 if (data == "error") {
                     $("#MsgErro").html("Tente novamente mais tarde");
@@ -80,6 +80,7 @@ function validateForm() {
     return isValid;
 }
 function ValidateCPF() {
+    var cpf = document.forms["intimus"]["cpf"];
     var cpfValue = document.forms["intimus"]["cpf"].value;
     if (cpfValue != '123.123.123-89') {
         cpfValue = cpfValue.replace(/\D+/g, '');
@@ -107,7 +108,7 @@ function ValidateCPF() {
 function ValidateMail() {
     var mail = document.forms["intimus"]["email"]
     if (mail.value != "") {
-        var RegExp = /^[\w]+@[\w]+\.[\w|\.]+$/;
+        var RegExp = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if (RegExp.test(mail.value) == true) {
             $(mail).removeClass('error');
             return true;
@@ -130,3 +131,27 @@ function ValidateName() {
     }
 }
 
+var modal = document.querySelector("#modal");
+var modalOverlay = document.querySelector("#modal-overlay");
+var closeButton = document.querySelector("#close-button");
+var openButtonFooter = document.querySelector("#open-button-footer");
+var openButtonForm = document.querySelector("#open-button-form");
+
+openButtonFooter.addEventListener("click", function() {
+  modal.classList.toggle("open");
+  modalOverlay.classList.toggle("open");
+});
+
+closeButton.addEventListener("click", function() {
+  modal.classList.toggle("open");
+  modalOverlay.classList.toggle("open");
+});
+
+function AbriRegulamento() {
+    modal.classList.toggle("open");
+    modalOverlay.classList.toggle("open");
+}
+function AbriRegulamento2() {
+    modal.classList.toggle("open");
+    modalOverlay.classList.toggle("open");
+}

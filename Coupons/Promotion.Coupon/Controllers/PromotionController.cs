@@ -13,6 +13,7 @@ using Promotion.Coupon.Entity.Extensions;
 using Promotion.Coupon.Application.Interfaces;
 using Promotion.Coupon.Application.Applications;
 using Promotion.Coupon.Entity.Handle;
+using System.Configuration;
 
 namespace Promotion.Coupon.Controllers
 {
@@ -108,13 +109,18 @@ namespace Promotion.Coupon.Controllers
 
                 model.Receipt.isValidated = null;
 
+                string theFileName = Path.GetFileName(model.ReceiptFile.FileName);
+                byte[] thePictureAsBytes = new byte[model.ReceiptFile.ContentLength];
+                using (BinaryReader theReader = new BinaryReader(model.ReceiptFile.InputStream))
+                {
+                    thePictureAsBytes = theReader.ReadBytes(model.ReceiptFile.ContentLength);
+                }
+                model.Receipt.imgBase64 = Convert.ToBase64String(thePictureAsBytes);               
                 var saveResult = _receiptApplication.Save(model.Receipt);
 
                 if (saveResult.isSuccess)
                 {
-                    var uploadDir = "~/ReceiptFiles";
-                    var imagePath = Path.Combine(Server.MapPath(uploadDir), model.Receipt.idReceipt + ".jpg");
-                    model.ReceiptFile.SaveAs(imagePath);
+                    //model.ReceiptFile.SaveAs(imagePath);
 
                     result.Status = "success";
                     result.Receipt = model.Receipt.ApiSerialize();
@@ -122,12 +128,14 @@ namespace Promotion.Coupon.Controllers
                     result.Receipt = model.Receipt;
 
                     result.Receipts = _receiptApplication.GetReceiptsByIdPerson(model.Receipt.idPerson);
-                   
-                    var @from = "Promoção Gympass Imtimus Sport <promocaogympass@intimus.com.br>";
+
+                    var @from = "Promoção Gympass Imtimus Sport <noreply@relay.kccweb.net>";
                     var subject = "Obrigado por participar, aguarde a válidação de seu cupom!";
 
-                    string content = System.IO.File.ReadAllText(Server.MapPath("~/Views/News/NewsVoucherView.cshtml"));
-                    EmailHandle.SendEmail(@from, model.email, subject, content);
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/Views/News/NewsParticipationView.cshtml"));                   
+                    string[] name = model.name.Split(' ');
+                    content = content.Replace("{NOME}", name[0].ToString());
+                    EmailHandle.SendEmail(@from, model.email, subject, content, ConfigurationManager.AppSettings["Ambiente"].ToString());
 
                     return "sucesso";
                 }

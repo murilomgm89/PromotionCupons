@@ -131,6 +131,7 @@
     <Content Include="Content\css\index.css" />
     <Content Include="Content\css\mobile.css" />
     <Content Include="Content\css\reset.css" />
+    <Content Include="Content\font\barlow-condensed-v1-latin-700.svg" />
     <Content Include="Content\font\ft.svg" />
     <Content Include="Content\font\ftb.svg" />
     <Content Include="Content\Images\absortion-img.png" />
@@ -300,6 +301,11 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\index.js" />
+    <Content Include="Content\font\.DS_Store" />
+    <Content Include="Content\font\barlow-condensed-v1-latin-700.eot" />
+    <Content Include="Content\font\barlow-condensed-v1-latin-700.ttf" />
+    <Content Include="Content\font\barlow-condensed-v1-latin-700.woff" />
+    <Content Include="Content\font\barlow-condensed-v1-latin-700.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -377,6 +383,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\News\NewsVoucherView.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Receipt\GetFile.cshtml" />
+    <Content Include="Views\News\NewsParticipationView.cshtml" />
+    <Content Include="Views\News\NewsCupomErrorView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

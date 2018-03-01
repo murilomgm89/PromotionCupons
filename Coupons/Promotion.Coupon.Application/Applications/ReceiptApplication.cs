@@ -241,7 +241,7 @@ namespace Promotion.Coupon.Application.Applications
             return result;
         }
 
-        public void SetValidated(int idReceipt, bool isValidated, string FileNews)
+        public void SetValidated(int idReceipt, bool isValidated, string FileNews, string ambiente)
         {
             var receipt = _receiptRepository.GetById(idReceipt);
 
@@ -260,19 +260,23 @@ namespace Promotion.Coupon.Application.Applications
             if (receipt.isValidated == true)
             {
                 var voucher = _voucherRepository.GenarateWinner(receipt.Person.idPerson);
-                var @from = "Promoção Gympass Imtimus Sport <promocaogympass@intimus.com.br>";
+                var @from = "Promoção Gympass Imtimus Sport <noreply@relay.kccweb.net>";
                 var subject = "Voce ganhou um voucher de desconto Gympass, Obrigado por participar!.";
                 string content = System.IO.File.ReadAllText(FileNews);
                 content = content.Replace("{VOUCHER}", voucher.code.ToString());
-                EmailHandle.SendEmail(@from, receipt.Person.email, subject, content);
+                string[] name = receipt.Person.name.Split(' ');
+                content = content.Replace("{NOME}", name[0].ToString());
+                EmailHandle.SendEmail(@from, receipt.Person.email, subject, content, ambiente);
             }
 
             if (receipt.isValidated == false)
             {
-                var @from = "Promoção Gympass Imtimus Sport <promocaogympass@gympass.com.br>";
-                var subject = "Olá, nós recebemos a sua solicitação porém nao foi dessa vez, continue tentando.";
+                var @from = "Promoção Gympass Imtimus Sport <noreply@relay.kccweb.net>";
+                var subject = "Olá, nós recebemos a sua solicitação porém não foi dessa vez, continue tentando.";
                 string content = System.IO.File.ReadAllText(FileNews);
-                EmailHandle.SendEmail(@from, receipt.Person.email, subject, content);
+                string[] name = receipt.Person.name.Split(' ');
+                content = content.Replace("{NOME}", name[0].ToString());                
+                EmailHandle.SendEmail(@from, receipt.Person.email, subject, content, ambiente);
             }
         }
         public void ApplyProductPromotion(Receipt receipt)

@@ -2,204 +2,217 @@
     Layout = null;
     var promotion = (ConfigPromotion)ViewBag.EndPromotion;
     int codes = ViewBag.NumbersWinners;
-    
+
 }
 <!DOCTYPE html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Gympass Intimus Sport</title>
-        <meta name="description" content="Conheça o produto na prática com a Promoção Gympass Intimus Sport">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="/Content/css/index-site.css">        
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/forms/inputmask.js")"></script>      
-    </head>
-    <body>
-        <!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-
-        <!-- Add your site or application content here -->
-        <div id="header">
-        	<div class="header-wrapper container">
-        		<div class="logo">
-        			<h1><img src="/Content/Images/logo.png" /></h1>
-        			<h3>Siga em frente</h3>
-        		</div>
-        		<div class="menu">
-        			<div class="menu-wrapper">
-        				<ul>
-        					<li><img src="/Content/Images/icon-menu-intimus.png" /><span><a href="https://www.intimus.com.br/">Intimus</a></span></li>
-        					<li><img src="/Content/Images/icon-menu-produtos.png" /><span><a href="https://www.intimus.com.br/produtos/">Produtos</a></span></li>
-        					<li><img src="/Content/Images/icon-menu-calendario-menstrual.png" /><span><a href="https://www.intimus.com.br/calendario-menstrual">Calendário Mesntrual</a></span></li>
-        				</ul>
-        			</div>
-        		</div>
-        	</div>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="pragma" content="no-cache">
+    <title>Gympass Intimus Sport</title>
+    <meta name="description" content="Conheça o produto na prática com a Promoção Gympass Intimus Sport">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/Content/css/index-site.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/admin/plugins/forms/inputmask.js")"></script>
+</head>
+<body>
+    <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+    <!-- Add your site or application content here -->
+    <div id="header">
+        <div class="header-wrapper container">
+            <div class="logo">
+                <h1><img src="/Content/Images/logo.png" /></h1>
+                <h3>Siga em frente</h3>
+            </div>
+            <div class="menu">
+                <div class="menu-wrapper">
+                    <ul>
+                        <li><img src="/Content/Images/icon-menu-intimus.png" /><span><a href="https://www.intimus.com.br/">Intimus</a></span></li>
+                        <li><img src="/Content/Images/icon-menu-produtos.png" /><span><a href="https://www.intimus.com.br/produtos/">Produtos</a></span></li>
+                        <li><img src="/Content/Images/icon-menu-calendario-menstrual.png" /><span><a href="https://www.intimus.com.br/calendario-menstrual">Calendário Mesntrual</a></span></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div id="content">
-        	<div class="introduction container">
-        		<div class="promo-logo mobile">
-        			<div class="promo-text">Promoção</div>
-        			<div class="promo-img"><img src="/Content/Images/promo-logo.png" /></div>
-        		</div>
-        		<div class="absortion">
-        			<div class="image"><img src="/Content/Images/absortion-img.png" /></div>
-        			<div class="text-absortion">
-        				<div class="text-one">Absorve Melhor</div>
-        				<div class="text-two">O fluxo e o suor</div>
-        			</div>
-        		</div>
-        		<div class="promo-logo desktop">
-        			<div class="promo-text">Promoção</div>
-        			<div class="promo-img"><img src="/Content/Images/promo-logo.png" /></div>
-        		</div>
-        		<div class="buyit">
-        			<div class="buy-text"><span class="big">Compre R$20</span><span class="small">Em produtos*</span></div>
-        			<div class="buy-win"><span class="big-yellow">Ganhe</span></div>
-        			<div class="buy-prize"><span class="medium-yellow">30 dias de academia</span></div>
-        			<div class="gympass"><img src="/Content/Images/logo-gympass.png" /></div>
-        		</div>
-        	</div>
-      		<div class="introduction-footer">
-      			<span class="pink">Conheça o produto na prática com</br>a Promoção <span class="white">Gympass Intimus Sport</span></span>
-      		</div>
-      		<div class="arrow"><img src="/Content/Images/arrow.png" /></div>
-      		<div class="steps-wrapper container">
-	      		<div class="steps">
-	      			<div class="title">
-	      				<span class="first">Passo</span>
-	      				<span class="second">A</span>
-	      				<span class="third">Passo</span></div>
-	      		</div>
-	      		<div class="steps-list mobile">
-	      			<div class="itens">
-	      				<div class="number">1</div>
-	      				<img src="/Content/Images/first-step.png" />
-	      			</div>
-	      			<div class="steps-text">
-	      				<div>Tire uma foto do<br/><span class="bg-pink">cupom fiscal.</span></div>
-	      			</div>
-	      			<div class="itens">
-	      				<div class="number">2</div>
-	      				<img src="/Content/Images/sec-step.png" />
-	      			</div>
-	      			<div class="steps-text">
-	      				<div>Envie por meio<br/><span class="bg-pink">deste site.</span></div>
-	      			</div>
-	      			<div class="itens">
-	      				<div class="number">3</div>
-	      				<img src="/Content/Images/third-step.png" />
-	      			</div>
-	      			<div class="steps-text">
-	      				<div>AGUARDE O RECEBIMENTO<br/><span class="bg-pink">DO VOUCHER.</span>ISSO PODE LEVAR ALGUNS DIAS.</div>
-	      			</div>
-	      			<div class="itens">
-	      				<div class="number">4</div>
-	      				<img src="/Content/Images/fourth-step.png" />
-	      			</div>
-	      			<div class="steps-text">
-	      				<div><span class="bg-pink">Cadastre o voucher<br/></span>no site da Gympass<br/>e comece a treinar!</div>
-	      			</div>
-	      		</div>
-	      		<div class="steps-list desktop">
-	      			<div class="itens">
-	      				<div class="number">1</div>
-	      				<img src="/Content/Images/first-step.png" />
-	      			</div>
-	      			<div class="steps-text">
-	      				<div>Tire uma foto do<span class="bg-pink">cupom fiscal.</span></div>
-	      			</div>
-	      			<div class="itens">
-	      				<div class="number">2</div>
-	      				<img src="/Content/Images/sec-step.png" />
-	      			</div>
-	      			<div class="steps-text">
-	      				<div>Envie por meio<span class="bg-pink">deste site.</span></div>
-	      			</div>
-	      			<div class="itens">
-	      				<div class="number">3</div>
-	      				<img src="/Content/Images/third-step.png" />
-	      			</div>
-	      			<div class="steps-text">
-	      				<div>AGUARDE O RECEBIMENTO<span class="bg-pink">DO VOUCHER.</span><br/>ISSO PODE LEVAR ALGUNS DIAS.</div>
-	      			</div>
-	      			<div class="itens">
-	      				<div class="number">4</div>
-	      				<img src="/Content/Images/fourth-step.png" />
-	      			</div>
-	      			<div class="steps-text">
-	      				<div><span class="bg-pink">Cadastre o voucher </span>no site<br/>da Gympass e comece a treinar!</div>
-	      			</div>
-	      		</div>
-	      	</div>
-	      	<div class="form-wrapper container">
-	      		<div class="form-text">
-	      			<span class="bg-pink">PREENCHA</span><br/>OS CAMPOS<br/> PARA<br/>PARTICIPAR:
-	      		</div>
-	      		<div class="form">
-				    <form name="intimus" id="frmUpCp">
+    </div>
+    <div id="content">
+        <div class="introduction container">
+            <div class="promo-logo mobile">
+                <div class="promo-text">Promoção</div>
+                <div class="promo-img"><img src="/Content/Images/promo-logo.png" /></div>
+            </div>
+            <div class="absortion">
+                <div class="image"><img src="/Content/Images/absortion-img.png" /></div>
+                <div class="text-absortion">
+                    <div class="text-one">Absorve Melhor</div>
+                    <div class="text-two">O fluxo e o suor</div>
+                </div>
+            </div>
+            <div class="promo-logo desktop">
+                <div class="promo-text">Promoção</div>
+                <div class="promo-img"><img src="/Content/Images/promo-logo.png" /></div>
+            </div>
+            <div class="buyit">
+                <div class="buy-text"><span class="big">Compre R$20</span><span class="small">Em produtos*</span></div>
+                <div class="buy-win"><span class="big-yellow">Ganhe</span></div>
+                <div class="buy-prize"><span class="medium-yellow">30 dias de academia</span></div>
+                <div class="gympass"><img src="/Content/Images/logo-gympass.png" /></div>
+                <div class="gympass-disclaimer">*somente produtos Intimus Sport.</div>
+            </div>
+        </div>
+        <div class="introduction-footer">
+            <span class="pink">Conheça o produto na prática com</br>a Promoção <span class="white">Gympass Intimus Sport</span></span>
+        </div>
+        <div class="arrow"><img src="/Content/Images/arrow.png" /></div>
+        <div class="steps-wrapper container">
+            <div class="steps">
+                <div class="title">
+                    <span class="first">Passo</span>
+                    <span class="second">A</span>
+                    <span class="third">Passo</span>
+                </div>
+            </div>
+            <div class="steps-list mobile">
+                <div class="itens">
+                    <div class="number">1</div>
+                    <img src="/Content/Images/first-step.png" />
+                </div>
+                <div class="steps-text">
+                    <div>Tire uma foto do<br /><span class="bg-pink">cupom fiscal.</span></div>
+                </div>
+                <div class="itens">
+                    <div class="number">2</div>
+                    <img src="/Content/Images/sec-step.png" />
+                </div>
+                <div class="steps-text">
+                    <div>Envie por meio<br /><span class="bg-pink">deste site.</span></div>
+                </div>
+                <div class="itens">
+                    <div class="number">3</div>
+                    <img src="/Content/Images/third-step.png" />
+                </div>
+                <div class="steps-text">
+                    <div>AGUARDE O RECEBIMENTO<br /><span class="bg-pink">DO VOUCHER.</span>ISSO PODE LEVAR ALGUNS DIAS.</div>
+                </div>
+                <div class="itens">
+                    <div class="number">4</div>
+                    <img src="/Content/Images/fourth-step.png" />
+                </div>
+                <div class="steps-text">
+                    <div><span class="bg-pink">Cadastre o voucher<br /></span>no site do Gympass<br />e comece a treinar!</div>
+                </div>
+            </div>
+            <div class="steps-list desktop">
+                <div class="itens">
+                    <div class="number">1</div>
+                    <img src="/Content/Images/first-step.png" />
+                </div>
+                <div class="steps-text">
+                    <div>Tire uma foto do<span class="bg-pink">cupom fiscal.</span></div>
+                </div>
+                <div class="itens">
+                    <div class="number">2</div>
+                    <img src="/Content/Images/sec-step.png" />
+                </div>
+                <div class="steps-text">
+                    <div>Envie por meio<span class="bg-pink">deste site.</span></div>
+                </div>
+                <div class="itens">
+                    <div class="number">3</div>
+                    <img src="/Content/Images/third-step.png" />
+                </div>
+                <div class="steps-text">
+                    <div>AGUARDE O RECEBIMENTO<span class="bg-pink">DO VOUCHER.</span><br />ISSO PODE LEVAR ALGUNS DIAS.</div>
+                </div>
+                <div class="itens">
+                    <div class="number">4</div>
+                    <img src="/Content/Images/fourth-step.png" />
+                </div>
+                <div class="steps-text">
+                    <div><span class="bg-pink">Cadastre o voucher </span>no site<br />do Gympass e comece a treinar!</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-wrapper container">
+            <div class="form-text">
+                <span class="bg-pink">PREENCHA</span><br />OS CAMPOS<br /> PARA<br />PARTICIPAR:
+            </div>
+            <div class="form">
+                <form name="intimus" id="frmUpCp">
+                    <label for="fname">Nome:</label>
+                    <input type="text" id="fname" name="firstname" onchange="ValidateName()">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf" onchange="ValidateCPF()">
+                    <label for="email">E-mail:</label>
+                    <input type="text" id="email" name="email" onchange="ValidateMail()">
+                    <div class="file-upload">
+                        <span id="SpanImage">Enviar Cupom-fiscal</span>
+                        <input type="file" name="pic" id="file">
+                    </div>
 
-				    <label for="fname">Nome:</label>
-                        <input type="text" id="fname" name="firstname" onchange="ValidateName()">
-
-				    <label for="cpf">CPF:</label>
-                        <input type="text" id="cpf" name="cpf" onchange="ValidateCPF()">
-
-				    <label for="email">E-mail:</label>
-                        <input type="text" id="email" name="email" onchange="ValidateMail()">
-					    <div class="file-upload">
-						    <span id="SpanImage">Enviar Cupom-fiscal</span>
-                            <input type="file" name="pic" id="file">
-					    </div>
-
-				    <div class="inputs-wrapper">
-					    <label class="container">Aceita receber informações de produtos
-							    <input type="checkbox" id="infos">
-							    <span class="checkmark"></span>
-						    </label>
-					    <br/>
-                        <label class="container" id="containerRules">
-                            LI E CONCORDO COM O REGULAMENTO
+                    <div class="inputs-wrapper">
+                        <label class="container">
+                            Aceita receber informações de produtos
+                            <input type="checkbox" id="infos">
+                            <span class="checkmark"></span>
+                        </label>
+                        <br />
+                        <label class="container">
+                            LI E CONCORDO COM O <span id="open-button-form"><a href="javascript:void(0)" onclick="AbriRegulamento2()" style="color: white;">REGULAMENTO</a></span>
                             <input type="checkbox" id="rules">
                             <span class="checkmark"></span>
                         </label>
-				    </div>
-						    
+                    </div>
+
                     <input type="button" id="btnEnviar" value="Cadastrar">
-                        <br />
-                        <span id="MsgErro" style="color:red"></span>
-				    </form>
-	      		</div>
-	      	</div>
-	      	<div class="sac container">
-	      		<div>SAC: 0800-7095599</div>
-	      		<div class="pink">Confira os termos de uso</div>
-	      	</div>
-	      	<div class="footer">
-	      		<div class="menu-footer">
-	      			<span><a href="https://www.intimus.com.br/contato">Contato</a></span>
-	      			<span><a href="https://www.intimus.com.br/termos-de-uso">Termos de Uso</a></span>
-	      			<span><a href="https://www.intimus.com.br/politica-de-privacidade">Politica de privacidade</a></span>
-	      		</div>
-	      		<div class="social-menu-footer">
-	      			<span><a href="https://www.facebook.com/Intimus"><img src="/Content/Images/icon-social-facebook.png" /></a></span>
-	      			<span><a href="https://www.youtube.com/user/intimusonline"><img src="/Content/Images/icon-social-youtube.png" /></a></span>
-	      			<span><a href="https://www.instagram.com/intimusoficial/"><img src="/Content/Images/icon-social-instagram.png" /></a></span>
-	      		</div>
-	      	</div>
-	      	<div class="kc"><img src="/Content/Images/kc-logo.jpg" /></div>
+                    <br /><br />
+                    <span id="MsgErro" style="color:red"></span>
+                </form>
+                <div class="success-form">
+                    <p><span class="pink">Cadastro realizado com sucesso.</span><br />Se o cupom estiver válido, você receberá um email com o VOUCHER.</p>
+                </div>
+            </div>
         </div>
-        <input type="hidden" id="codes" value="@Html.Raw(codes)">
-        <script src="/Scripts/index.js"></script>        
-        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-        <!-- <script>
-            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
-        </script> 
-        <script src="https://www.google-analytics.com/analytics.js" async defer></script>-->
-    </body>
+        <div class="sac container">
+            <div>SAC: 0800-7095599</div>
+            <div class="pink" id="open-button-footer">Confira os termos de uso</div>
+        </div>
+        <div class="disclaimer"><a href="javascript:void(0)" onclick="AbriRegulamento()" style="text-decoration: underline; cursor: pointer;">Clique aqui</a> para consultar o regulamento completo. Promoção válida até dia 15/04/2018</div>
+        <div class="footer">
+            <div class="menu-footer">
+                <span><a href="https://www.intimus.com.br/contato">Contato</a></span>
+                <span><a href="https://www.intimus.com.br/termos-de-uso">Termos de Uso</a></span>
+                <span><a href="https://www.intimus.com.br/politica-de-privacidade">Politica de privacidade</a></span>
+            </div>
+            <div class="social-menu-footer">
+                <span><a href="https://www.facebook.com/Intimus"><img src="/Content/Images/icon-social-facebook.png" /></a></span>
+                <span><a href="https://www.youtube.com/user/intimusonline"><img src="/Content/Images/icon-social-youtube.png" /></a></span>
+                <span><a href="https://www.instagram.com/intimusoficial/"><img src="/Content/Images/icon-social-instagram.png" /></a></span>
+            </div>
+        </div>
+        <div class="kc"><img src="/Content/Images/kc-logo.jpg" /></div>
+    </div>
+    <div class="modal-overlay" id="modal-overlay"></div>
+
+    <div class="modal" id="modal">
+        <div class="modal-guts">
+            <div class="pink" id="close-button" style="cursor: pointer;">Fechar</div>
+            <h1>REGULAMENTO CAMPANHA “GYMPASS INTIMUS SPORT”</h1>
+            <p>A KIMBERLY-CLARK BRASIL INDÚSTRIA E COMÉRCIO DE PRODUTOS DE HIGIENE LTDA.(KIMBERLY-CLARK), lança, em parceria com GPBR PARTICIPAÇÕES LTDA (GYMPASS) a campanha Compre R$ 20 (vinte) reais em produtos INTIMUS SPORT™ e Ganhe 30 (trinta) dias GYMPASS denominada “GYMPASS INTIMUS SPORT”, com distribuição de vouchers, válidos pelo período de 30 (trinta) dias e para utilização exclusiva na rede de academias parceiras GYMPASS, na compra de produtos INTIMUS SPORT™ indicados de acordo com o presente regulamento, contemplando todas as pessoas físicas, residentes e domiciliadas em todo território nacional, de acordo com o Regulamento abaixo estipulado.<br><br> 1. REGULAMENTO PARA PARTICIPAÇÃO DA CAMPANHA<br><br> I. Durante o período de 01/03/18 a 15/04/18, nas compras com o valor total a partir (mínimo) de R$20,00 (vinte reais) em produtos INTIMUS SPORT™ o(a) consumidor(a) terá direito a 1 (um) voucher válido por 30 (trinta) dias na rede de academias parceiras do GYMPASS no valor de R$ 199,90 (cento e noventa e nove reais e noventa centavos).<br><br> II. Para participar desta campanha o(a) consumidor(a) deverá entrar no site da Campanha (www.promocaointimussport.com.br), se cadastrar e fazer o upload de seu cupom fiscal.<br><br> III. Cada CPF cadastrado no site da campanha terá direito a apenas 1 (um) voucher.<br><br> IV. O(A) consumidor(a) não terá direito a cadastrar mais de um cupom fiscal para a campanha e mesmo que o valor gasto em produtos INTIMUS SPORT™ seja superior a R$ 20,00 (vinte reais), o(a) consumidor(a) só terá direito a 1 (um) voucher.<br><br> V. É necessário preencher todos os dados cadastrais. Não nos responsabilizamos por informações incompletas ou incorretas que forem fornecidas.<br><br> VI. Após validação de auditoria interna do cupom fiscal, o(a) consumidor(a) receberá o voucher de 30 (trinta) dias para acesso e uso da rede GYMPASS. VII. A ativação do voucher será feita no site https://www.gympass.com/ e deverá ser realizada até 05/06/2018. Assim que ativar seu voucher, o(a) consumidor(a) terá 30 (trinta) dias corridos para utilizar o acesso à rede GYMPASS gratuitamente.<br><br> VIII. Cada voucher corresponderá a quantia de R$ 199,90 (cento e noventa e nove reais e noventa centavos) e poderá ser utilizado em todas as academias parceiras até esse valor. Caso o plano selecionado na GYMPASS seja com valor inferior, nenhuma quantia será devolvida ao consumidor. Da mesma forma, se o plano escolhido for superior, o consumidor deverá arcar com o custo da diferença. Caso a usuária opte por contratar um plano de maior valor, a renovação no próximo mês será automática e com valor integral da compra. A usuária poderá cancelar a assinatura a qualquer momento sem cobrança de multa.<br><br> IX. Os vouchers não poderão ser usados para usuários com planos ativos no GYMPASS e/ou não poderão ser somados a quaisquer outros descontos ou créditos. Também não poderão ser utilizados por usuários com planos corporativos.<br><br> X. Uma vez ativado, o voucher não poderá ser utilizado por outra pessoa, pois estará conectado ao CPF da pessoa que o ativou.<br><br> XI. Durante a campanha será oferecido o número limitado de 5.000 (cinco mil) vouchers. A campanha terminará no dia 15/04/2018 ou ao término da quantidade de vouchers acima mencionada, o que ocorrer primeiro.<br><br> XII. No período entre 16/04/2018 e 05/06/2018 apenas a ativação dos vouchers já recebidos poderá ser realizada. Qualquer compra de produtos a partir de 16/04/2018 não dará direito a voucher.<br><br> XIII. Os produtos incluídos nessa campanha são:<br><br> ABS FEM INTIM SUAVE C/A UFIN SPORT 60X8<br><br> ABS FEM INTIM SUAVE C/A UFIN SPORT 15X32<br><br> PRO DIA INTIMUS DAY ULTRAFINO 6X80 SPORT<br><br> PRO DIA INTIMUS DAY ULTRAFIN 12X40 SPORT<br><br> ABS INT INTIMUS C/ APLI SUPER 12X8 SPORT<br><br> ABS INT INTIMUS C/ APLI MÉDIO 12X8 SPORT<br><br> XIV. A campanha é válida para todo território brasileiro.<br><br> 2.DISPOSIÇÕES GERAIS<br><br> I. A KIMBERLY-CLARK e a GYMPASS reservam o direito de, caso necessário, alterar ou modificar qualquer item desse Regulamento, de acordo com seus objetivos. O Regulamento estará sempre atualizado no site da ação.<br><br> II. A campanha poderá ser suspensa ou cancelada há qualquer momento, caso haja motivos de casos fortuitos ou de força maior.<br><br> III. As informações contidas no formulário de cadastro serão utilizadas, inicialmente e exclusivamente, para o controle de vouchers mas poderão ser usadas pelas empresas posteriormente - o(a) consumidor(a) deverá indicar, no momento do cadastro, a sua aceitação ou rejeição quanto a este uso posterior.<br><br> IV. Em caso de dúvidas quanto a ativação e/ou uso do voucher na rede GYMPASS, o(a) consumidor(a) poderá acessar https://www.gympass.com/como_funciona e verificar como utilizar seu benefício e conferir as academias parceiras da rede GYMPASS.<br><br> V. Em caso de dúvidas quanto à ação “GYMPASS INTIMUS SPORT” entre em contato com um dos Serviços de Atendimento ao Cliente (SAC): SAC KIMBERLY-CLARK BRASIL no número 0800 7095599 das 8h às 18h e SAC GYMPASS através do e-mail intimussport@gympass.com.<br><br> VI. Em caso de efeito adverso com os produtos INTIMUS SPORT™, por favor entrar em contato com o SAC KIMBERLY-CLARK BRASIL mencionado no item anterior.</p>
+        </div>
+    </div>
+    <input type="hidden" id="codes" value="@Html.Raw(codes)">
+    <script src="/Scripts/index.js"></script>
+    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+    <!-- <script>
+        window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+        ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js" async defer></script>-->
+</body>
 </html>

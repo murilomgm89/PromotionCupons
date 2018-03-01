@@ -16,7 +16,7 @@ namespace Promotion.Coupon.Entity.Entities
     {
         public int idVoucher { get; set; }
         public Nullable<int> idPerson { get; set; }
-        public int code { get; set; }
+        public string code { get; set; }
         public Nullable<System.DateTime> dtWinner { get; set; }
     
         public virtual Person Person { get; set; }

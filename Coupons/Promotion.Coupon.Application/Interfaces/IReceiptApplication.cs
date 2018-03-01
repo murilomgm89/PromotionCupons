@@ -28,7 +28,7 @@ namespace Promotion.Coupon.Application.Interfaces
         void DeclaredWinner(Receipt receipt);
         void Save(Receipt receipt, bool direct);
         ReceiptSaveResult Save(Receipt receipt);
-        void SetValidated(int idReceipt, bool isValidated, string FileNews);
+        void SetValidated(int idReceipt, bool isValidated, string FileNews, string ambiente);
         void ApplyProductPromotion(Receipt receipt);
         int LuckyCodeRandom();
 

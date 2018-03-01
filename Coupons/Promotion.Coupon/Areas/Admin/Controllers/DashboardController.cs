@@ -16,10 +16,12 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
     {
         private readonly IReceiptApplication _receiptApplication;
         private readonly IPersonApplication _personApplication;
+        private readonly IVoucherApplication _voucherApplication;
         public DashboardController()
         {
             _receiptApplication = new ReceiptApplication();
             _personApplication = new PersonApplication();
+            _voucherApplication = new VoucherApplication();
         }
         [GET("/admin/dashboard")]
         public ActionResult Index()
@@ -35,8 +37,25 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
             })
             .OrderBy(d => d.Label)
             .ToList();
+            
+            var PieVoucherDistribuido = _voucherApplication.NumberCoupons();
+            var PieTotalVoucher = 5000;
 
-            //var vPowerData2 = _receiptApplication.GetCountByParticipation("intimus");
+            model.PieChartData = new List<DashboardViewModel.ChartItem>()
+            {
+                new DashboardViewModel.ChartItem() { Label = "Voucher Distribuídos", Value = PieVoucherDistribuido },
+                new DashboardViewModel.ChartItem() { Label = "Quantidade de Voucher", Value = PieTotalVoucher }
+            };
+
+            var PieReprovados = _receiptApplication.GetBy("intimus", true, false).Count();
+            var PiePendentes = _receiptApplication.GetBy("intimus", true, null).Count();
+
+            model.PieChartData2 = new List<DashboardViewModel.ChartItem>()
+            {
+                new DashboardViewModel.ChartItem() { Label = "Voucher Distribuídos:", Value = PieVoucherDistribuido },
+                new DashboardViewModel.ChartItem() { Label = "Reprovados", Value = PieReprovados },
+                new DashboardViewModel.ChartItem() { Label = "Pendente de Cuaradoria", Value = PiePendentes }
+            };     
 
             model.PersonsChartData = _personApplication.GetCountPerDateBy(Convert.ToDateTime(vPowerData.OrderBy(k => k.Key).FirstOrDefault().Key), DateTime.Now)
                 .Select(d => new DashboardViewModel.ChartItem()

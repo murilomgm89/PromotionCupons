@@ -63,27 +63,33 @@ table {
     max-width: 73.125rem;
   }
 }
-@import url('https://fonts.googleapis.com/css?family=Barlow+Condensed:700');
 @font-face {
   font-family: 'Barlow Condensed';
   font-style: normal;
   font-weight: 700;
-  src: local('Barlow Condensed Bold'), local('BarlowCondensed-Bold'), url(https://fonts.gstatic.com/s/barlowcondensed/v1/HTxwL3I-JCGChYJ8VI-L6OO_au7B46r2z3jWuYMBYrp0xg.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Barlow Condensed';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Barlow Condensed Bold'), local('BarlowCondensed-Bold'), url(https://fonts.gstatic.com/s/barlowcondensed/v1/HTxwL3I-JCGChYJ8VI-L6OO_au7B46r2z3bWuYMBYro.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: url('../font/barlow-condensed-v1-latin-700.eot'); /* IE9 Compat Modes */
+  src: local('Barlow Condensed Bold'), local('BarlowCondensed-Bold'),
+       url('../font/barlow-condensed-v1-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../font/barlow-condensed-v1-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../font/barlow-condensed-v1-latin-700.woff') format('woff'), /* Modern Browsers */
+       url('../font/barlow-condensed-v1-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../font/barlow-condensed-v1-latin-700.svg#BarlowCondensed') format('svg'); /* Legacy iOS */
 }
 .desktop {display: none}
 #header {background: url('../images/bg-header-desktop.png');border-bottom: solid 0.2rem #b7418d;}
-#header .header-wrapper{height: 3rem;display: flex;justify-content: space-between;}
+#header .header-wrapper{
+  height: 3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
 #header .header-wrapper .logo{
   padding-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 #header .header-wrapper .logo h1{
@@ -104,6 +110,9 @@ table {
     padding-right: 0rem;
     padding-left: 1rem;
     position: relative;
+}
+#header .header-wrapper .menu .menu-wrapper ul li:first-child{
+  padding-left: 0;
 }
 #header .header-wrapper .menu .menu-wrapper ul li a{
     color: white;
@@ -127,8 +136,6 @@ table {
 
 #content .introduction{
     padding-top: 2rem;
-    /* display: flex; */
-    /* justify-content: space-between; */
 }
 #content .introduction .absortion{
     text-align: center;
@@ -215,6 +222,11 @@ table {
     /* padding-top: 1rem; */
     padding-left: 1rem;
 }
+#content .introduction .buyit .gympass-disclaimer{
+  font-size: 0.2rem;
+  color: white;
+  padding-top: 1.8rem;
+}
 #content .introduction .buyit .gympass img{
     width: 9rem;
 }
@@ -239,8 +251,6 @@ table {
     margin-top: 2rem;
 }
 #content .steps-wrapper{
-    /* display: flex; */
-    /* justify-content: space-between; */
     margin-top: 4rem;
 }
 #content .steps-wrapper .steps{
@@ -284,8 +294,12 @@ table {
   letter-spacing: 0.2rem;
 }
 #content .steps-wrapper .steps-list .itens{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content:  center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     margin-bottom: 0.5rem;
 }
 #content .steps-wrapper .steps-list .itens:nth-child(5) img{
@@ -321,7 +335,31 @@ table {
     background-color: #b7418d;
     padding-left: 0.4rem;
 }
-#content .form-wrapper .form{padding: 1rem;}
+#content .form-wrapper .form{padding: 1rem;position: relative;}
+#content .form-wrapper .form .success-form{
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    text-transform:  initial;
+    text-align: center;
+    padding:  1rem 1rem;
+    border: 1px solid #c1498b;
+    line-height: 2rem;
+    height: 88%;
+    letter-spacing: 0.1rem;
+    background-color: rgba(0,0,0,.9);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+#content .form-wrapper .form .success-form p span.pink{
+  color: #c1498b;
+}
 #content .form-wrapper .form form{
     text-align: left;
 }
@@ -366,6 +404,7 @@ table {
     width: 20rem;
     height: 1.3rem;
     color: white;
+    font-size: 1rem
 }
 #content .form-wrapper .form form input[type="text"].error{
     border: solid 1px red;
@@ -439,14 +478,24 @@ table {
     color: white;
     font-weight: bold;
     margin-top: 7rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     letter-spacing: 0.05rem;
 }
 #content .sac div{}
 #content .sac div.pink{
     color: #b7418d;
 }
-
+#content .disclaimer{
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.4rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  color: white;
+  letter-spacing: 0.05rem;
+  margin-bottom: 1rem;
+  padding: 0rem 1rem;
+}
+#content .disclaimer a{ color: white; text-decoration: none; }
 #content .footer{
     width: 12rem;
     float:  left;
@@ -493,6 +542,54 @@ table {
 #content .kc img{
     text-align: center;
 }
+.modal {
+  display: none;
+  width: 600px;
+  max-width: 100%;
+  height: 400px;
+  max-height: 100%;
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+}
+.open {
+  display: block;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.6);
+}
+.modal-overlay.open {display: block;}
+.modal-guts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #0a060b;
+  width: 100%;
+  color: white;
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
+  height: 100%;
+  border: 1px solid #b7418d;
+  overflow: auto;
+  padding: 20px 50px 20px 20px;
+  line-height: 1.4rem;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+.modal-guts #close-button{
+  text-align: right;
+}
 @media screen and (min-width: 734px) {
   .mobile{display: none}
   .desktop{display: block}
@@ -505,6 +602,9 @@ table {
   #header .header-wrapper .menu .menu-wrapper ul li{
   padding-right:  1rem;
   }
+  #header .header-wrapper .menu .menu-wrapper ul li:first-child{
+    padding-left: 1rem;
+  }
   #header .header-wrapper .menu .menu-wrapper ul li a:hover{color: #b7418d }
   #header .header-wrapper .menu .menu-wrapper ul li:nth-child(2) img{top: -0.5rem;width: 0.8rem;}
   #header .header-wrapper .menu .menu-wrapper ul li:nth-child(3) img{top: -0.5rem;}
@@ -515,8 +615,12 @@ table {
     background-image: url('../images/bg-768.jpg');
   }
   #content .introduction{
-      display: flex;
-      justify-content: space-between;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
   #content .introduction .absortion{
       padding-top:  6rem;
@@ -525,9 +629,6 @@ table {
       width: 17rem;
   }
   #content .introduction .absortion .text-absortion{padding-left: 8rem;letter-spacing: 0.2rem;}
-  #content .introduction .absortion .text-absortion .text-one{
-      padding-left: 0.2rem;
-  }
   #content .introduction .absortion .text-absortion .text-two{
       width: 13rem;
   }
@@ -560,8 +661,6 @@ table {
   }
   #content .introduction .buyit .buy-win{
       font-size: 3rem;
-      color: #ffde16;
-      letter-spacing: 0.5rem;
   }
   #content .introduction .buyit .buy-win span{}
   #content .introduction .buyit .buy-win span.big-yellow{}
@@ -572,7 +671,6 @@ table {
       font-size: 1.5rem;
       padding: 0.2rem;
       margin-left: 1rem;
-      /* width: 11.6rem; */
       margin-bottom: 0.5rem;
   }
   #content .introduction .buyit .buy-prize span.medium-yellow{
@@ -580,7 +678,6 @@ table {
       padding-right: 0.2rem;
   }
   #content .introduction .buyit .gympass{
-      /* padding-top: 1rem; */
       padding-left: 1rem;
   }
   #content .introduction .buyit .gympass img{
@@ -593,9 +690,13 @@ table {
       letter-spacing: 0.05rem;
   }
   #content .steps-wrapper{
-      display: flex;
-      justify-content: space-between;
-      margin-top: 7rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-top: 7rem;
   }
   #content .steps-wrapper .steps{
       margin-left: 4rem;
@@ -605,7 +706,9 @@ table {
     padding-left:  2rem;
   }
   #content .steps-wrapper .steps-list .itens{
-  justify-content: normal;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
   }
   #content .steps-wrapper .steps-list .itens .number{
       font-size: 4rem;
@@ -621,8 +724,12 @@ table {
   }
 
   #content .form-wrapper{
-      display: flex;
-      justify-content: space-between;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
   #content .form-wrapper .form-text{font-size: 2.5rem;letter-spacing: 0.4rem;padding-left: 5rem;text-align: left;}
   #content .form-wrapper .form{
@@ -634,16 +741,23 @@ table {
   }
   #content .form-wrapper .form form .file-upload{width: auto;}
   #content .footer{
-      display: flex;
-      width: 100%;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
   #content .footer .menu-footer{
-      /* padding-left: 4rem; */
-      display: flex;
-      justify-content: space-between;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
   #content .footer .social-menu-footer{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding-left:  8rem;
     padding-right: 2rem;
@@ -678,8 +792,6 @@ table {
       display: inline-grid;
       /* margin-bottom: 1rem; */
   }
-  #content .introduction .buyit .buy-text span{}
-  #content .introduction .buyit .buy-text span.big{}
   #content .introduction .buyit .buy-text span.small{
       font-size: 0.7rem;
       padding-left:  1.3rem;
@@ -687,11 +799,7 @@ table {
   }
   #content .introduction .buyit .buy-win{
       font-size: 4rem;
-      color: #ffde16;
-      letter-spacing: 0.5rem;
   }
-  #content .introduction .buyit .buy-win span{}
-  #content .introduction .buyit .buy-win span.big-yellow{}
   #content .introduction .buyit .buy-prize{
       background-color: #ffde16;
       color: black;
@@ -707,7 +815,6 @@ table {
       padding-right: 0.2rem;
   }
   #content .introduction .buyit .gympass{
-      /* padding-top: 1rem; */
       padding-left: 1rem;
   }
   #content .introduction .buyit .gympass img{
@@ -717,6 +824,271 @@ table {
 @media screen and (min-width: 1250px) {
   #content {
     background-image: url('../images/bg-1250.jpg');
+  }
+  #content .introduction{
+    padding-top: 2rem;
+  }
+  #content .introduction .absortion{
+    padding-top: 10rem;
+  }
+  #content .introduction .absortion .image img{
+      width: 20rem;
+  }
+  #content .introduction .absortion .text-absortion{font-size: 2rem;padding-left:  15rem;}
+  #content .introduction .absortion .text-absortion .text-two{
+      height: 2.3rem;
+      width: 20rem;
+  }
+  #content .introduction .promo-logo .promo-text{
+      font-size: 2.5rem;
+  }
+  #content .introduction .promo-logo .promo-img img{
+      width: 7rem;
+  }
+  #content .introduction .buyit{
+      padding-top: 12.5rem;
+      color: white;
+      width: 25rem;
+      min-height: 22rem;
+      padding-left: 1.3rem;
+      font-size: 1.5rem;
+      font-family:  'Barlow Condensed', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.2rem;
+      background-size: 25rem;
+      background-image: url('../images/bg-buy-it.png');
+      background-position-y: 9.2rem;
+      background-repeat:  no-repeat;
+      background-position-x: 0.8rem;
+  }
+  #content .introduction .buyit .buy-text{
+      display: inline-grid;
+  }
+  #content .introduction .buyit .buy-text span.small{
+      font-size: 0.7rem;
+      padding-left:  1.3rem;
+      padding-top: 0.2rem;
+  }
+  #content .introduction .buyit .buy-win{
+      font-size: 4.5rem;
+      color: #ffde16;
+      letter-spacing: 0.5rem;
+  }
+  #content .introduction .buyit .buy-prize{
+      background-color: #ffde16;
+      color: black;
+      letter-spacing: 0.1rem;
+      font-size: 2rem;
+      padding: 0.2rem;
+      margin-left: 4rem;
+      width: 17.8rem;
+  }
+  #content .introduction .buyit .buy-prize span.medium-yellow{
+      padding-left: 0.3rem;
+      padding-right: 0.2rem;
+  }
+  #content .introduction .buyit .gympass{
+      padding-left: 1rem;
+  }
+  #content .introduction .buyit .gympass img{
+      width: 12rem;
+  }
+  #content .introduction-footer {
+      text-align: center;
+      font-size: 0.9rem;
+      line-height: 1rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      text-transform: uppercase;
+      color: white;
+      font-weight: bold;
+      letter-spacing: 0.2rem;
+  }
+  #content .introduction-footer span.pink{color: #b7418d;}
+  #content .introduction-footer span.white{
+      color: white;
+  }
+  #content .arrow {
+      text-align: center;
+      margin-top: 2rem;
+  }
+  #content .steps-wrapper{
+      margin-top: 4rem;
+  }
+  #content .steps-wrapper .steps{
+      margin: 0 auto;
+      height: 5.7rem;
+      width: 23rem;
+  }
+  #content .steps-wrapper .steps .title{
+      font-size: 5rem;
+  }
+  #content .steps-wrapper .steps .title span{
+      position: absolute;
+  }
+  #content .steps-wrapper .steps .title span.second{
+      top: 4rem;
+  }
+  #content .steps-wrapper .steps .title span.third{
+      top: 4rem;
+  }
+  #content .steps-wrapper .steps-list .itens:nth-child(5) img{
+    width: 38px;
+  }
+  #content .steps-wrapper .steps-list .steps-text{font-size: 1.5rem;}
+  #content .steps-wrapper .steps-list .steps-text div{
+      padding-bottom: 1rem;
+  }
+
+  #content .form-wrapper{
+      margin-top: 7rem;
+      color: white;
+      font-family: 'Barlow Condensed', sans-serif;
+      text-transform: uppercase;
+      font-weight: bold;
+  }
+  #content .form-wrapper .form-text{font-size: 3.2rem;letter-spacing: 0.6rem;line-height: 3.3rem;}
+  #content .form-wrapper .form-text span.bg-pink{
+      background-color: #b7418d;
+      padding-left: 0.4rem;
+  }
+  #content .form-wrapper .form{font-size: 1.3rem;}
+
+  #content .form-wrapper .form form .file-upload{
+    position: relative;
+    overflow: hidden;
+    margin-top: 1rem;
+    text-align: center;
+    border: 1px solid #c1498b;
+  }
+  #content .form-wrapper .form form .file-upload span{
+    letter-spacing: 0.5rem;
+    /* border: 1px solid red; */
+    display: block;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  }
+  #content .form-wrapper .form form .file-upload input[type="file"]{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+
+  #content .form-wrapper .form form input[type="text"]{
+      width: 22rem;
+      height: 1.8rem;
+      color: white;
+      font-size: 1rem;
+      padding-left: 0.5rem;
+  }
+  #content .form-wrapper .form form input[type="text"].error{
+      border: solid 1px red;
+  }
+  #content .form-wrapper .form form input[type="submit"]{
+      border: none;
+      background-color: #c1498b;
+      color:  white;
+      font-size: 1.3rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+  }
+  #content .form-wrapper .form form .inputs-wrapper{
+      padding-top: 1rem;
+  }
+  #content .form-wrapper .form form .inputs-wrapper label.container{
+      font-size: 0.8rem;
+      padding-right: 1.5rem;
+      position: relative;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      padding-top: 0.2rem;
+      user-select: none;
+  }
+  #content .form-wrapper .form form .inputs-wrapper label.container input[type="checkbox"]{
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+  }
+  #content .form-wrapper .form form .inputs-wrapper label.container span.checkmark{position: absolute;top: 0;right: 0;height: 15px;width: 15px;border: 1px solid #ffde16;background-color: #02171e;}
+
+  #content .form-wrapper .form form .inputs-wrapper span.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  #content .form-wrapper .form form .inputs-wrapper label.container input:checked ~ span.checkmark:after {
+    display: block;
+  }
+
+  #content .form-wrapper .form form .inputs-wrapper label.container span.checkmark:after {
+    left: 5px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: solid #ffde16;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  #content .sac{
+      text-align: center;
+      font-size: 0.9rem;
+      line-height: 1.4rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      text-transform: uppercase;
+      color: white;
+      font-weight: bold;
+      margin-top: 7rem;
+      margin-bottom: 3rem;
+      letter-spacing: 0.05rem;
+  }
+  #content .sac div{}
+  #content .sac div.pink{
+  width: 11rem;
+  cursor: pointer;
+  margin: 0 auto;
+  }
+
+  #content .footer .menu-footer{
+      width: 51%;
+  }
+  #content .footer .menu-footer span a{
+      color: white;
+      text-decoration: none;
+  }
+  #content .footer .menu-footer span a:hover{
+      color: #b7418d;
+  }
+  #content .footer .social-menu-footer{
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  #content .footer .social-menu-footer span{
+      display: inline-block;
+      padding: 1rem 0.5rem;
+  }
+  #content .footer .social-menu-footer span img{
+      width: 2rem;
+  }
+
+  #content .kc{
+      background-color:  #0a060b;
+      text-align: center;
+      padding-top: 3rem;
+  }
+  #content .kc img{
+      text-align: center;
   }
 }
 @media screen and (min-width: 1440px) {

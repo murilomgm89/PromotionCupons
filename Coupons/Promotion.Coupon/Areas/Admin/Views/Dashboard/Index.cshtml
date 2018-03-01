@@ -6,6 +6,8 @@
 
 <input type="hidden" id="lineChartPromotion" value='@Html.Raw(Model.SerializedLineVPowerData)' />
 <input type="hidden" id="lineChartTicks" value='@Html.Raw(Model.SerializedLineChartTicks)' />
+<input type="hidden" id="pieChartData" value='@Html.Raw(Model.SerializedPieChartData)' />
+<input type="hidden" id="pieChartData2" value='@Html.Raw(Model.SerializedPieChartData2)' />
 
 <div class="page-header">
     <div class="page-title">
@@ -87,4 +89,34 @@
             <!-- /filled blue -->
         </div>
     </div>    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h6 class="panel-title"><i class="icon-calendar2"></i>Distribuição de Voucher</h6>
+                </div>
+                <div class="panel-body">
+                    <div class="graph-standard" id="pie" style="padding: 0px; position: relative;">
+                        <canvas class="flot-base" width="301" height="250" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 301px; height: 250px;"></canvas>
+                        <canvas class="flot-overlay" width="301" height="250" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 301px; height: 250px;"></canvas>
+                        <span class="pieLabel" id="pieLabel1" style="position: absolute; top: 69px; left: 204.5px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series2<br>15%</div></span><span class="pieLabel" id="pieLabel3" style="position: absolute; top: 164px; left: 192.5px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series4<br>14%</div></span><span class="pieLabel" id="pieLabel4" style="position: absolute; top: 191px; left: 136.5px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series5<br>10%</div></span><span class="pieLabel" id="pieLabel5" style="position: absolute; top: 163px; left: 68.5px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series6<br>19%</div></span><span class="pieLabel" id="pieLabel6" style="position: absolute; top: 93px; left: 48.5px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series7<br>10%</div></span><span class="pieLabel" id="pieLabel7" style="position: absolute; top: 36px; left: 88.5px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series8<br>17%</div></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h6 class="panel-title"><i class="icon-calendar2"></i>Relação de Curadoria</h6>
+                </div>
+                <div class="panel-body">
+                    <div class="graph-standard" id="pie2" style="padding: 0px; position: relative;">
+                        <canvas class="flot-base" width="301" height="250" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 301px; height: 250px;"></canvas>
+                        <canvas class="flot-overlay" width="301" height="250" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 301px; height: 250px;"></canvas>
+                        <span class="pieLabel" id="pieLabel1" style="position: absolute; top: 69px; left: 204.5px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series2<br>15%</div></span><span class="pieLabel" id="pieLabel3" style="position: absolute; top: 164px; left: 192.5px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series4<br>14%</div></span><span class="pieLabel" id="pieLabel4" style="position: absolute; top: 191px; left: 136.5px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series5<br>10%</div></span><span class="pieLabel" id="pieLabel5" style="position: absolute; top: 163px; left: 68.5px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series6<br>19%</div></span><span class="pieLabel" id="pieLabel6" style="position: absolute; top: 93px; left: 48.5px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series7<br>10%</div></span><span class="pieLabel" id="pieLabel7" style="position: absolute; top: 36px; left: 88.5px;"><div style="font-size:8pt;text-align:center;padding:2px;color:white;">Series8<br>17%</div></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
 </div>

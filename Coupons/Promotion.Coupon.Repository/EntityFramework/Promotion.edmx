@@ -64,6 +64,7 @@
           <Property Name="isWinner" Type="bit" Nullable="false" />
           <Property Name="dtCreation" Type="datetime" Nullable="false" />
           <Property Name="isValidated" Type="bit" />
+          <Property Name="imgBase64" Type="text" />
         </EntityType>
         <EntityType Name="Voucher">
           <Key>
@@ -71,7 +72,7 @@
           </Key>
           <Property Name="idVoucher" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idPerson" Type="int" />
-          <Property Name="code" Type="int" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="dtWinner" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -89,7 +90,7 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
           <Property Name="idReceipt" Type="int" Nullable="false" />
           <Property Name="Premiado" Type="bit" Nullable="false" />
           <Property Name="Validado" Type="bit" />
-          <Property Name="VoucherVinculado" Type="int" />
+          <Property Name="VoucherVinculado" Type="varchar" MaxLength="50" />
           <Property Name="Data_do_Cadastro_do_Recibo" Type="datetime" Nullable="false" />
           <Property Name="Nome_do_Participante" Type="varchar" MaxLength="75" Nullable="false" />
           <Property Name="cpf" Type="varchar" MaxLength="14" Nullable="false" />
@@ -198,12 +199,14 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
             <End Role="Person" EntitySet="Person" />
             <End Role="NewsSending" EntitySet="NewsSending" />
           </AssociationSet>
+          <EntitySet Name="ConfigPromotion" EntityType="GymPassModel.ConfigPromotion" />
+          <EntitySet Name="BlockedCPF" EntityType="GymPassModel.BlockedCPF" />
           <EntitySet Name="Voucher" EntityType="GymPassModel.Voucher" />
           <AssociationSet Name="FK__Voucher__idPerso__32E0915F" Association="GymPassModel.FK__Voucher__idPerso__32E0915F">
             <End Role="Person" EntitySet="Person" />
             <End Role="Voucher" EntitySet="Voucher" />
           </AssociationSet>
-          <EntitySet Name="ConfigPromotion" EntityType="GymPassModel.ConfigPromotion" />
+          <EntitySet Name="ViewReceiptExport" EntityType="GymPassModel.ViewReceiptExport" />
           <EntitySet Name="Receipt" EntityType="GymPassModel.Receipt" />
           <AssociationSet Name="FK_dbo_NewsSending_dbo_Receipt_idReceipt" Association="GymPassModel.FK_dbo_NewsSending_dbo_Receipt_idReceipt">
             <End Role="Receipt" EntitySet="Receipt" />
@@ -213,8 +216,6 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
             <End Role="Person" EntitySet="Person" />
             <End Role="Receipt" EntitySet="Receipt" />
           </AssociationSet>
-          <EntitySet Name="BlockedCPF" EntityType="GymPassModel.BlockedCPF" />
-          <EntitySet Name="ViewReceiptExport" EntityType="GymPassModel.ViewReceiptExport" />
           </EntityContainer>
         <EntityType Name="AdminAccount">
           <Key>
@@ -265,13 +266,31 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ConfigPromotion">
+          <Key>
+            <PropertyRef Name="idPromotion" />
+          </Key>
+          <Property Name="idPromotion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dtStart" Type="DateTime" Precision="3" />
+          <Property Name="dtEnd" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="BlockedCPF">
+          <Key>
+            <PropertyRef Name="idBlockedCPF" />
+          </Key>
+          <Property Name="idBlockedCPF" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CPF" Type="Int64" Nullable="false" />
+        </EntityType>
         <EntityType Name="Voucher">
           <Key>
             <PropertyRef Name="idVoucher" />
           </Key>
           <Property Name="idVoucher" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idPerson" Type="Int32" />
-          <Property Name="code" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dtWinner" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Person" Relationship="GymPassModel.FK__Voucher__idPerso__32E0915F" FromRole="Voucher" ToRole="Person" />
         </EntityType>
@@ -287,16 +306,25 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ConfigPromotion">
+        <EntityType Name="ViewReceiptExport">
           <Key>
-            <PropertyRef Name="idPromotion" />
+            <PropertyRef Name="idReceipt" />
+            <PropertyRef Name="Premiado" />
+            <PropertyRef Name="Data_do_Cadastro_do_Recibo" />
+            <PropertyRef Name="Nome_do_Participante" />
+            <PropertyRef Name="cpf" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="Data_de_Cadastro_do_Participante" />
           </Key>
-          <Property Name="idPromotion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="type" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="dtStart" Type="DateTime" Precision="3" />
-          <Property Name="dtEnd" Type="DateTime" Precision="3" />
-          <Property Name="isActive" Type="Boolean" />
+          <Property Name="idReceipt" Type="Int32" Nullable="false" />
+          <Property Name="Premiado" Type="Boolean" Nullable="false" />
+          <Property Name="Validado" Type="Boolean" />
+          <Property Name="VoucherVinculado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Data_do_Cadastro_do_Recibo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Nome_do_Participante" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="cpf" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Data_de_Cadastro_do_Participante" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Receipt">
           <Key>
@@ -307,6 +335,7 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
           <Property Name="isWinner" Type="Boolean" Nullable="false" />
           <Property Name="dtCreation" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="isValidated" Type="Boolean" />
+          <Property Name="imgBase64" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="NewsSending" Relationship="GymPassModel.FK_dbo_NewsSending_dbo_Receipt_idReceipt" FromRole="Receipt" ToRole="NewsSending" />
           <NavigationProperty Name="Person" Relationship="GymPassModel.FK_dbo_Receipt_dbo_Person_idPersonalData" FromRole="Receipt" ToRole="Person" />
         </EntityType>
@@ -338,33 +367,6 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="BlockedCPF">
-          <Key>
-            <PropertyRef Name="idBlockedCPF" />
-          </Key>
-          <Property Name="idBlockedCPF" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CPF" Type="Int64" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ViewReceiptExport">
-          <Key>
-            <PropertyRef Name="idReceipt" />
-            <PropertyRef Name="Premiado" />
-            <PropertyRef Name="Data_do_Cadastro_do_Recibo" />
-            <PropertyRef Name="Nome_do_Participante" />
-            <PropertyRef Name="cpf" />
-            <PropertyRef Name="email" />
-            <PropertyRef Name="Data_de_Cadastro_do_Participante" />
-          </Key>
-          <Property Name="idReceipt" Type="Int32" Nullable="false" />
-          <Property Name="Premiado" Type="Boolean" Nullable="false" />
-          <Property Name="Validado" Type="Boolean" />
-          <Property Name="VoucherVinculado" Type="Int32" />
-          <Property Name="Data_do_Cadastro_do_Recibo" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Nome_do_Participante" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
-          <Property Name="cpf" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Data_de_Cadastro_do_Participante" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -406,16 +408,6 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Voucher">
-            <EntityTypeMapping TypeName="GymPassModel.Voucher">
-              <MappingFragment StoreEntitySet="Voucher">
-                <ScalarProperty Name="dtWinner" ColumnName="dtWinner" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
-                <ScalarProperty Name="idVoucher" ColumnName="idVoucher" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ConfigPromotion">
             <EntityTypeMapping TypeName="GymPassModel.ConfigPromotion">
               <MappingFragment StoreEntitySet="ConfigPromotion">
@@ -428,22 +420,21 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Receipt">
-            <EntityTypeMapping TypeName="GymPassModel.Receipt">
-              <MappingFragment StoreEntitySet="Receipt">
-                <ScalarProperty Name="isValidated" ColumnName="isValidated" />
-                <ScalarProperty Name="dtCreation" ColumnName="dtCreation" />
-                <ScalarProperty Name="isWinner" ColumnName="isWinner" />
-                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
-                <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="BlockedCPF">
             <EntityTypeMapping TypeName="GymPassModel.BlockedCPF">
               <MappingFragment StoreEntitySet="BlockedCPF">
                 <ScalarProperty Name="CPF" ColumnName="CPF" />
                 <ScalarProperty Name="idBlockedCPF" ColumnName="idBlockedCPF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Voucher">
+            <EntityTypeMapping TypeName="GymPassModel.Voucher">
+              <MappingFragment StoreEntitySet="Voucher">
+                <ScalarProperty Name="dtWinner" ColumnName="dtWinner" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+                <ScalarProperty Name="idVoucher" ColumnName="idVoucher" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -458,6 +449,18 @@ warning 6002: The table/view 'intimusgympass.dbo.ViewReceiptExport' does not hav
                 <ScalarProperty Name="VoucherVinculado" ColumnName="VoucherVinculado" />
                 <ScalarProperty Name="Validado" ColumnName="Validado" />
                 <ScalarProperty Name="Premiado" ColumnName="Premiado" />
+                <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipt">
+            <EntityTypeMapping TypeName="GymPassModel.Receipt">
+              <MappingFragment StoreEntitySet="Receipt">
+                <ScalarProperty Name="imgBase64" ColumnName="imgBase64" />
+                <ScalarProperty Name="isValidated" ColumnName="isValidated" />
+                <ScalarProperty Name="dtCreation" ColumnName="dtCreation" />
+                <ScalarProperty Name="isWinner" ColumnName="isWinner" />
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
                 <ScalarProperty Name="idReceipt" ColumnName="idReceipt" />
               </MappingFragment>
             </EntityTypeMapping>

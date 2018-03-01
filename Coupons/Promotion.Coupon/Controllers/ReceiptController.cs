@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 using Promotion.Coupon.Entity.Extensions;
+using System.Configuration;
+using System.IO;
+using Promotion.Coupon.Application.Interfaces;
+using Promotion.Coupon.Application.Applications;
 
 namespace Promotion.Coupon.Controllers
 {
@@ -8,16 +12,19 @@ namespace Promotion.Coupon.Controllers
     public class ReceiptController : Controller
     {
         // GET: Receipt
-        public ActionResult Index()
+        private readonly IReceiptApplication _receiptApplication;
+        public ReceiptController()
         {
-            return View();
+            _receiptApplication = new ReceiptApplication();
         }
 
         [HttpGet]
         [Route("file")]
         public ActionResult GetFile(string id)
         {
-            ViewBag.file = "/receipt/file/" + id;
+            id = id.Base64Decode();
+            var receipt = _receiptApplication.GetById(Convert.ToInt32(id));
+            ViewBag.file = receipt.imgBase64;
 
             return View("GetFile");
         }
@@ -27,8 +34,8 @@ namespace Promotion.Coupon.Controllers
         public ActionResult GetFileRaw(string id)
         {
             id = id.Base64Decode();
-
-            return File("/ReceiptFiles/" + Convert.ToInt32(id).ToString() + ".jpg", "image/jpg");
+            var receipt = _receiptApplication.GetById(Convert.ToInt32(id));
+            return File(receipt.imgBase64, "image/jpg");
         }
     }
 }

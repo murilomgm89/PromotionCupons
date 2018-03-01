@@ -260,7 +260,7 @@ namespace Promotion.Coupon.Repository.Repositories
             throw new NotImplementedException();
         }
 
-        public void SetValidated(int idReceipt, bool isValidated, string FileNews)
+        public void SetValidated(int idReceipt, bool isValidated, string FileNews, string ambiente)
         {
             throw new NotImplementedException();
         }
@@ -272,18 +272,18 @@ namespace Promotion.Coupon.Repository.Repositories
 
         public int LuckyCodeRandom()
         {
-            Random rnd = new Random();
-            int luckyCode = rnd.Next(0, 99999);
+            //Random rnd = new Random();
+            //int luckyCode = rnd.Next(0, 99999);
 
-            using (var context = new GymPass())
-            {
-                var obj = context.Voucher.Any(a => a.code == luckyCode);
-                if (obj)
-                {
-                    luckyCode = rnd.Next(0, 99999);
-                }
-            }
-            return luckyCode;
+            //using (var context = new GymPass())
+            //{
+            //    var obj = context.Voucher.Any(a => a.code == luckyCode);
+            //    if (obj)
+            //    {
+            //        luckyCode = rnd.Next(0, 99999);
+            //    }
+            //}
+           return 1;
         }
     }
 }

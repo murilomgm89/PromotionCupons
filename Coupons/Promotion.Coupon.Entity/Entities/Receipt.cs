@@ -25,6 +25,7 @@ namespace Promotion.Coupon.Entity.Entities
         public bool isWinner { get; set; }
         public System.DateTime dtCreation { get; set; }
         public Nullable<bool> isValidated { get; set; }
+        public string imgBase64 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NewsSending> NewsSending { get; set; }
