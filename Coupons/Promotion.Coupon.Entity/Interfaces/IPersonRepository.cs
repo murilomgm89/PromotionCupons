@@ -9,7 +9,7 @@ namespace Promotion.Coupon.Entity.Interfaces
     {
         Dictionary<string, int> GetCountPerDateBy(DateTime? from = null, DateTime? to = null);
         IEnumerable<Person> GetBy(DateTime from, DateTime to);
-        IEnumerable<Person> GetBySearch(string search);
+        IEnumerable<Receipt> GetBySearch(string search);
         PersonSaveResult Save(Person person);
         bool IsAllowedToSave(Person person);
         Person GetByCpf(string cpf);

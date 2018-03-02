@@ -46,18 +46,57 @@
                     <th>Nome</th>
                     <th>E-mail</th>                  
                     <th>Data do Cadastro</th>
+                    <th>Status</th>
+                    <th>Imagem</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var p in Model.PersonList)
+                @foreach (var r in Model.ReceiptList)
                 {
                     <tr>
-                        <td><a href="/admin/person/@p.idPerson">@p.name</a></td>
-                        <td>@p.email</td>                        
-                        <td>@p.dtCreation.ToString("dd/MM/yyyy")</td>
+                        <td><a href="/admin/person/@r.Person.idPerson">@r.Person.name</a></td>
+                        <td>@r.Person.email</td>                        
+                        <td>@r.Person.dtCreation.ToString("dd/MM/yyyy")</td>
+                        <td><strong>
+                        @{
+                            if (r.isValidated == true)
+                            {
+                                @Html.Raw("<p style='color:blue'>PREMIADO</p>");
+                            }
+                            else if (r.isValidated == false)
+                            {
+                                @Html.Raw("<p style='color:red'>REPROVADO</p>");
+                            }
+                            else
+                            {
+                                @Html.Raw("<p>PENDENTE DE CURADORIA</p>");
+                            }
+                        }
+                    </strong>
+                        </td>
+                        <td><a class="btn-xs btn-default" href="javascript:void(0)" onclick="$('#default_modal_@r.idReceipt').show();"><i class="icon-file3" style="margin-right: 5px;"></i> Ver cupom</a></td>
                     </tr>
+                    <div id="default_modal_@r.idReceipt" class="modal fade in" tabindex="-1" role="dialog" aria-hidden="false" style="display: none;">
+                        <div class="modal-dialog" style="width: 100%; height: 100%">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="$('#default_modal_@r.idReceipt').hide();">×</button>
+                                    <h4 class="modal-title">Cupom</h4>
+                                </div>
+
+                                <div class="modal-body with-padding">
+                                    <img src="data:image/jpeg;base64,@r.imgBase64" style="width: 100%; height: 100%" />                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="btn-xs btn-default" target="_blank" href="/receipt/file?id=@r.idReceipt.ToString().PadLeft(8, '0').Base64Encode()"><i class="icon-file3" style="margin-right: 5px;"></i> Imagem Original</a>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="$('#default_modal_@r.idReceipt').hide();">Fechar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 }
             </tbody>
         </table>
     </div>
 </div>
+

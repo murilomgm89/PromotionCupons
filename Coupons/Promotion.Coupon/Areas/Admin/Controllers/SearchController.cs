@@ -30,7 +30,7 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
             {
                 model.Search = Request.QueryString["search"];
             }
-            model.PersonList = _personApplication.GetBySearch(model.Search).ToList();
+            model.ReceiptList = _personApplication.GetBySearch(model.Search).ToList();
 
             return View("~/Areas/Admin/Views/Search/Search.cshtml", model);
         }
@@ -40,5 +40,6 @@ namespace Promotion.Coupon.Areas.Admin.Controllers
     {
         public List<Person> PersonList { get; set; }
         public string Search { get; set; }
+        public List<Receipt> ReceiptList { get; set; }
     }
 }

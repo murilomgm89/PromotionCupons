@@ -45,7 +45,7 @@ namespace Promotion.Coupon.Repository.Repositories
             }
         }
 
-        public IEnumerable<Person> GetBySearch(string search)
+        public IEnumerable<Receipt> GetBySearch(string search)
         {
             using (var context = new GymPass())
             {
@@ -53,11 +53,12 @@ namespace Promotion.Coupon.Repository.Repositories
 
                 int.TryParse(search, out intSearch);
 
-                return context.Person
+                return context.Receipt
+                    .Include(pd => pd.Person)          
                     .Where(p =>
-                        p.cpf.Contains(search) ||
-                        p.email.Contains(search) ||
-                        p.name.Contains(search)
+                        p.Person.cpf.Contains(search) ||
+                        p.Person.email.Contains(search) ||
+                        p.Person.name.Contains(search)
                     )
                     .ToList();
             }

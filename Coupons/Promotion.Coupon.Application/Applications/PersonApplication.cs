@@ -63,10 +63,10 @@ namespace Promotion.Coupon.Application.Applications
             return _personRepository.GetBy(from, to);
         }
 
-        public IEnumerable<Person> GetBySearch(string search)
+        public IEnumerable<Receipt> GetBySearch(string search)
         {
             if (string.IsNullOrEmpty(search))
-                return new List<Person>();
+                return new List<Receipt>();
 
 
             if (search.IndexOf('@') < 0)
